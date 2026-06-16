@@ -24,4 +24,10 @@ Cloudflare DNS:
 - `A lif3line.me 146.190.240.66`
 - `A www 146.190.240.66`
 
-After DNS points to the VM, issue TLS on the server with Certbot or switch this host to Caddy.
+TLS is issued on the VM with Certbot:
+
+```bash
+sudo certbot --nginx -d lif3line.me -d www.lif3line.me --redirect
+```
+
+Renewal is handled by the systemd `certbot.timer`.
