@@ -1,0 +1,430 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.booking-page {
+    background: variables.$light;
+    header {
+        .header-nav {
+            & > .navbar-header, & > .header-btn {                
+                @include mixins.respond-above(lg) {
+                    display: none !important;
+                }
+            }
+            .navbar-header {
+                @include mixins.respond-below(sm) {
+                    width: auto;
+                }
+            }
+            .navbar-brand.logo-small {
+                @include mixins.respond-below(sm) {
+                    padding: 0;
+                    width: auto;
+                    display: flex;
+                }
+            }
+        }
+        .main-menu-wrapper {
+            @include mixins.respond-above(lg) {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+            @include mixins.respond-below(lg) {
+                display: none;
+            }
+        }
+    }
+}
+.booking-sidebar {
+    position: relative;
+    z-index: 1;
+    &::before {
+        content: "";
+        background: url('/assets/img/bg/book-bg-01.svg') no-repeat;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-size: contain;
+        width: 121px;
+        height: 87px;
+        z-index: -1;
+    }
+    &::after {
+        content: "";
+        background: url('/assets/img/bg/book-bg-02.svg') no-repeat;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        background-size: contain;
+        width: 155px;
+        height: 60px;
+        z-index: -1;
+    }
+}
+.location-card {
+    overflow: hidden;
+    z-index: 1; 
+    @include mixins.transition(all 0.5s ease);
+    &.selected {
+        box-shadow: variables.$success-shadow;         
+    }
+    &:hover {
+        box-shadow: variables.$success-shadow; 
+        @include mixins.transition(all 0.5s ease);
+        &::before {
+            content: "";
+            background: url('/assets/img/icons/loc-bg.svg') no-repeat;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-size: contain;
+            width: 155px;
+            height: 100%;
+            z-index: -1;
+        }
+    }
+    h6 {
+        font-size: variables.$font-size-12;
+    }
+    p {
+        font-size: variables.$font-size-12;
+    }
+    .trend-icon {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        position: absolute;
+        z-index: 6;
+        inset-block-start: -5px;
+        inset-inline-start: -6px;
+        span {
+            position: absolute;
+            display: block;
+            width: 70px;
+            padding: 6px 6px 3px 0;
+            color: variables.$white;
+            font: 500 16px/1 Lato, sans-serif;
+            text-shadow: 0 1px 1px rgba(0,0,0, 0.1);
+            text-transform: capitalize;
+            text-align: center;
+            inset-inline-end: -5px;
+            inset-block-start: 1px;
+            transform: rotate(-45deg);
+            img {
+            transform: rotate(45deg);
+            }
+        }
+    }
+}
+.staff-card {
+    overflow: hidden;
+    z-index: 1; 
+    @include mixins.transition(all 0.5s ease);
+    &.selected {
+        box-shadow: variables.$success-shadow;         
+    }
+    &:hover {
+        box-shadow: variables.$success-shadow; 
+        @include mixins.transition(all 0.5s ease);
+    }
+    h6 {
+        font-size: variables.$font-size-12;
+    }
+    p {
+        font-size: variables.$font-size-12;
+    }
+}
+.time-item {
+    background: variables.$white;
+    border: 1px solid variables.$border-color;
+    @include mixins.rounded(4px);
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    &.disable {
+        cursor: not-allowed;
+        pointer-events: none;
+        background: variables.$light;
+        h6, p {
+            color: variables.$gray-300;
+        }
+    }
+    &.selected {
+        background: variables.$success;
+        border-color: variables.$success;
+        h6, p {
+            color: variables.$white;
+        }
+    }
+}
+.service-info {
+    background: variables.$gray-900;
+    @include mixins.rounded(5px);
+    padding: 8px;
+    .avatar {
+        img {
+            border: 1px solid variables.$white;
+        }
+    }
+    span {
+        color: variables.$gray-300;
+        display: block;
+    }
+}
+.booking-wizard {
+    padding: 55px 0;
+    @include mixins.respond-below(lg) {
+        padding: 30px 0;
+    }
+}
+fieldset.booking-content {
+    display: none;
+    &#first-field {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+.cart-info-wrap {
+    background: variables.$light-400;
+    @include mixins.rounded(5px);
+    padding: 16px;
+}
+.booking-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: space-between;
+    flex-direction: column;
+    height: 100%;
+    p, h6, .form-label {
+        font-size: variables.$font-size-12;
+    }
+    .form-control {
+        height: 28px;
+    }
+    textarea {
+        &.form-control {
+            height: auto;
+        }
+    }
+}
+.booking-footer {
+    border-top: 1px solid variables.$border-color;
+    margin-top: 16px;
+    .btn {
+        margin-top: 16px;
+    }
+}
+.payment-item {
+    border: 1px solid variables.$border-color;
+    @include mixins.rounded(5px);
+    padding: 16px;
+    .form-check {
+        .form-check-label {
+            font-size: variables.$font-size-12;
+            font-weight: variables.$font-weight-medium;
+        }
+    }
+    &.active {
+        box-shadow: variables.$success-shadow;
+    }
+}
+.total-card {
+    min-height: 500px;
+    #pay-btn {
+        &.btn {
+            color: variables.$gray-300;
+            cursor: none; 
+            pointer-events: none;
+            &.active {
+                background: variables.$primary !important;
+                border-color: variables.$primary !important;
+                color: variables.$white !important;
+                cursor: pointer; 
+                pointer-events: auto;
+            }
+        }
+    }
+    
+    @include mixins.respond-below(lg) {
+        min-height: 300px;
+    }
+}
+.total-wrap {
+    background: variables.$light-300;
+    padding: 15px;
+    @include mixins.rounded(5px);
+    margin-bottom: 8px;
+}
+#bokingwizard {
+    position: relative;
+    li {
+        font-size: variables.$font-size-12;
+        font-weight: variables.$font-weight-medium;
+        color: variables.$light;
+        position: relative;
+        padding-left: 20px;
+        &::before {
+            content: "";
+            border: 1px dashed variables.$gray-600;
+            width: 1px;
+            height: calc(100% - 2px);
+            position: absolute;
+            top: 2px;
+            left: 6px;
+        }
+        span {
+            &::before {
+                content: "";
+                width: 13px;
+                height: 13px;
+                @include mixins.rounded(50%);
+                border: 1px solid variables.$gray-600;
+                position: absolute;
+                top: 2px;
+                left: 0;
+                background: variables.$dark;
+            }
+        }
+        &.active {
+            span {
+                &::after {
+                    content: "";
+                    width: 3px;
+                    height: 3px;
+                    @include mixins.rounded(50%);
+                    background-color: variables.$success;
+                    position: absolute;
+                    top: 7px;
+                    left: 5px;
+                }
+            }
+        }
+        &.activated {
+            span {
+                &::before {
+                    border: 0;
+                }
+                &::after {
+                    font-family: variables.$font-awesome;
+                    content: "\f058";
+                    color: variables.$success;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+        &:last-child {
+            &::before {
+                content: none;
+            }
+        }
+    }
+}
+.status-report {
+    margin-bottom: 16px;
+    h6 {
+        border-bottom: 1px solid variables.$gray-800;
+    }
+    p {
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+.booking-user {
+    .user-img {
+        width: 44px;
+        height: 44px;
+        @include mixins.rounded(50%);
+        border: 1px solid variables.$border-color;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        justify-content: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        img {
+            width: 36px;
+            height: 36px;
+            @include mixins.rounded(50%);
+        }
+    }
+}
+.num-count {
+    width: 12px;
+    height: 12px;
+    @include mixins.rounded(50%);
+    font-size: 10px;
+    font-weight: variables.$font-weight-medium;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+}
+.footer-copyright {
+    background: variables.$white;
+    padding: 20px 0;
+    p {
+        font-size: variables.$font-size-14;
+        color: variables.$gray-900;
+        text-align: center;
+    }
+}
+.booking-title {
+    .dropdown {
+        & >  a {
+            font-size: variables.$font-size-10;
+            font-weight: variables.$font-weight-medium;
+            @include mixins.rounded(5px);
+            border: 0;
+            padding: 5px 8px;
+            &::after {
+                font-size: variables.$font-size-10;
+            }
+        }
+    }
+    .dropdown-menu {
+        li {
+            a {
+                font-size: variables.$font-size-10;
+            }
+        }
+    }
+    .loc-dropdown {
+        &.dropdown {
+            & >  a {
+                padding: 7px 8px;
+            }
+        }
+    }
+}
+.select-item {
+    @include mixins.rounded(5px);
+    &:hover, &.selected {
+        box-shadow: variables.$success-shadow; 
+    }
+}
+.btn-addon {
+    &.active {
+        background-color: variables.$success !important;
+        border-color: variables.$success !important;
+        color: variables.$white !important;
+    }
+}
+.fc-dayGridMonth-button,.fc-timeGridWeek-button,.fc-timeGridDay-button,.fc-listMonth-button {
+    background: variables.$dark !important;
+    border-color: variables.$dark !important;
+}

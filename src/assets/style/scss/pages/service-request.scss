@@ -1,0 +1,440 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.booking-sidebar {
+    &.request-sidebar {
+        &::before {
+            display: none;
+        }
+        &::after {
+            display: none;
+        }
+        #bokingwizard {
+            li {
+                color: variables.$gray-900;
+                font-size: 16px;
+                padding-left: 30px;
+                span {
+                    &::before {
+                        width: 20px;
+                        height: 20px;
+                        border-color: variables.$gray-200;
+                        background: variables.$light-500;
+                    }
+                    &::after {
+                        content: "";
+                        border: 4px solid variables.$gray-200;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 9px;
+                        left: 6px;
+                    }
+                }
+                &::before {
+                    content: "";
+                    border: 1px solid variables.$gray-200;
+                    width: 1px;
+                    height: calc(40% - 2px);
+                    position: absolute;
+                    top: 28px;
+                    left: 9px;
+                    border-radius: 30px;
+                }
+                &:last-child {
+                    &::before {
+                        display: none;
+                    }
+                }
+                &.active {
+                    &::before {
+                        border-color: variables.$primary;
+                    }
+                    span {
+                        &::after {
+                            border-color: variables.$primary;
+                        }
+                        &::before {
+                            border-color: variables.$primary;
+                        }
+                    }
+                }
+                &.activated {
+                    &::before {
+                        border-color: variables.$success;
+                    }
+                    span {
+                        &::after {
+                            font-family: "Fontawesome";
+                            content: "\f00c";
+                            color: variables.$white;
+                            position: absolute;
+                            top: 5px;
+                            left: 5px;
+                            font-size: 10px;
+                            border: 0;
+                        }
+                        &::before {
+                            border: 1px solid variables.$success;
+                            background: variables.$success;
+                        }
+                    }
+                }
+            }
+           
+        }
+    }
+}
+.form-floating {
+    .form-control {
+        min-height: 40px;
+        height: 40px;
+    }
+    label {
+        padding: 0.5rem 0.75rem;
+        color: variables.$gray-600;
+    }
+}
+.form-floating > .form-control:not(:placeholder-shown) ~ label,.form-control:focus~label {
+    top: -10px;
+    color: variables.$gray-900;
+}
+.form-floating>.form-control:not(:placeholder-shown),.form-floating .form-control:focus {
+    padding-top: 16px;
+}
+.custom-increment {
+    .quantity-btn {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: variables.$dark;
+        color: variables.$white;
+        padding: 0;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        &:hover {
+            background: variables.$primary;
+        }
+    }
+    input {
+        width: 40px;
+        border: 0;
+        text-align: center;
+        padding: 0 5px;
+    }
+}
+.select-floating-label {
+    position: absolute;
+    top: -10px;
+    z-index: 100;
+    background: #fff;
+    padding: 2px;
+    left: 10px;
+}
+.request-wizard {
+    fieldset {
+        .card {
+            .card-body {
+                padding: 20px;
+                @include mixins.respond-below(xl) {
+                    padding: 15px;
+                }
+            }
+        }
+    }
+}
+.upload-field {
+    border: 1px dashed variables.$gray-200;
+    border-radius: 5px;
+    padding: 20px;
+}
+.review-order {
+    background: variables.$secondary-100;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+    .review-item {
+        min-width: 150px;
+    }
+}
+
+
+.support-section {
+    &-twelve {
+        .support-twelve {
+            background-color: variables.$secondary;
+            background-image: url(/assets/img/bg/team-bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 10px;
+            padding: 80px 50px;
+            text-align: center;
+            position: relative;
+            @include mixins.respond-below(md) {
+                padding: 40px;
+            }
+            @include mixins.respond-below(sm) {
+                padding: 24px;
+            }
+            .icon-1 {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                @include mixins.respond-below(md) {
+                    display: none;
+                }
+            }
+            .subtitle {
+                font-size: 18px;
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$white;
+                margin-bottom: 4px;
+                @include mixins.respond-below(sm) {
+                    font-size: 16px;
+                }
+            }
+            .title {
+                font-size: 60px;
+                font-weight: variables.$font-weight-bold;
+                color: variables.$white;
+                margin-bottom: 12px;
+                @include mixins.respond-below(lg) {
+                    font-size: 44px;
+                }
+                @include mixins.respond-below(sm) {
+                    font-size: 26px;
+                }
+            }
+            .description {
+                color: variables.$white;
+                margin: 0px auto 24px;
+                position: relative;
+                z-index: 1;
+                width: 46%;
+                @include mixins.respond-below(lg) {
+                    width: 100%;
+                }
+            }
+            .support-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                @include mixins.respond-below(sm) {
+                    flex-direction: column;
+                }
+                .btn {
+                    @include mixins.respond-below(sm) {
+                        width: 100%;
+                        justify-content: center;
+                    }
+                }
+                .btn-outline-white {
+                    color: variables.$white;
+                    border-color: variables.$white;
+                    background: transparent;
+                    &:hover {
+                        background: variables.$primary;
+                        color: variables.$white;
+                        border-color: variables.$primary;
+                    }
+
+                }
+            }
+            .wave-1 {
+                position: absolute;
+                bottom: 10%;
+                left: 6%;
+                width: 133px;
+                height: 133px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include mixins.respond-below(lg) {
+                    display: none;
+                }
+                &::after {
+                    content: "";
+                    background: url(/assets/img/icons/rounded-icon.svg);
+                    background-size: 100% 100%;
+                    position: absolute;
+                    inset: 0;
+                    margin: auto;
+                    animation: rotate 10s infinite linear;
+                }
+                &::before {
+                    content: "";
+                    background: url(/assets/img/icons/rounded-icon.svg);
+                    background-size: 100% 100%;
+                    position: absolute;
+                    inset: 0;
+                    margin: auto;
+                    width: 80%;
+                    animation: rotateplus 10s infinite linear;
+                }
+            }
+            .wave-2 {
+                position: absolute;
+                top: 10%;
+                right: 6%;
+                width: 133px;
+                height: 133px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include mixins.respond-below(lg) {
+                    display: none;
+                }
+                &::after {
+                    content: "";
+                    background: url(/assets/img/icons/rounded-icon.svg);
+                    background-size: 100% 100%;
+                    position: absolute;
+                    inset: 0;
+                    margin: auto;
+                    animation: rotate 10s infinite linear;
+                }
+                &::before {
+                    content: "";
+                    background: url(/assets/img/icons/rounded-icon.svg);
+                    background-size: 100% 100%;
+                    position: absolute;
+                    inset: 0;
+                    margin: auto;
+                    width: 80%;
+                    animation: rotateplus 10s infinite linear;
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes rotateplus {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.add-tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: nowrap;
+    @include mixins.respond-below(sm) {
+        flex-wrap: wrap;
+    }
+    li {
+        width: 100%;
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid variables.$border-color;
+            text-align: center;
+            width: 100%;
+            &.active {
+                background: variables.$light-200;
+                border-color: variables.$gray-800;
+                color: variables.$primary;
+            }
+            i{
+                color: variables.$text-muted;
+            }
+            p {
+                text-align: start;
+            }
+        }
+    }
+}
+
+
+.job-offcanvas {
+    .offcanvas-header {
+        padding: 20px;
+        border-bottom: 1px solid variables.$border-color;
+        .offcanvas-title {
+            font-size: 20px;
+            font-weight: variables.$font-weight-semibold;
+        }
+        .btn-close {
+            background: variables.$white;
+            opacity: 1;
+            border-radius: 50%;
+            width: 30px;   
+            height: 30px;
+            font-size: variables.$font-size-16;
+            color: variables.$primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 1px solid variables.$border-color;
+            transition: all 0.4s;
+            &:hover {
+                background: variables.$primary;
+                border-color: variables.$primary;
+                color: variables.$white;
+            }
+        }
+    }
+    .offcanvas-body {
+        padding: 20px;
+        .form-check-input {
+            width: 15px;
+            height: 15px;
+        }
+        .noUi-target {
+            height: 16px;
+            background: variables.$dark;
+            border-radius: 50px;
+            border: none;
+            box-shadow: unset;
+            padding: 0px 15px 0px 0px;
+            .noUi-handle {
+                width: 14px;
+                height: 14px;
+                right: -14px;
+                top: 1px;
+                background: variables.$white;
+                border-radius: 50%;
+                box-shadow: unset;
+                cursor: pointer;
+                &::after {
+                    content: unset;
+                }
+                &::before {
+                    content: unset;
+                }
+            }
+            .noUi-connect {
+                background: variables.$secondary;
+                border-radius: 100px;
+            }
+            .noUi-tooltip {
+                border: none;
+                position: unset;
+                background: transparent;
+                font-size: 14px;
+                font-weight: variables.$font-weight-medium;
+            }
+
+        }
+    }
+}

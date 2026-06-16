@@ -1,0 +1,373 @@
+@use "../utils/mixins";
+@use "../utils/variables" as *;
+
+.table {
+  margin-bottom: 0;
+  color: $gray-700;
+  
+  tbody {
+      border: 1px solid #F1F1F1;
+  }
+  td {
+    white-space: nowrap;
+  }
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table.no-border {
+  > tbody > tr > td {
+    border: none;
+  }
+  
+  > tfoot > tr > td, > tfoot > tr > th {
+    border: none;
+  }
+  
+  > thead > tr > td, > thead > tr > th {
+    border: none;
+  }
+}
+
+.table > tbody > tr > th {
+  font-weight: 600;
+  color: $gray-900;
+}
+
+.table-resposnive {
+  overflow-x: auto;
+}
+
+.table {
+  th {
+    font-weight: 600;
+    color:  $gray-900;
+  }
+  
+  td {
+    vertical-align: middle;
+    padding: 15px;
+    color: #74788D;
+    font-size: 14px;
+  }
+}
+
+.table-nowrap {
+  td, th {
+    white-space: nowrap;
+  }
+}
+
+.table {
+  thead tr th:first-child {
+        border-radius: 10px 0 0 0;
+  }
+  
+  thead tr th:last-child {
+    border-radius: 0 10px 0 0;
+  }
+  
+  thead th {
+    border-top: 1px solid $light-400;
+    font-weight: 600;
+    color:  $gray-900;
+    padding: 15px;
+    background: #EDF3F9;
+    font-size: 16px;
+  }
+}
+
+.table.dataTable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 !important;
+}
+
+table.table td h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: $primary;
+  
+  &.table-avatar {
+    display: flex;
+    align-items: center;
+    
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    a {
+      color: $primary;
+      
+      &:hover {
+        color: $primary;
+      }
+    }
+    
+    span {
+      color: $gray-700;
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+}
+
+.action-language {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  ul li {
+    display: inline-block;
+  }
+  
+  .btn.btn-primary:hover {
+    background-color: $primary;
+  }
+}
+
+.btn-grey {
+  background-color: $gray-700;
+  color: $white;
+}
+
+table.table td h2.table-avatar {
+  display: flex;
+  align-items: center;
+  
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  a {
+    color: $primary;
+    
+    &:hover {
+      color: $primary;
+    }
+  }
+  
+  span {
+    color: $gray-700;
+    font-size: 13px;
+    font-weight: 400;
+  }
+}
+
+.table {
+  thead tr th {
+    font-weight: 600;
+    border: 0;
+    white-space: nowrap;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid $light-400;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      
+      td {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.table.table-center {
+  td, th {
+    text-align: center;
+  }
+}
+
+.table-bottom {
+  margin-bottom: 40px;
+}
+.datatable thead tr th {
+    background: #EDF3F9 !important;
+}
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  
+  td {
+    background-color: transparent;
+  }
+}
+
+.table-striped {
+  thead tr {
+    background-color: $light;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid $light-400;
+    
+    &:nth-of-type(even) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    &:nth-of-type(odd) {
+      background-color: $white;
+    }
+  }
+}
+
+.table-bordered {
+  border: 1px solid $light-400;
+  
+  th, td {
+    border: 1px solid $light-400;
+  }
+}
+
+.card-table .card-body {
+  padding: 0;
+  
+  .table > thead > tr > th {
+    border-top: none;
+  }
+  
+  .table tr td:first-child, .table tr th:first-child {
+    border-left: none;
+  }
+  
+  .table tr td:last-child, .table tr th:last-child {
+    border-right: none;
+  }
+}
+
+.card-table .table {
+  td, th {
+    padding: 15px;
+    border-top: 1px solid $light-400;
+    vertical-align: middle;
+  }
+}
+
+.actions a {
+  color: $primary;
+  margin-right: 10px;
+}
+
+.cal-icon {
+  position: relative;
+  
+  &:after {
+    content: "\f073";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray-700;
+    pointer-events: none;
+  }
+}
+
+.invoice-total-inner .add-links:hover {
+  color: $primary;
+}
+
+.dataTables_info {
+    float: right;
+    padding-right: 15px;
+    padding-top: 18px !important;
+    font-size: 12px;
+    color: #5E5873;
+    font-weight: 600;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  margin: 0;
+}
+
+.dataTables_length {
+  margin-top: 15px !important;
+    float: left;
+    font-size: 12px;
+  
+  label:before {
+    content: "Show";
+    margin-right: 5px;
+  }
+}
+
+.paging_numbers {
+  margin: 0;
+}
+
+.login-content {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-link {
+  color: $primary;
+  
+  &:hover {
+    color: $primary;
+  }
+}
+
+.btn.focus, .btn:focus {
+  box-shadow: none;
+}
+
+.btn-white {
+  background-color: $white;
+  color: $primary;
+  border: 1px solid $light-400;
+}
+
+.btn.btn-rounded {
+  border-radius: 50px;
+}
+.paging_numbers {
+    float: right;
+}
+@media only screen and (max-width: 1199.98px) {
+  .invoices-tabs ul li a.active {
+    border-bottom: 0;
+  }
+  .dropdown-heads > a {
+    width: 35px;
+    height: 35px;
+  }
+  .tax-table-rate .list-btn ul {
+    display: block;
+  }
+  .tax-table-rate .list-btn ul li {
+    margin-bottom: 10px;
+  }
+  .tax-table-rate .list-btn ul li:last-child {
+    margin-bottom: 0px;
+  }
+  .tax-table-rate .list-btn .filter-sorting ul {
+    display: flex;
+  }
+  .user-menu.nav > li > a {
+    padding: 0 10px;
+  }
+}

@@ -1,0 +1,329 @@
+
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.solution-section {
+    &-twelve {
+        position: relative;
+        .element-1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: -1;
+            @include mixins.respond-below(md) {
+                max-width: 120px;
+            }
+            @include mixins.respond-below(sm) {
+                max-width: 70px;
+            }
+        }
+    }
+}
+
+// Solution Item
+.solution-item {
+    &-twelve {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 22px;
+        @include mixins.respond-below(xl) {
+            margin-bottom: 16px;
+        }
+        @include mixins.respond-below(sm) {
+            height: 250px;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &:hover {
+            &::before {
+                content: "";
+                opacity: 0.5;
+            }
+            .img-1 {
+                transform: scale(1.1) rotate(3deg);
+            }
+            .solution-icon {
+                opacity: 1;
+            }
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: variables.$dark;
+            opacity: 0;
+            z-index: 1;
+        }
+        .img-1 {
+            transition: all 0.4s;
+            width: 100%;
+            height: 100%;
+        }
+        .solution-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: variables.$white-100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: variables.$white;
+            font-size: 24px;
+            backdrop-filter: blur(14px);
+            opacity: 0;
+            transition: all 0.5s;
+            &:hover {
+                background: variables.$primary-gradient;
+            }
+        }
+        .title {
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: variables.$font-weight-semibold;
+            color: variables.$white;
+            backdrop-filter: blur(84px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+            width: 92%;
+            left: 0;
+            right: 0;
+            margin: 12px auto;
+            z-index: 1;
+            @include mixins.respond-below(xxl) {
+                font-size: 18px;
+            }
+            @include mixins.respond-below(xl) {
+                font-size: 16px;
+                padding: 12px 6px;
+            }
+        }
+    }
+}
+
+// Who Section
+.who-section {
+    &-twelve {
+        position: relative;
+        .element-1 {
+            position: absolute;
+            bottom: -4%;
+            top: 0;
+            right: 0;
+            margin: auto;
+            z-index: -1;
+            @include mixins.respond-below(lg) {
+                display: none;
+            }
+        }
+        .line-1 {
+            position: absolute;
+            bottom: 56%;
+            left: -36px;
+            width: 32%;
+            height: 140px;
+            background: variables.$primary;
+            z-index: -1;
+            transform: rotate(-12deg);
+            @include mixins.respond-below(lg) {
+                display: none;
+            }
+        }
+        .line-2 {
+            position: absolute;
+            bottom: 40%;
+            left: -36px;
+            width: 32%;
+            height: 97px;
+            background: variables.$secondary;
+            z-index: -1;
+            transform: rotate(-12deg);
+            @include mixins.respond-below(lg) {
+                display: none;
+            }
+        }
+        .section-header-twelve {
+            text-align: start;
+            @include mixins.respond-below(lg) {
+                text-align: center;
+            }
+            .subtitle {
+                margin: 0px 0px 8px;
+                @include mixins.respond-below(lg) {
+                    margin: 0px auto 8px;
+                }
+            }
+            .title {
+                font-size: 32px;
+                margin-bottom: 12px;
+                @include mixins.respond-below(xxl) {
+                    font-size: 30px;
+                }
+                @include mixins.respond-below(xl) {
+                    font-size: 25px;
+                }
+            }
+            .description {
+                margin-bottom: 0;
+            }
+        }
+        .who-img-twelve {
+            position: relative;
+            padding: 0px 40px 40px 0px;
+            @include mixins.respond-below(lg) {
+                display: none;
+            }
+            .img-1 {
+                border-radius: 10px;
+            }
+            .img-content {
+                padding: 40px;
+                background: variables.$dark;
+                border: 7px solid variables.$white;
+                width: 356px;
+                position: absolute;
+                bottom: 0px;
+                right: 0;
+                border-radius: 10px;
+                .count {
+                    font-size: 28px;
+                    font-weight: variables.$font-weight-bold;
+                    color: variables.$white;
+                    margin-bottom: 4px;
+                }
+                .title {
+                    font-size: 28px;
+                    font-weight: variables.$font-weight-bold;
+                    color: variables.$white;
+                    margin-bottom: 8px;
+                }
+                .description {
+                    font-size: 16px;
+                    font-weight: variables.$font-weight-normal;
+                    color: variables.$white;
+                    margin-bottom: 0;
+                }
+            }
+            .video-btn {
+                position: absolute;
+                top: -30px;
+                right: 0;
+            }
+        }
+    }
+}
+
+// Who Item
+.who-item {
+    &-twelve {
+        background: variables.$white;
+        border: 1px solid variables.$light-900;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        box-shadow: variables.$box-shadow;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        @include mixins.respond-below(sm) {
+            flex-direction: column;
+			align-items: start;
+		}
+        &:hover {
+            box-shadow: variables.$box-shadow-lg;
+            transform: translateY(-5px);
+        }
+        .who-icon {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: variables.$secondary-100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .who-content {
+            .title {
+                font-size: 20px;
+                font-weight: variables.$font-weight-bold;
+                color: variables.$gray-900;
+                margin-bottom: 4px;
+            }
+            .description {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.animate-button2 {
+    background: variables.$white;
+    color: variables.$gray-900;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-content: center;
+    transition: background 300ms, transform 200ms;
+    font-weight: 600;
+    position: relative;
+    box-shadow: 0px 4px 4px 0px #D9D9D940;
+    &:hover {
+        .button-circle {
+            background: variables.$secondary;
+        }
+    }
+    .button-text2 {
+        position: absolute;
+        inset: 0;
+        animation: text-rotation 8s linear infinite;
+        margin: 0 !important;
+        > span {
+            position: absolute;
+            inset: 25px;
+            transform: rotate(calc(var(--angle) * var(--index) * 1deg));
+            transform-origin: center 72px;
+            top: 9px;
+            display: flex;
+            justify-content: center;
+            color: variables.$gray-900;
+        }
+    }
+
+    .button-circle {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        background: variables.$primary;
+        color: variables.$white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.8s;
+        font-size: 24px;
+        font-weight: variables.$font-weight-normal;
+    }
+}
+
+@keyframes text-rotation {
+    to {
+        rotate: 360deg;
+    }
+}

@@ -1,0 +1,22 @@
+@use "../utils/variables";
+
+.mean-container {
+    a.meanmenu-reveal {
+        display: none !important;
+    }
+    .mean-bar {
+        background: variables.$white;
+    }
+    .mean-nav {
+        background: variables.$white;
+        margin-top: 0;
+        & > ul {
+            display: block !important;
+            li {
+                a {
+                    color: variables.$gray-900;
+                }
+            }
+        }
+    }
+}

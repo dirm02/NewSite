@@ -1,0 +1,43 @@
+@use "../utils/variables" as *;
+
+.progress-xs {
+  height: 4px;
+}
+
+.progress-sm {
+  height: 15px;
+}
+
+.progress.progress-sm {
+  height: 6px;
+}
+.progress.progress-md {
+  height: 8px;
+}
+.progress.progress-lg {
+  height: 18px;
+}
+
+.row.row-sm {
+  margin-left: -3px;
+  margin-right: -3px;
+}
+.row.row-sm > div {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.swal2-title {
+  font-size: 22px !important;
+  font-weight: 500;
+  color: #28283C !important;
+}
+
+.swal2-content {
+  font-size: 14px !important;
+  color: #74788D !important;
+}
+
+.swal2-styled.swal2-confirm {
+  font-size: 14px !important;
+}

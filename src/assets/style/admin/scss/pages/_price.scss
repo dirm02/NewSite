@@ -1,0 +1,108 @@
+@use "../utils/variables" as *;
+
+.price-card {
+	background: $white;
+	border: 2px solid $light-100;
+	border-radius: 8px;
+	padding: 15px;
+	&:hover {
+		background: $light-200;
+		border: 2px solid $light-100;
+		.btn-choose {
+			background-color: $primary;
+			color: $white;
+		}
+	}
+}
+.price-head {
+	border-bottom: 1px solid #EFEFEF;
+	padding-bottom: 15px;
+	h6 {
+		font-weight: 500;
+		font-size: 14px;
+		margin-bottom: 10px;
+	}
+	h1 {
+		font-weight: 700;
+		font-size: 40px;
+		margin-bottom: 0;
+		span {
+			font-size: 12px;
+			color: #9A9A9A;
+		}
+	}
+}
+.price-level {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: space-between;
+}
+.price-body {
+	padding-top: 15px;
+	ul {
+		margin-bottom: 35px;
+		li {
+			position: relative;
+			font-size: 14px;
+			color: #848484;
+			margin-bottom: 15px;
+			padding-left: 25px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			&:before {
+				position: absolute;
+				content: "";
+				top: 2px;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-repeat: no-repeat;
+			}
+		}
+		li.active {
+			&:before {
+				background-image: url("/src/assets/img/icons/check-icon.svg");
+			}
+		}
+		li.inactive {
+			&:before {
+				background-image: url("/src/assets/img/icons/close-icon.svg");
+			}
+		}
+	}
+	.btn-choose {
+		background: $light-200;
+		border-radius: 8px;
+		font-size: 14px;
+		padding: 6px 30px;
+		margin: 0 auto;
+	}
+}
+.price-toggle {
+	font-weight: 500;
+	font-size: 18px;
+	color: #28283C;
+	text-align: center;
+	margin-bottom: 35px;
+	.checktoggle {
+		margin: 0 23px;
+		background: $primary;
+	}
+	.check {
+		&:checked {
+			+ {
+				.checktoggle {
+					background-color: $primary;
+					border: 1px solid $primary;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,642 @@
+@use "../utils/variables";
+
+.dark {
+
+    //General 
+    body {
+        background-color: variables.$dark-light-100;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .h1,
+        .h2,
+        .h3,
+        .h4,
+        .h5,
+        .h6 {
+            color: variables.$dark-gray-900;
+            font-family: variables.$font-family-primary;
+            font-weight: variables.$font-weight-bold;
+            margin-bottom: 0;
+        }
+
+        p {
+            color: variables.$dark-gray-600;
+        }
+
+        a {
+            color: variables.$dark-gray-600;
+        }
+
+        i {
+            color: variables.$dark-gray-900;
+        }
+
+        input {
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+        }
+
+        .card {
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+            box-shadow: none;
+            .card-footer{
+                border-color: variables.$dark-light-900;
+            }
+        }
+
+        .form-label {
+            color: variables.$dark-gray-300;
+        }
+
+        .form-control {
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+        }
+
+        .bootstrap-tagsinput {
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+
+            .tag {
+                background-color: variables.$dark-primary;
+            }
+        }
+
+        .form-control:focus {
+            background-color: variables.$dark-primary;
+            color: variables.$dark-gray-900;
+            border: 1px solid variables.$dark-light-900;
+        }
+
+        .select2-dropdown {
+            border: 1px solid variables.$dark-light-900;
+        }
+
+        span.select2-container.select2-container--default.select2-container--open {
+            box-shadow: none;
+        }
+
+        .select2-container--default {
+            .select2-selection--single {
+                background-color: variables.$dark-primary;
+                border: 1px solid variables.$dark-light-900;
+            }
+
+            .select2-results__option[aria-selected=true] {
+                background-color: variables.$primary;
+                border: 1px solid variables.$dark-light-900;
+                color: variables.$primary;
+            }
+
+            .select2-results__option[aria-selected] {
+                background-color: variables.$dark-primary;
+                border: 1px solid variables.$dark-light-900;
+
+            }
+        }
+
+        .bg-light-300 {
+            background-color: variables.$dark-light-300 !important;
+        }
+
+        .bg-light-500 {
+            background-color: variables.$dark-light-500 !important;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid variables.$dark-light-900 !important;
+        }
+
+        .bg-white {
+            background-color: variables.$dark-primary !important;
+            color: variables.$dark-gray-900;
+        }
+        .btn-light{
+            background-color: variables.$dark-light-900;
+            border: 1px solid variables.$dark-light-900;
+            color: variables.$white;
+        }
+        .btn-white{
+            background-color: variables.$dark-primary !important;
+            border: 1px solid variables.$dark-primary;
+            color: variables.$dark-gray-900;
+        }
+
+        .dropdown-item:not(.active):hover,
+        .dropdown-item:not(.active):focus,
+        .dropdown-item:not(.active):active {
+            background-color: variables.$dark-primary;
+            color: variables.$dark-gray-900 !important;
+        }
+
+        .border-end {
+            border-inline-end: 1px solid variables.$dark-light-900 !important;
+        }
+
+        .text-dark {
+            color: variables.$dark-gray-900 !important;
+        }
+
+        .border {
+            border: 1px solid variables.$dark-light-900 !important;
+        }
+
+        .dropdown {
+            .dropdown-toggle {
+                border: 1px solid variables.$dark-light-900;
+                color: variables.$dark-gray-900;
+                background-color: variables.$dark-primary;
+            }
+        }
+
+        .dropdown-item {
+            background-color: variables.$dark-primary;
+            color: variables.$dark-gray-900 !important;
+            &.active {
+                background-color: variables.$dark-light-900;
+                color: variables.$dark-gray-900 !important;
+            }
+        }
+
+        .dropdown-menu {
+            border: 1px solid variables.$dark-light-900;
+        }
+
+        .bg-light {
+            background-color: variables.$dark-light-900 !important;
+            border: 1px solid variables.$dark-light-900 !important;
+            color: variables.$dark-gray-900;
+        }
+        .text-gray-9{
+            color: variables.$dark-gray-900 !important;
+        }
+        .paginations {
+            .page-link-1{
+                background-color: variables.$dark-light-900;
+            }
+        }
+
+        #calendar-book .fc-toolbar-chunk .fc-prev-button, #calendar-book .fc-toolbar-chunk .fc-next-button {
+            border: 1px solid variables.$dark-light-900;
+            background: variables.$dark-primary;
+            color: variables.$dark-gray-900;
+        }
+
+        .fc-scrollgrid {
+            border: 1px solid variables.$dark-light-900;
+        }
+        .fc-col-header-cell  {
+            border: 1px solid variables.$dark-light-900;
+        }
+        .fc-day-other{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .fc-theme-bootstrap5 td{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .fc-theme-bootstrap5-shaded{
+            background-color: variables.$dark-primary;
+        }
+        .fc-list{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .bg-gray{
+            background-color: variables.$dark-light-900 !important;
+            color: variables.$dark-gray-900;
+        }
+        //Header
+        .provider-header {
+            background-color: variables.$dark-light-900;
+            border-bottom: 1px solid variables.$dark-light-900;
+
+            .header-left {
+                background-color: variables.$dark-primary;
+                border-bottom: 1px solid variables.$dark-primary;
+            }
+
+            .searchinputs {
+                input {
+                    background-color: variables.$dark-primary;
+                    border: 1px solid variables.$dark-light-900;
+                }
+
+                .search-addon {
+                    span {
+                        background-color: variables.$dark-primary;
+                    }
+                }
+            }
+
+            .provider-head-links {
+                a {
+                    background-color: variables.$dark-primary;
+                    border: 1px solid variables.$dark-light-900;
+                }
+            }
+
+            .dropdown-menu.show {
+                box-shadow: none;
+                background-color: variables.$dark-primary;
+            }
+
+            .text-dark {
+                color: variables.$dark-gray-600 !important;
+            }
+
+        }
+
+        //Sider
+        .sidebar {
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+
+            .sidebar-menu {
+                ul {
+                    li {
+                        a {
+                            i {
+                                color: variables.$dark-gray-900;
+                            }
+
+                            span {
+                                color: variables.$dark-gray-900;
+                            }
+                        }
+
+                        &.submenu {
+                            ul {
+                                li {
+                                    a {
+                                        color: variables.$dark-gray-900;
+                                        &.active{
+                                            color: variables.$primary;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        &.active{
+                            a{
+                                i{
+                                    color: variables.$primary;
+                                }
+                                span{
+                                    color: variables.$primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .trend-tag{
+            background-color: variables.$dark-light-900;
+            color: variables.$dark-gray-900;
+        }
+        .trend-tag-2{
+            background-color: variables.$dark-light-900;
+            color: variables.$dark-gray-900;
+        }
+        .act-btn{
+            background-color: variables.$dark-light-900;
+        }
+        .value select{
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+            color: variables.$dark-gray-900;
+        }
+        .card{
+            .card-body{
+                a{
+                    color: variables.$dark-gray-900;
+                }
+            }
+        }
+        .value {
+            span{
+                color: variables.$dark-gray-900;
+            }
+        }
+        .tags{
+            background-color: variables.$dark-primary;
+                border: 1px solid variables.$dark-light-900;
+            &.active{
+                background-color: variables.$primary;
+                border: 1px solid variables.$primary;
+            }
+        }
+        .booking-list{
+            .booking-details{
+                li {
+                    .book-item{
+                        color: variables.$dark-gray-900;
+                    }
+                }
+            }
+        } 
+        .chat-cont-left {
+            .chat-users-list {
+                .chat-member {
+                    background: variables.$dark-primary;
+                }
+            }
+        }
+        .chat-cont-right {
+            .card-header {
+                border-bottom: 1px solid variables.$dark-light-900;
+            }
+        }
+        .msg_card_body {
+            .media {
+                &.sent {
+                    .media-body {
+                        .msg-box {
+                            .received-message{
+                                background-color: variables.$dark-light-500;
+                            }
+                            &:first-child {
+                                
+                                .sent-message {
+                                   
+                                    background: variables.$dark-light-500;
+                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .msg_card_body {
+            .media {
+                &.received {
+                    .media-body {
+                        .msg-box {
+                            .received-message {
+                                background-color: variables.$dark-light-500;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .day-badge::after{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .avatar.online:before{
+            border: 2px solid variables.$dark-primary !important;
+        } 
+        .avatar.offline:before{
+            border: 2px solid variables.$dark-primary !important;
+        }
+        .table-responsive{
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+            .table{
+                
+                td{
+                    p{
+                        color: variables.$dark-gray-900;
+                    }
+                }
+                thead{
+                    &.thead-light {
+                        th{
+                            background-color: variables.$dark-light-600;
+                            color: variables.$dark-gray-900;
+                            border-color: variables.$dark-light-900;
+                        }
+                       
+                    }
+                    tr{
+                        border: 1px solid variables.$dark-light-900;
+                    }
+                }
+                tbody{
+                    tr{
+                        border: 1px solid variables.$dark-light-900;
+                        td{
+                            background-color: variables.$dark-primary;
+                            color: variables.$dark-gray-600;
+                            h6{
+                                a{
+                                    color: variables.$dark-gray-900;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .user-icon a{
+            background-color: variables.$dark-light-500;
+        }
+
+        .modal{
+            .modal-dialog{
+                .modal-content{
+                    background-color: variables.$dark-primary;
+                    .modal-footer{
+                        border-top: 1px solid variables.$dark-light-900;
+                    }
+                }
+            }
+        }
+        .col-form-label{
+            color: variables.$dark-gray-900;
+        }
+        .bootstrap-datetimepicker-widget table th.prev span, .bootstrap-datetimepicker-widget table th.next span{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .bootstrap-datetimepicker-widget .list-unstyled{
+            background-color: variables.$dark-primary;
+            border: 1px solid variables.$dark-light-900;
+        }
+        .datepicker{
+            table{
+                thead{
+                    tr{
+                        th{
+                            color: variables.$dark-gray-900;
+                        }
+                    }
+                }
+                tbody{
+                    td{
+                        color: variables.$dark-gray-600;
+                        &:hover{
+                            background-color: variables.$dark-gray-600;
+                            color: variables.$dark-gray-900;
+                        }
+                    }
+                }
+                
+            }
+        }
+        .appointment-setting-list{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .linked-item{
+            border: 1px solid variables.$dark-light-900;
+        }
+        .connected-apps {
+            .card-body {
+                .app-footer-content {
+                    border-top: 1px solid variables.$dark-light-900;
+                }
+            }
+        }
+
+        .profile-verification {
+            .card {
+                .card-body {
+                    .verification-body {
+                        .icon {
+                            span {
+                                background-color: variables.$dark-light-500;
+                            }
+                        }
+                    }
+                    .verification-footer{
+                        border-top: 1px solid variables.$dark-light-900;
+                    }
+                }
+            }
+        }
+        .booking-list {
+            .booking-img {
+                .fav-item {
+                    .fav-icon {
+                        background: variables.$dark-primary;
+                        color: variables.$dark-gray-900;
+                    }
+                }
+            }
+        }
+        .sidebar-layout{
+            background-color: variables.$dark-primary;
+        }
+        .toggle-sidebar {
+            .sidebar-header{
+                border-bottom: 1px solid variables.$dark-light-900;
+            }
+        }
+        .bk-wrap {
+            border-bottom: 1px solid variables.$dark-light-900;
+        }
+        .bk-history {
+            span{
+                background-color: variables.$primary;
+            }
+        }
+    }
+    .site-link {
+        a {
+            color: variables.$darkmode-text-white;
+            i {
+                color: variables.$darkmode-text-white;
+            }
+        }
+    }
+    .card .card-header {
+        border-color: variables.$dark-light-900;
+    }
+    .nav-dark-solid {
+        .nav-link {
+            background: variables.$dark-light-900;
+            color: variables.$darkmode-text-white;
+            span {
+                background: #0d0d0d;
+                color: variables.$darkmode-text-white;
+            }
+            &.active {
+                background: variables.$info;
+
+            }
+        }
+    }
+    .btn-white {
+        border: 1px solid variables.$dark-light-900 !important;
+    }
+    .btn-light {
+        &:hover {
+            background: variables.$info;
+            color: variables.$darkmode-text-white;
+        }
+    }
+    .booking-user .user-img {
+        border: none;
+    }
+    .user-img > img {
+        border: 3px solid variables.$dark-primary;
+        outline: none;
+    }
+    .header {
+        box-shadow: unset;
+    }
+    .job-offcanvas {
+        background: variables.$dark-primary;
+        .offcanvas-header {
+            border-color: variables.$dark-light-900 !important;
+            .btn-close {
+                background: #000;
+                border: none;
+            }
+        } 
+        .noUi-tooltip {
+            color: variables.$darkmode-text-white;
+        }
+    } 
+    .custom-input-group {
+        .input-group-text {
+            border-color: variables.$dark-light-900;
+        }
+        input {
+            border-left: none !important;
+
+        }
+    }
+    .bg-transparent-success {
+        background: variables.$dark;
+    }
+    .bg-light-200 {
+        background: variables.$dark-primary !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: variables.$darkmode-text-white !important;
+    }
+    .text-light {
+        color: variables.$dark-light-900 !important;
+    }
+    .search-input-method {
+        border-color: variables.$dark-light-900;
+    }
+    .border-top {
+        border-color: variables.$dark-light-900 !important;
+    }
+    .table {
+        tbody {
+            td {
+                a {
+                    color: variables.$dark-gray-600;
+                }
+            } 
+        } 
+    } 
+    .notification-tab-wrapper {
+        background: variables.$dark-gray-100;
+    }
+    .notication-card {
+        .notification-icon {
+            background-color: #e1d8fb17 !important;
+        }
+    }
+}

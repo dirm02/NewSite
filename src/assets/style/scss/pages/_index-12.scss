@@ -1,0 +1,46 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.top-bar-twelve {
+    background: variables.$primary-gradient;
+    padding: 6px;
+    @include mixins.respond-below(lg) {
+        display: none;
+    }
+    .top-content {
+        padding: 4px 16px;
+        background: variables.$white-100;
+        border-radius: 50px;
+        width: fit-content;
+        .top-text {
+            color: variables.$white;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+    .social-icon-twelve {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 10px;
+        .icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: variables.$white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: variables.$secondary;
+            font-size: 12px;
+            transition: all 0.4s;
+            &:hover {
+                background: variables.$primary;
+                color: variables.$white;
+            }
+        }
+    }
+}
+

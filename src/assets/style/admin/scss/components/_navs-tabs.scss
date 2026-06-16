@@ -1,0 +1,178 @@
+@use "../utils/mixins";
+@use "../utils/variables" as *;
+
+.nav-tabs {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.card-header-tabs {
+  border-bottom: 0;
+}
+
+.nav-tabs > li > a {
+  margin-right: 0;
+  color: #888;
+  border-radius: 0;
+}
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+  border-color: transparent;
+  color: $gray-700
+}
+.nav-tabs.nav-tabs-solid > li > a {
+  color: $gray-700
+}
+.nav-tabs.nav-tabs-solid > .active > a {
+  background-color: $primary;
+  border-color: $primary;
+  color: $white;
+}
+.nav-tabs.nav-tabs-solid > .active > a:hover, .nav-tabs.nav-tabs-solid > .active > a:focus {
+  background-color: $primary;
+  border-color: $primary;
+  color: $white;
+}
+
+.tab-content {
+  padding-top: 20px;
+}
+
+.nav-tabs .nav-link {
+  border-radius: 0;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  background-color: #eee;
+  border-color: transparent;
+  color: $gray-700
+}
+.nav-tabs.nav-justified > li > a {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.nav-tabs.nav-justified > li > a:hover, .nav-tabs.nav-justified > li > a:focus {
+  border-bottom-color: #ddd;
+}
+.nav-tabs.nav-justified.nav-tabs-solid > li > a {
+  border-color: transparent;
+}
+.nav-tabs.nav-tabs-solid > li > a {
+  color: $gray-700
+}
+.nav-tabs.nav-tabs-solid > li > a.active {
+  background-color: $primary;
+  border-color: $primary;
+  color: $white;
+}
+.nav-tabs.nav-tabs-solid > li > a.active:hover, .nav-tabs.nav-tabs-solid > li > a.active:focus {
+  background-color: $primary;
+  border-color: $primary;
+  color: $white;
+}
+.nav-tabs.nav-tabs-solid.nav-tabs-rounded {
+  border-radius: 50px;
+}
+.nav-tabs.nav-tabs-solid.nav-tabs-rounded > li > a {
+  border-radius: 50px;
+}
+.nav-tabs.nav-tabs-solid.nav-tabs-rounded > li > a.active {
+  border-radius: 50px;
+}
+.nav-tabs.nav-tabs-solid.nav-tabs-rounded > li > a.active:hover, .nav-tabs.nav-tabs-solid.nav-tabs-rounded > li > a.active:focus {
+  border-radius: 50px;
+}
+
+.nav-tabs-justified > li > a {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.nav-tabs-justified > li > a:hover, .nav-tabs-justified > li > a:focus {
+  border-bottom-color: #ddd;
+}
+.nav-tabs-justified.nav-tabs-solid > li > a {
+  border-color: transparent;
+}
+
+.nav-tabs.nav-justified.nav-tabs-top {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs.nav-justified.nav-tabs-top > li > a {
+  border-width: 2px 0 0 0;
+}
+.nav-tabs.nav-justified.nav-tabs-top > li > a:hover, .nav-tabs.nav-justified.nav-tabs-top > li > a:focus {
+  border-width: 2px 0 0 0;
+}
+.nav-tabs.nav-tabs-top > li {
+  margin-bottom: 0;
+}
+.nav-tabs.nav-tabs-top > li > a {
+  border-width: 2px 0 0 0;
+}
+.nav-tabs.nav-tabs-top > li > a:hover, .nav-tabs.nav-tabs-top > li > a:focus {
+  border-width: 2px 0 0 0;
+}
+.nav-tabs.nav-tabs-top > li.open > a {
+  border-top-color: #ddd;
+}
+.nav-tabs.nav-tabs-top > li > a:hover, .nav-tabs.nav-tabs-top > li > a:focus {
+  border-top-color: #ddd;
+}
+.nav-tabs.nav-tabs-top > li + li > a {
+  margin-left: 1px;
+}
+.nav-tabs.nav-tabs-top > li > a.active {
+  border-top-color: $primary;
+}
+.nav-tabs.nav-tabs-top > li > a.active:hover, .nav-tabs.nav-tabs-top > li > a.active:focus {
+  border-top-color: $primary;
+}
+.nav-tabs.nav-tabs-bottom > li {
+  margin-bottom: -1px;
+}
+.nav-tabs.nav-tabs-bottom > li > a.active {
+  border-bottom-width: 2px;
+  border-color: transparent;
+  border-bottom-color: $primary;
+  background-color: transparent;
+  transition: none 0s ease 0s;
+  -moz-transition: none 0s ease 0s;
+  -o-transition: none 0s ease 0s;
+  -ms-transition: none 0s ease 0s;
+  -webkit-transition: none 0s ease 0s;
+}
+.nav-tabs.nav-tabs-bottom > li > a.active:hover, .nav-tabs.nav-tabs-bottom > li > a.active:focus {
+  border-bottom-width: 2px;
+  border-color: transparent;
+  border-bottom-color: $primary;
+  background-color: transparent;
+  transition: none 0s ease 0s;
+  -moz-transition: none 0s ease 0s;
+  -o-transition: none 0s ease 0s;
+  -ms-transition: none 0s ease 0s;
+  -webkit-transition: none 0s ease 0s;
+}
+.nav-tabs.nav-tabs-solid {
+  background-color: #fafafa;
+  border: 0;
+}
+.nav-tabs.nav-tabs-solid > li {
+  margin-bottom: 0;
+}
+.nav-tabs.nav-tabs-solid > li > a {
+  border-color: transparent;
+}
+.nav-tabs.nav-tabs-solid > li > a:hover, .nav-tabs.nav-tabs-solid > li > a:focus {
+  background-color: $light-300;
+}
+.nav-tabs.nav-tabs-solid > .open:not(.active) > a {
+  background-color: $light-300;
+  border-color: transparent;
+}
+
+.nav-tabs-justified.nav-tabs-top {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs-justified.nav-tabs-top > li > a {
+  border-width: 2px 0 0 0;
+}
+.nav-tabs-justified.nav-tabs-top > li > a:hover, .nav-tabs-justified.nav-tabs-top > li > a:focus {
+  border-width: 2px 0 0 0;
+}

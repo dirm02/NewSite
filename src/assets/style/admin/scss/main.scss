@@ -1,0 +1,42 @@
+/****** Utils ******/
+@use "utils/variables";
+@use "utils/mixins";
+
+/******* Components ******/
+@use "components/avatar";
+@use "components/boostrap";
+@use "components/loader";
+@use "components/reboot";
+@use "components/progress";
+@use "components/navs-tabs";
+@use "components/table";
+
+/****** Layout ******/
+@use "layout/content";
+@use "layout/header";
+@use "layout/sidebar";
+@use "layout/notification";
+
+/******* Pages ******/
+@use "pages/availability";
+@use "pages/bank";
+@use "pages/service";
+@use "pages/invoice";
+@use "pages/login";   
+@use "pages/dashboard";
+@use "pages/chat";
+@use "pages/blog-details";
+@use "pages/blog";
+@use "pages/price";
+@use "pages/report";
+@use "pages/settings";
+@use "pages/profile";
+
+
+/******* Vendors ******/
+@use "vendors/select2";
+
+
+
+
+

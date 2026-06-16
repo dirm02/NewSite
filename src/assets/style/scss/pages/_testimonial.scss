@@ -1,0 +1,390 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.testimonial-section-two {
+    background: variables.$primary-gradient;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    .section-header-two {
+        p {
+            font-size: 20px;
+            font-weight: variables.$font-weight-medium;
+            margin-bottom: 0;
+            color: variables.$white;
+            @include mixins.respond-below(md) {
+                font-size: 18px;
+            }
+        }
+    }
+    .testimonial-bg {
+        position: absolute;
+        top: 0;
+        right: 45%;
+        z-index: -1;
+        @include mixins.respond-below(md) {
+            display: none;
+        }
+    }
+}
+.counter-item {
+    background: variables.$white-100;
+    border-radius: variables.$border-radius-md;
+    padding: 20px;
+    border-right: 3px solid variables.$white;
+    text-align: center;
+    @include mixins.respond-below(md) {
+        border-bottom: 3px solid variables.$white;
+        border-right: 0;
+    }
+	h3 {
+        color: variables.$white;
+		font-size: 52px;
+        margin-bottom: 12px;
+        @include mixins.respond-below(lg) {
+            font-size: 36px;
+        }
+        @include mixins.respond-below(md) {
+            font-size: 26px;
+        }
+    }
+    p {
+        font-size: 18px;
+        color: variables.$white;
+        margin-bottom: 0;
+        @include mixins.respond-below(md) {
+            font-size: 16px;
+        }
+    }
+}
+.testimonial-item {
+    &-two {
+        .testimonial-rating {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid variables.$white-100;
+            .rating {
+                display: flex;
+                align-items: center;
+                gap: 2px;
+                color: variables.$white;
+                span {
+                    width: 22px;
+                    height: 22px;
+                    background: variables.$warning;
+                    color: variables.$white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 4px;
+                    &:last-child {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+        .description {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-size: 24px;
+            @include mixins.respond-below(xl) {
+                font-size: 20px;
+            }
+            @include mixins.respond-below(lg) {
+                font-size: 16px;
+            }
+        }
+        p {
+            color: variables.$white;
+            margin-bottom: 24px;
+        }
+        .testimonial-img {
+            margin-bottom: 12px;
+        }
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            .testimonial-user {
+                width: 48px;
+                height: 48px;
+                img {
+                    border-radius: 50%;
+                }
+            }
+            .custom-title {
+                color: variables.$white;
+                margin-bottom: 4px;
+            }
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.testimonial-wrap {
+    position: relative;
+    margin-left: 40px;
+    @include mixins.respond-below(xl) {
+        margin-left: 0;
+    }
+    .slider-nav {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        @include mixins.respond-below(md) {
+            position: unset;
+            margin-top: 24px;
+        }
+    }
+}
+.slider-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    button {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: variables.$white;
+        background: transparent;
+        border: 1px solid variables.$light-900;
+        font-size: 20px;
+        @include mixins.respond-below(lg) {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+        @include mixins.respond-below(md) {
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+        }
+        &:hover {
+            background: variables.$white-100;
+        }
+    }
+}
+.testimonials-content {
+    margin-right: 60px;
+    @include mixins.respond-below(xl) {
+        margin: 0 0 40px 0;
+    }
+    .section-header-two {
+        @include mixins.respond-below(md) {
+            text-align: center;
+        }
+    }
+}
+
+// Testimonial Section
+.testimonial-section {
+    &-twelve {
+        background-color: variables.$secondary;
+        // background-image: url(/assets/img/bg/team-bg.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        .section-header-twelve {
+            .title {
+                color: variables.$white;
+            }
+        }
+        .slick-slide {
+            & > div {
+                margin: 0px 12px;
+            }
+        }
+        .element-2 {
+            position: absolute;
+            bottom: -93px;
+            left: 0;
+            width: 100%;
+            @include mixins.respond-above(xxl) {
+                bottom: -80px;
+            }
+            @include mixins.respond-below(xxl) {
+                bottom: -70px;
+            }
+            @include mixins.respond-below(xl) {
+                bottom: -60px;
+            }
+            @include mixins.respond-below(lg) {
+                bottom: -44px;
+            }
+            @include mixins.respond-below(md) {
+                bottom: -33px;
+            }
+            @include mixins.respond-below(sm) {
+                bottom: -16px;
+            }
+        }
+    }
+}
+.testimonial-item {
+    &-twelve {
+        position: relative;
+        background: variables.$dark-300;
+        border-radius: 10px;
+        padding: 40px;
+        transition: all 0.5s ease;
+        overflow: hidden;
+        @include mixins.respond-below(lg) {
+            padding: 24px;
+        }
+        &:hover {
+            background: variables.$dark;
+            &::before , &::after {
+                opacity: 0.5;
+            }
+        }
+        &::before {
+            content: "";
+            background: variables.$white-100;
+            width: 156px;
+            height: 156px;
+            border-radius: 50%;
+            opacity: 0;
+            position: absolute;
+            top: -28%;
+            right: 5%;
+        }
+        &::after {
+            content: "";
+            background: variables.$white-100;
+            width: 156px;
+            height: 156px;
+            border-radius: 50%;
+            position: absolute;
+            top: -14%;
+            right: -10%;
+            opacity: 0;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            .author-img {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                overflow: hidden;
+                flex-shrink: 0;
+                img {
+
+                }
+            }
+            .author-info {
+                .name {
+                    font-size: 20px;
+                    font-weight: variables.$font-weight-semibold;
+                    color: variables.$white;
+                    margin-bottom: 4px;
+                    a {
+                       color: variables.$white; 
+                       transition: all 0.5s ease;
+                        &:hover {
+                            color: variables.$primary;
+                        }
+                    }
+                }
+                .designation {
+                    color: variables.$white;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .author-content {
+            position: relative;
+            z-index: 1;
+            .subtitle {
+                font-size: 20px;
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$white;
+                margin-bottom: 8px;
+                @include mixins.respond-below(xxl) {
+                    font-size: 18px;
+                }
+            }
+            .description {
+                color: variables.$white;
+                margin-bottom: 0;
+            }
+            .rating {
+                margin-top: 24px;   
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                i {
+                    font-size: 14px;
+                    color: variables.$warning;
+                }
+            }
+        }
+        .icon {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            @include mixins.respond-below(sm) {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    }
+}
+
+.paint-section-tweleve {
+    background: variables.$secondary;
+    padding: 20px 0;
+    position: relative;
+    overflow: hidden;
+    .element-1 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        @include mixins.respond-below(xxl) {
+            left: -7%;
+        }
+        @include mixins.respond-below(md) {
+            display: none;
+        }
+    }
+    .horizontal-slide {
+        .slide-list {
+            .service-slide {
+                display: flex;
+                white-space: nowrap;
+                padding: 0px 30px;
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    background: variables.$primary;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                }
+                h2 {
+                    font-size: 20px;
+                    font-weight: variables.$font-weight-semibold;
+                    color: variables.$white;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

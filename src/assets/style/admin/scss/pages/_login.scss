@@ -1,0 +1,497 @@
+@use "../utils/mixins";
+@use "../utils/variables" as *;
+  
+.login-pages {
+	padding: 40px 70px;
+}
+.login-logo {
+	margin-bottom: 80px;
+	text-align: center;
+	@media only screen and (max-width: 1399.98px) {
+		.login-logo {
+			margin-bottom: 40px;
+		}
+	}
+}
+.login-input {
+	.form-group {
+		label {
+			color: #000000;
+			font-size: 12px;
+		}
+	}
+	.form-control {
+		background: $white;
+		border: 1px solid #E4E4E8;
+		&:focus {
+			border: 1px solid $primary;
+			border-left: 5px solid $primary;
+		}
+	}
+}
+.login-contenthead {
+	h5 {
+		font-size: 30px;
+		font-weight: 700;
+		margin-bottom: 18px;
+	}
+	margin-bottom: 60px;
+	h6 {
+		font-size: 14px;
+		color: #71717A;
+		font-weight: 400;
+		margin-bottom: 18px;
+	}
+	p {
+		margin: 0;
+		color: #040404;
+		font-weight: 400;
+		a {
+			color: #0E82FD;
+			text-decoration: underline;
+		}
+	}
+}
+.flag-nav {
+	img {
+		min-width: 18px;
+		height: 18px;
+		width: 18px;
+	}
+}
+.forgetpassword-link {
+	color: #0E82FD;
+	text-decoration: underline;
+}
+.tab-sets {
+	border-bottom: 2px solid #E7E7E7;
+	padding-bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.tab-contents-sets {
+	ul {
+		display: flex;
+		align-items: center;
+		li {
+			+ {
+				li {
+					padding-left: 35px;
+				}
+			}
+			a {
+				color: #74788D;
+				font-weight: 500;
+				position: relative;
+				&:hover {
+					&::after {
+						position: absolute;
+						content: "";
+						background: $primary;
+						width: 100%;
+						height: 2px;
+						left: 0;
+						top: 29px;
+					}
+					color: $primary;
+				}
+			}
+			a.active {
+				color: $primary;
+				&::after {
+					position: absolute;
+					content: "";
+					background: $primary;
+					width: 100%;
+					height: 2px;
+					left: 0;
+					top: 29px;
+				}
+			}
+		}
+	}
+}
+.table-div {
+	padding-top: 40px;
+}
+.tab-contents-count {
+	h6 {
+		margin: 0;
+		font-size: 14px;
+		color: #74788D;
+		font-weight: normal;
+	}
+}
+.table-imgname {
+	align-items: center;
+	display: inline-flex;
+	font-size: inherit;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	white-space: nowrap;
+	padding-right: 30px;
+	img {
+		width: 40px;
+		height: 40px;
+		border-radius: 5px;
+	}
+}
+.badge-pending {
+	background: #FFF9E8;
+	padding: 6px;
+	min-width: 80px;
+	margin: 0;
+	font-size: 13px;
+	color: #FFC107;
+	border-radius: 4px;
+	display: inline-block;
+	text-align: center;
+}
+.delete-table {
+	&:hover {
+		img {
+			filter: brightness(0) invert(1);
+		}
+	}
+}
+.badge-inactive {
+	background: #F1F8FF;
+	padding: 6px;
+	min-width: 80px;
+	margin: 0;
+	font-size: 13px;
+	color: #007BFF;
+	border-radius: 4px;
+	display: inline-block;
+	text-align: center;
+	&.bg-warning, &.bg-success {
+		color: $white;
+	}
+}
+.badge-active {
+	background: #F2FFF6;
+	padding: 6px;
+	min-width: 80px;
+	margin: 0;
+	font-size: 13px;
+	color: #1BA345;
+	border-radius: 4px;
+	display: inline-block;
+	text-align: center;
+	&:hover {
+		background: #F2FFF6;
+		padding: 6px;
+		min-width: 80px;
+		margin: 0;
+		font-size: 13px;
+		color: #1BA345;
+		display: inline-block;
+		text-align: center;
+	}
+}
+.badge-active.inprogress {
+	background: #FFF9E8;
+	color: #FFC107;
+	&:hover {
+		background: #FFF9E8;
+		color: #FFC107;
+	}
+}
+.badge-active.badge-reject {
+	background: #FFF3F3;
+	color: #FF4949;
+	&:hover {
+		background: #FFF3F3;
+		color: #FF4949;
+	}
+}
+.badge-active.badge-pending {
+	background: #F1F8FF;
+	color: #007BFF;
+	&:hover {
+		background: #F1F8FF;
+		color: #007BFF;
+	}
+}
+.badge-delete {
+	background: #FDE2E7;
+	padding: 6px;
+	min-width: 80px;
+	margin: 0;
+	font-size: 14px;
+	color: #E63C3C;
+	border-radius: 4px;
+	display: inline-block;
+	text-align: center;
+}
+.badge-delete.action-delete {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	max-width: 74px;
+	&:hover {
+		color: #E63C3C;
+	}
+	img {
+		margin-right: 5px;
+	}
+}
+.login-wrapper {
+	width: 100%;
+	height: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+  
+  .loginbox {
+    background-color: $white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px 0px rgba(55, 73, 72, 0.02);
+    max-width: 500px;
+    padding: 40px;
+    width: 100%;
+  }
+  
+  .account-logo img {
+    max-height: 80px;
+    width: auto;
+  }
+  
+@media only screen and (max-width: 767.98px) {
+  .login-wrapper .loginbox {
+    max-width: 450px;
+    min-height: unset;
+  }
+  .page-settings {
+    flex-direction: column;
+  }
+  .content-sidelink {
+    width: 100%;
+    padding: 15px;
+  }
+  .error-box h1 {
+    font-size: 6em;
+  }
+  .error-box .btn {
+    font-size: 15px;
+    min-width: 150px;
+    padding: 8px 20px;
+  }
+  .dash-count {
+    font-size: 16px;
+  }
+  .nav-tabs.menu-tabs {
+    margin-top: -15px;
+  }
+  .nav-tabs.menu-tabs .nav-item {
+    margin-top: 20px;
+  }
+  .settings-btns .btn-grey {
+    font-size: 13px;
+  }
+  .label {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+  }
+  .app-listing {
+    flex-wrap: wrap;
+  }
+  .app-listing li {
+    width: 100%;
+  }
+  .invoices-tabs {
+    margin-bottom: 15px;
+  }
+  .invoices-tabs ul li {
+    margin-right: 25px;
+  }
+  .invoices-tabs ul li a.active {
+    border-bottom: 0;
+  }
+  .report-list .app-listing {
+    display: block;
+    margin: 0;
+  }
+  .report-list .app-listing li {
+    width: 100%;
+    padding: 0;
+  }
+  .field-box .btn {
+    min-width: 100%;
+    padding: 10px 0;
+  }
+  .service-upload {
+    width: 100%;
+  }
+  .invoice-total-footer h4 {
+    font-size: 16px;
+    color: #4C40ED;
+  }
+  .invoice-inner-footer .form-control {
+    position: relative;
+  }
+  .invoices-create-btn {
+    margin-top: 10px;
+  }
+  .invoices-create-btn .btn {
+    font-size: 14px;
+    padding: 8px 0px;
+    min-width: 115px;
+    margin-bottom: 10px;
+  }
+  .invoice-setting-btn .btn {
+    min-width: 145px;
+    padding: 7px 0;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .invoice-setting-btn .cancel-btn {
+    margin-right: 0 !important;
+  }
+  .invoice-item .invoice-logo img {
+    width: 100%;
+  }
+  .invoice-head p {
+    font-size: 15px;
+  }
+  .invoice-head h2 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .invoice-item-bg .invoice-info {
+    padding: 20px;
+    margin-top: 0px;
+    margin-bottom: 0;
+  }
+  .invoice-payment-box .payment-details {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .invoice-info-card .card-body {
+    padding: 10px;
+  }
+  .invoice-total-box p {
+    font-size: 14px;
+  }
+  .pagination-tab {
+    padding: 10px;
+  }
+  .pagination {
+    flex-wrap: wrap;
+  }
+  .pagination .page-link {
+    font-size: 14px;
+  }
+  .settings-btns .btn-orange {
+    font-size: 13px;
+    margin-right: 10px;
+  }
+  .links-cont .form-control {
+    margin-bottom: 15px;
+  }
+  .countset .form-control, .countset .socail-links-set {
+    margin-bottom: 15px;
+  }
+  .links-conts .form-control {
+    margin-bottom: 15px;
+  }
+  .invoices-settings-btn .btn {
+    padding: 8px 0;
+    min-width: 155px;
+  }
+  .inovices-widget-header .inovices-amount {
+    font-size: 20px;
+  }
+  .invoice-inner-head {
+    padding: 15px;
+  }
+  .invoice-inner-date {
+    padding: 15px;
+  }
+  .invoice-inner-date.invoice-inner-datepic {
+    padding-left: 15px;
+  }
+  .serv-profile h2 {
+    font-size: 20px;
+  }
+  .service-images {
+    margin-bottom: 20px;
+  }
+  .progressbar-card #progressbar li {
+    width: 100%;
+  }
+  .progressbar-card #progressbar li::before {
+    display: none;
+  }
+  .progressbar-card #progress-head li {
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  .earning-group {
+    display: block;
+  }
+  .earning-group .sortby-section .sorting-info .sortby-filter-group .sortbyset.week-bg .sorting-select .select2-container .select2-selection--single .select2-selection__rendered {
+    background-position: 3% 50%;
+  }
+  .earning-group .select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 45px;
+  }
+  .earning-group .sortby-section {
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+  .earning-group .sortby-section:last-child {
+    margin-bottom: 0px;
+  }
+  .card-table-head {
+    margin-bottom: 10px;
+  }
+  .chart-date-group .form-control {
+    max-width: 100%;
+    margin-bottom: 10px;
+    background-position: 5% 50%;
+  }
+  .tax-table-rate .list-btn ul li {
+    margin-bottom: 10px;
+  }
+  .tax-table-rate .list-btn ul li:last-child {
+    margin-bottom: 0px;
+  }
+  .fc-left {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    left: 35px;
+  }
+  .fc-toolbar .fc-right {
+    right: 24px;
+    position: relative;
+  }
+  .card-table-head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-table-head ul {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}

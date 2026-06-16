@@ -1,0 +1,53 @@
+@use "sass:color";
+// Base Font
+$font-size-base: 14px;
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+
+// Font Family
+$font-family: "Roboto", sans-serif;
+$font-awesome: "Fontawesome";
+	
+// Theme Colors Variables
+$primary: #4C40ED;
+$primary-hover: #2c1fe5;
+$secondary: #74788D;
+$success: #27c24c;
+$success-hover: #23ad44;
+$danger: #f05050;
+$danger-hover: #ee3939;
+$warning: #ffbc34;
+$warning-hover: #e9ab2e;
+$info: #009efb;
+$info-hover: #028ee1;
+$light: #f8f9fa;
+$dark: #343a40;
+$white: #fff;
+$black: #000;
+$light-100: #F1F1F1;
+$light-200: #EDF3F9;
+$light-300: #f5f5f5;
+$light-400: #e2e5e8;
+
+// Gray
+$gray-100: #E4E5E7;
+$gray-200: #eee;
+$gray-300: #888;
+$gray-400: #979797;
+$gray-500: #74788D;
+$gray-600: #5E5873;
+$gray-700: #333;
+$gray-800: #28283C;
+$gray-900: #2A313D;
+
+// Style Anchor Elements
+$link-color: $primary;
+$link-decoration: none;
+$link-shade-percentage: 20%;
+$link-hover-color: color.adjust($link-color, $lightness: -10%);
+$link-hover-decoration: null;

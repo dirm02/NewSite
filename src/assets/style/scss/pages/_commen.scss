@@ -1,0 +1,65 @@
+
+@use "../utils/mixins";
+@use "../utils/variables";
+
+
+.section-header {
+    &-twelve {
+        text-align: center;
+        margin-bottom: 40px;
+        .subtitle {
+            background: variables.$primary;
+            padding: 8px 14px;
+            border-radius: 100px;
+            font-size: 18px;
+            font-weight: variables.$font-weight-semibold;
+            color: variables.$white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0px auto 8px;
+            width: fit-content;
+            @include mixins.respond-below(sm) {
+                font-size: 14px;
+            }
+        }
+        .title {
+            font-size: 44px;
+            font-weight: variables.$font-weight-bold;
+            color: variables.$gray-900;
+            margin-bottom: 0;
+            @include mixins.respond-below(xl) {
+                font-size: 40px;
+            }
+            @include mixins.respond-below(sm) {
+                font-size: 22px;
+            }
+        }
+    }
+}
+
+
+.theme-2 {
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: variables.$font-weight-semibold;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 50px;
+        &:hover {
+            background: variables.$primary-hover;
+            border-color: variables.$primary-hover;
+        }
+    }
+    .btn-outline-white {
+        border: 1px solid variables.$white;
+        color: variables.$white;
+        &:hover {
+            background: variables.$primary;
+            border-color: variables.$primary;
+        }
+    }
+}

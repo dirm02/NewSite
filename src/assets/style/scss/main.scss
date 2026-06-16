@@ -1,0 +1,86 @@
+/****** Utils ******/
+@use "utils/variables";
+@use "utils/mixins";
+
+/******* Base *******/
+@use "base/base";
+@use "base/background";
+
+/******* Components ******/
+@use "components/avatar";
+@use "components/boostrap";
+@use "components/button";
+@use "components/badge";
+@use "components/border";
+@use "components/dropdown";
+@use "components/font";
+@use "components/typography";
+@use "components/forms";
+@use "components/accordion";
+@use "components/cards";
+@use "components/grid";
+@use "components/cursor";
+@use "components/navs-tabs";
+@use "components/table";
+
+/****** Layout ******/
+@use "layout/common";
+@use "layout/content";
+@use "layout/breadcrumb";
+@use "layout/header-2";
+@use "layout/header-3";
+@use "layout/header-9";
+@use "layout/header";
+@use "layout/header-7";
+
+@use "layout/provider-header";
+@use "layout/footer";
+@use "layout/footer-7";
+@use "layout/sidebar";
+@use "layout/customer-sidebar";
+
+/******* Pages ******/
+@use "pages/dark-mode";
+@use "pages/home";
+@use "pages/services";
+@use "pages/service-details";
+@use "pages/providers";
+@use "pages/login";   
+@use "pages/categories";
+@use "pages/customer-booking";
+@use "pages/booking";
+@use "pages/chat";
+@use "pages/customer-wallet";
+@use "pages/favourites";
+@use "pages/customer-reviews";
+@use "pages/provider-settings";
+@use "pages/about-us";
+@use "pages/blog-details";
+@use "pages/blog";
+@use "pages/index-2";
+@use "pages/index-3";
+@use "pages/index-4";
+@use "pages/index-7";
+@use "pages/index-5";
+@use "pages/index-6";
+@use "pages/index-8";
+@use "pages/index-9";
+@use "pages/index-10";
+@use "pages/index-12";
+@use "pages/installer";
+@use "pages/service-request";
+@use "pages/banner";
+@use "pages/commen";
+@use "pages/solutions";
+@use "pages/team";
+@use "pages/work";
+@use "pages/testimonial";
+
+/******* Vendors ******/
+@use "vendors/meanmenu";
+@use "vendors/select2";
+
+
+
+
+

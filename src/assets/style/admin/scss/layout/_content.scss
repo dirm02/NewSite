@@ -1,0 +1,39 @@
+@use "../utils/mixins";
+@use "../utils/variables" as *;
+
+.main-wrapper {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+  }
+  
+  .page-wrapper {
+    margin-left: 270px;
+    padding-top: 60px;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+  .page-wrapper > .content {
+    padding: 30px;
+    width: 100%;
+  }
+  
+  .page-header {
+    margin-bottom: 1.875rem;
+  }
+  .page-header .breadcrumb {
+    background-color: transparent;
+    color: #6c757d;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .page-header .breadcrumb a {
+    color: $gray-700;
+  }
+  
+  .page-title {
+    color: $gray-700;
+    margin-bottom: 5px;
+  }
