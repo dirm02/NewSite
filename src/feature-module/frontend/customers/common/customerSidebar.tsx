@@ -1,10 +1,21 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { customerSidebarData, type CustomerSidebarItem } from "./customerSidebarData"
 import { forwardRef, useState } from "react"
+import { useAuth } from "../../../../core/auth/AuthContext"
+import { all_routes } from "../../../../core/data/routes/all_routes"
 
 const CustomerSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { logout } = useAuth()
   const [openSubmenus, setOpenSubmenus] = useState<Set<string>>(new Set())
+
+  // Sidebar logout must clear the PocketBase session just like the header logout.
+  const handleLogout = (event: React.MouseEvent) => {
+    event.preventDefault()
+    logout()
+    navigate(all_routes.login)
+  }
 
   // Handle mouse enter on sidebar
   const handleMouseEnter = () => {
@@ -97,6 +108,7 @@ const CustomerSidebar = forwardRef<HTMLDivElement>((_, ref) => {
       <li key={item.id} className={`${shouldHighlight ? 'active' : ''}`}>
         <Link 
           to={item.to}
+          {...(item.id === 'logout' ? { onClick: handleLogout } : {})}
           {...(item.isModal && item.modalTarget ? {
             'data-bs-toggle': 'modal',
             'data-bs-target': item.modalTarget

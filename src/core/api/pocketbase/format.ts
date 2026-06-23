@@ -93,6 +93,23 @@ export function searchWithCategory(slug: string): string {
   return `/services/search?category=${encodeURIComponent(slug)}`;
 }
 
+/**
+ * Builds a `/services/search` URL with optional keyword / location / category
+ * query params. Empty/blank values are omitted so the resulting URL stays clean.
+ */
+export function buildSearchUrl(params: {
+  query?: string;
+  location?: string;
+  category?: string;
+}): string {
+  const sp = new URLSearchParams();
+  if (params.query?.trim()) sp.set("query", params.query.trim());
+  if (params.location?.trim()) sp.set("location", params.location.trim());
+  if (params.category?.trim()) sp.set("category", params.category.trim());
+  const qs = sp.toString();
+  return qs ? `/services/search?${qs}` : "/services/search";
+}
+
 export function customerJobDetailUrl(id: string): string {
   return `/customers/customer-job-details?id=${encodeURIComponent(id)}`;
 }

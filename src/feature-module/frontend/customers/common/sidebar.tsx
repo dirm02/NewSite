@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import { useAuth } from '../../../../core/auth/AuthContext';
 import StickyBox from 'react-sticky-box';
 const CustomerSideBar = () => {
   const routes = all_routes;
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const handleLogout = (event: React.MouseEvent) => {
+    event.preventDefault();
+    logout();
+    navigate(routes.login);
+  };
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [subdroptoggle, setsubdroptoggle] = useState(false);
   const togglePasswordVisibility = () => {
@@ -152,7 +160,7 @@ const CustomerSideBar = () => {
             </ul>
           </li>
           <li className="mb-0">
-            <Link to={routes.login} className={`d-flex align-items-center `}>
+            <Link to={routes.login} onClick={handleLogout} className={`d-flex align-items-center `}>
               <i className="ti ti-logout me-2" />
               Logout
             </Link>

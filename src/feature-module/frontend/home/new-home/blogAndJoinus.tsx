@@ -62,7 +62,7 @@ const BlogAndJoinus = () => {
           className="col-md-6 text-md-end wow fadeInUp"
           data-wow-delay="0.2s"
         >
-          <Link to="#" className="btn btn-linear-primary">
+          <Link to={routes.chooseSignUp} className="btn btn-linear-primary">
             <i className="ti ti-user-filled me-2" />
             Join Us
           </Link>

@@ -14,10 +14,23 @@ const Search = () => {
   const routes = all_routes;
   const [searchParams] = useSearchParams();
   const categorySlug = searchParams.get('category') ?? undefined;
+  const queryTerm = (searchParams.get('query') ?? '').trim().toLowerCase();
   const { data: allServices, loading: discoveryLoading, error: discoveryError, source: discoverySource } = useServices();
-  const discoveryServices = categorySlug
-    ? allServices.filter((s) => s.expand?.category?.slug === categorySlug)
-    : allServices;
+  const discoveryServices = allServices.filter((s) => {
+    if (categorySlug && s.expand?.category?.slug !== categorySlug) return false;
+    if (queryTerm) {
+      const haystack = [
+        s.title,
+        s.description,
+        s.expand?.category?.name,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      if (!haystack.includes(queryTerm)) return false;
+    }
+    return true;
+  });
   const [selectedValue1, setSelectedValue1] = useState(null);
 
   const [isExpanded, setIsExpanded] = useState(false);

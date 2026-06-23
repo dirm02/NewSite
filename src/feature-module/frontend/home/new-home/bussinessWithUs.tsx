@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+import { all_routes } from '../../../../core/data/routes/all_routes'
 
 const BussinessWithUs = () => {
+  const routes = all_routes
   return (
     <>
   {/* Business Section */}
@@ -20,7 +22,7 @@ const BussinessWithUs = () => {
               electrical work to personal services like photography and
               tutoring.
             </p>
-            <Link to="#" className="btn btn-linear-primary">
+            <Link to={routes.chooseSignUp} className="btn btn-linear-primary">
               <i className="ti ti-user-filled me-2" />
               Join Us
             </Link>

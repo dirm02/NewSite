@@ -276,7 +276,7 @@ const ProviderHeader = () => {
                 <div className="noti-content">
                   <div className="d-flex flex-column">
                     <div className="border-bottom mb-3 pb-3">
-                      <Link to={routes.commonNotification}>
+                      <Link to={routes.providerNotification}>
                         <div className="d-flex">
                           <span className="avatar avatar-lg me-2 flex-shrink-0">
                             <ImageWithBasePath
@@ -304,7 +304,7 @@ const ProviderHeader = () => {
                       </Link>
                     </div>
                     <div className="border-bottom mb-3 pb-3">
-                      <Link to={routes.commonNotification} className="pb-0">
+                      <Link to={routes.providerNotification} className="pb-0">
                         <div className="d-flex">
                           <span className="avatar avatar-lg me-2 flex-shrink-0">
                             <ImageWithBasePath
@@ -340,7 +340,7 @@ const ProviderHeader = () => {
                       </Link>
                     </div>
                     <div className="border-bottom mb-3 pb-3">
-                      <Link to={routes.commonNotification}>
+                      <Link to={routes.providerNotification}>
                         <div className="d-flex">
                           <span className="avatar avatar-lg me-2 flex-shrink-0">
                             <ImageWithBasePath
@@ -363,7 +363,7 @@ const ProviderHeader = () => {
                       </Link>
                     </div>
                     <div className="border-0 mb-3 pb-0">
-                      <Link to={routes.commonNotification}>
+                      <Link to={routes.providerNotification}>
                         <div className="d-flex">
                           <span className="avatar avatar-lg me-2 flex-shrink-0">
                             <ImageWithBasePath

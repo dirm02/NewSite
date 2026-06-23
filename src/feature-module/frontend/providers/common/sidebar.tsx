@@ -1,15 +1,26 @@
 import { forwardRef, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "overlayscrollbars/overlayscrollbars.css";
 import {
   providerSidebarData,
   type ProviderSidebarItem,
 } from './providerSidebarData';
+import { useAuth } from '../../../../core/auth/AuthContext';
+import { all_routes } from '../../../../core/data/routes/all_routes';
 
 const ProviderSidebar = forwardRef<HTMLDivElement>((_, ref) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [openSubmenus, setOpenSubmenus] = useState<Set<string>>(new Set());
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  // Sidebar logout must clear the PocketBase session just like the header logout.
+  const handleLogout = (event: React.MouseEvent) => {
+    event.preventDefault();
+    logout();
+    navigate(all_routes.login);
+  };
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -117,6 +128,7 @@ const ProviderSidebar = forwardRef<HTMLDivElement>((_, ref) => {
       <li key={item.id} className={shouldHighlight ? 'active' : ''}>
         <Link
           to={item.to}
+          {...(item.id === 'logout' ? { onClick: handleLogout } : {})}
           {...(item.isModal && item.modalTarget
             ? {
                 'data-bs-toggle': 'modal' as const,

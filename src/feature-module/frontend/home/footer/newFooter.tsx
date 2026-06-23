@@ -272,14 +272,14 @@ const NewFooter = () => {
             <div className="col-md-12">
               <div className="d-flex align-items-center justify-content-between flex-wrap">
                 <p className="mb-2">
-                  Copyright © 2025 - All Rights Reserved Truelysell
+                  Copyright © 2025 - All Rights Reserved Lif3line
                 </p>
                 <ul className="menu-links mb-2">
                   <li>
-                    <Link to="#"> Terms and Conditions</Link>
+                    <Link to={routes.termsCondition}> Terms and Conditions</Link>
                   </li>
                   <li>
-                    <Link to="#">Privacy Policy</Link>
+                    <Link to={routes.privacyPolicy}>Privacy Policy</Link>
                   </li>
                 </ul>
               </div>

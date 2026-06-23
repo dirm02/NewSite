@@ -1,8 +1,9 @@
 import QuoteModal from '../../common/modals/quote-modal'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import BecomeProvider from '../../common/modals/provider-modal'
-import { Link } from 'react-router-dom'
-import { all_routes } from '../../../../core/data/routes/all_routes'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { buildSearchUrl } from '../../../../core/api/pocketbase/format'
 import FeatureSection from './feature-section'
 import PopularSection from './popular-section'
 import WorkSection from './workSection'
@@ -18,7 +19,15 @@ import NewFooter from '../footer/newFooter'
 import HomeCategorySection from './HomeCategorySection'
 
 const NewHome = () => {
-  const routes = all_routes
+  const navigate = useNavigate()
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchLocation, setSearchLocation] = useState('')
+
+  const handleHeroSearch = (event: React.FormEvent) => {
+    event.preventDefault()
+    navigate(buildSearchUrl({ query: searchQuery, location: searchLocation }))
+  }
+
   return (
     <>
     <HomeHeader type={1}/>
@@ -43,7 +52,7 @@ const NewHome = () => {
                 time.
               </p>
               <div className="banner-form bg-white border mb-3">
-                <form action="#">
+                <form onSubmit={handleHeroSearch}>
                   <div className="d-md-flex align-items-center">
                     <div className="input-group mb-2">
                       <span className="input-group-text px-1">
@@ -53,6 +62,8 @@ const NewHome = () => {
                         type="text"
                         className="form-control"
                         placeholder="Search for Service"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
                     </div>
                     <div className="input-group mb-2">
@@ -63,14 +74,16 @@ const NewHome = () => {
                         type="text"
                         className="form-control"
                         placeholder="Enter Location"
+                        value={searchLocation}
+                        onChange={(e) => setSearchLocation(e.target.value)}
                       />
                     </div>
                     <div className="mb-2">
 
-                      <Link  to={routes.search} className="btn btn-linear-primary d-inline-flex align-items-center w-100">
+                      <button type="submit" className="btn btn-linear-primary d-inline-flex align-items-center w-100">
 												<i className="feather icon-search me-2"></i>
 												Search
-											</Link>
+											</button>
                     </div>
                   </div>
                 </form>
@@ -83,19 +96,19 @@ const NewHome = () => {
               <div className="d-flex align-items-center flex-wrap">
                 <h6 className="mb-2 me-2 fw-medium">Popular Searches</h6>
                 <Link
-                  to={routes.search}
+                  to={buildSearchUrl({ query: 'Plumber' })}
                   className="badge badge-dark-transparent fs-14 fw-normal mb-2 me-2"
                 >
                   Plumber
                 </Link>
                 <Link
-                  to={routes.search}
+                  to={buildSearchUrl({ query: 'Interior' })}
                   className="badge badge-dark-transparent fs-14 fw-normal mb-2 me-2"
                 >
                   Interior
                 </Link>
                 <Link
-                  to={routes.search}
+                  to={buildSearchUrl({ query: 'Nail Technicians' })}
                   className="badge badge-dark-transparent fs-14 fw-normal mb-2 me-2"
                 >
                   Nail Technicians

@@ -24,6 +24,28 @@ test.describe("Role navigation contract @navigation", () => {
     await expect(page).toHaveURL(/\/authentication\/login$/);
   });
 
+  test("hero search navigates to /services/search with query params", async ({
+    page,
+  }) => {
+    await page.goto("/index", { waitUntil: "domcontentloaded" });
+
+    await page.getByPlaceholder("Search for Service").fill("Plumbing");
+    await page.getByPlaceholder("Enter Location").fill("Toronto");
+    await page.locator('.banner-form button[type="submit"]').click();
+
+    await expect(page).toHaveURL(/\/services\/search\?/);
+    await expect(page).toHaveURL(/query=Plumbing/);
+    await expect(page).toHaveURL(/location=Toronto/);
+  });
+
+  test("popular search chip navigates to search with its keyword", async ({
+    page,
+  }) => {
+    await page.goto("/index", { waitUntil: "domcontentloaded" });
+    await page.getByRole("link", { name: "Plumber", exact: true }).first().click();
+    await expect(page).toHaveURL(/\/services\/search\?query=Plumber/);
+  });
+
   test.describe("customer shell", () => {
     test.beforeEach(async ({ page }) => {
       test.skip(!hasSeedCredentials("customer"), seedSkipReason("customer"));
@@ -65,6 +87,22 @@ test.describe("Role navigation contract @navigation", () => {
         timeout: 45_000,
       });
     });
+
+    test("sidebar logout clears the PocketBase session", async ({ page }) => {
+      await page.goto("/customers/customer-dashboard", {
+        waitUntil: "domcontentloaded",
+      });
+      await expect(page).toHaveURL(/\/customers\/customer-dashboard/);
+
+      const sidebar = page.locator("#sidebar");
+      await sidebar.getByRole("link", { name: /logout/i }).click();
+
+      await expect(page).toHaveURL(/\/authentication\/login/, { timeout: 45_000 });
+      const stored = await page.evaluate(() =>
+        localStorage.getItem("lif3line_pb_auth"),
+      );
+      expect(stored).toBeNull();
+    });
   });
 
   test.describe("provider shell", () => {
@@ -102,6 +140,30 @@ test.describe("Role navigation contract @navigation", () => {
         waitUntil: "domcontentloaded",
       });
       await expect(page).toHaveURL(/\/providers\/dashboard/, { timeout: 45_000 });
+    });
+
+    test("header notifications do not link to customer-only routes", async ({
+      page,
+    }) => {
+      await page.goto("/providers/dashboard", { waitUntil: "domcontentloaded" });
+      const header = page.locator(".provider-header");
+      await expect(
+        header.locator('a[href*="/customers/"]'),
+      ).toHaveCount(0);
+    });
+
+    test("sidebar logout clears the PocketBase session", async ({ page }) => {
+      await page.goto("/providers/dashboard", { waitUntil: "domcontentloaded" });
+      await expect(page).toHaveURL(/\/providers\/dashboard/);
+
+      const sidebar = page.locator("#sidebar");
+      await sidebar.getByRole("link", { name: /logout/i }).click();
+
+      await expect(page).toHaveURL(/\/authentication\/login/, { timeout: 45_000 });
+      const stored = await page.evaluate(() =>
+        localStorage.getItem("lif3line_pb_auth"),
+      );
+      expect(stored).toBeNull();
     });
   });
 });

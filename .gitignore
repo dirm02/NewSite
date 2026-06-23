@@ -38,5 +38,8 @@ docs/e2e/crawl-results.json
 docs/e2e/crawl-report.md
 docs/e2e/role-nav/*.png
 
+# Entrypoint audit runtime captures (may contain seed emails in screenshots)
+docs/entrypoint-audit/_runtime/
+
 # Crawlee/local scraper runtime state
 storage/
