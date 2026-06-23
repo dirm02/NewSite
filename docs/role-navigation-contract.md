@@ -48,13 +48,13 @@ Source of truth for guest, customer, provider, and admin navigation. Agents impl
 
 **Top header (MVP):** dashboard utilities only: logo/sidebar toggle, search, Visit Website escape link, notifications, profile/logout.
 
-**Sidebar (MVP):** Dashboard, Job Feed, Proposals, My Jobs, My Services, Reviews, Profile & Settings (submenu), Logout.
+**Sidebar:** Provider workspace menu: Dashboard, My Services, Bookings, Job Feed, Proposals, My Jobs, Staffs, Customers, Payout, Holidays & Leave, Coupons, Offers, Reviews, Enquiries, Earnings, Chat, Settings (submenu), Logout.
 
 **Must not show:** public mega-nav, Customers mega-menu, Admin link, customer-only booking/wallet flows.
 
 **Visit Website:** **Keep** as a public-site escape hatch (`/index`). Providers need to preview marketing/discovery pages without logging out.
 
-**Deferred (Later):** Bookings, Staffs, Customers list, Payout, Holidays, Coupons, Offers, Enquiries, Earnings, Chat, plan/billing settings.
+**Deferred (Later):** none in provider sidebar. Provider is an operator workspace and can expose the broader management menu while customer stays MVP-focused.
 
 ## Admin
 
