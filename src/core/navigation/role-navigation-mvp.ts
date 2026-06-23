@@ -9,20 +9,6 @@ export interface RoleNavLink {
   relatedRoutes?: string[];
 }
 
-/** Flat top-nav links for logged-in customer header. */
-export const CUSTOMER_MVP_TOP_NAV: RoleNavLink[] = [
-  { id: "dashboard", label: "Dashboard", to: r.customerDashboard },
-  { id: "create-job", label: "Create Job", to: r.customerCreateJob },
-  {
-    id: "jobs",
-    label: "Jobs",
-    to: r.userJob,
-    relatedRoutes: [r.customerJobDetails, r.customerEditJob],
-  },
-  { id: "quote-comparison", label: "Quote Comparison", to: r.userQuoteComparison },
-  { id: "visit-website", label: "Visit Website", to: r.home },
-];
-
 /** Sidebar items for customer dashboard — MVP only. */
 export const CUSTOMER_MVP_SIDEBAR: RoleNavLink[] = [
   { id: "dashboard", label: "Dashboard", to: r.customerDashboard, relatedRoutes: [] },
@@ -46,26 +32,6 @@ export const CUSTOMER_MVP_SIDEBAR: RoleNavLink[] = [
     ],
   },
   { id: "logout", label: "Logout", to: r.login },
-];
-
-/** Flat top-nav links for logged-in provider header. */
-export const PROVIDER_MVP_TOP_NAV: RoleNavLink[] = [
-  { id: "dashboard", label: "Dashboard", to: r.providerDashboard },
-  { id: "job-feed", label: "Job Feed", to: r.providerJobFeed, relatedRoutes: [r.providerApplyJobs] },
-  { id: "proposals", label: "Proposals", to: r.providerProposal },
-  {
-    id: "my-jobs",
-    label: "My Jobs",
-    to: r.providerActiveJobs,
-    relatedRoutes: [
-      r.providerJobsDetails,
-      r.providerJobsDetailsDelivered,
-      r.providerJobsDetailsCompleted,
-      r.providerJobsDetailsInprogress,
-      r.providerJobsDetailsCancelled,
-    ],
-  },
-  { id: "visit-website", label: "Visit Website", to: r.home },
 ];
 
 /** Sidebar items for provider dashboard — MVP only. */

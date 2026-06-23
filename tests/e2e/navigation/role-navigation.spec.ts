@@ -31,16 +31,17 @@ test.describe("Role navigation contract @navigation", () => {
       await loginViaUi(page, email, password);
     });
 
-    test("top nav is customer-only", async ({ page }) => {
+    test("top header is utility-only", async ({ page }) => {
       await page.goto("/customers/customer-dashboard", {
         waitUntil: "domcontentloaded",
       });
       const header = page.locator(".customer-header");
       await expect(header.getByRole("link", { name: /^providers$/i })).toHaveCount(0);
       await expect(header.getByRole("link", { name: /^admin$/i })).toHaveCount(0);
-      await expect(header.getByRole("link", { name: "Dashboard" }).first()).toBeVisible();
-      await expect(header.getByRole("link", { name: "Create Job" })).toBeVisible();
-      await expect(header.getByRole("link", { name: "Quote Comparison" })).toBeVisible();
+      await expect(header.getByRole("link", { name: "Dashboard" })).toHaveCount(0);
+      await expect(header.getByRole("link", { name: "Create Job" })).toHaveCount(0);
+      await expect(header.getByRole("link", { name: "Quote Comparison" })).toHaveCount(0);
+      await expect(header.getByRole("link", { name: /home/i }).first()).toBeVisible();
     });
 
     test("sidebar shows MVP items only", async ({ page }) => {
@@ -73,13 +74,14 @@ test.describe("Role navigation contract @navigation", () => {
       await loginViaUi(page, email, password);
     });
 
-    test("top nav is provider-only", async ({ page }) => {
+    test("top header is utility-only", async ({ page }) => {
       await page.goto("/providers/dashboard", { waitUntil: "domcontentloaded" });
       const header = page.locator(".provider-header");
       await expect(header.getByRole("link", { name: /^customers$/i })).toHaveCount(0);
       await expect(header.getByRole("link", { name: /^admin$/i })).toHaveCount(0);
-      await expect(header.getByRole("link", { name: "Job Feed" }).first()).toBeVisible();
-      await expect(header.getByRole("link", { name: "Proposals" }).first()).toBeVisible();
+      await expect(header.getByRole("link", { name: "Job Feed" })).toHaveCount(0);
+      await expect(header.getByRole("link", { name: "Proposals" })).toHaveCount(0);
+      await expect(header.getByRole("link", { name: /visit website/i })).toBeVisible();
     });
 
     test("sidebar shows MVP items only", async ({ page }) => {

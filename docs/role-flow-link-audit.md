@@ -8,8 +8,8 @@ Contract: `docs/role-navigation-contract.md`
 | Surface | Finding | Action |
 |---------|---------|--------|
 | `SiteHeaderMainNav` | Admin link visible to all guests | **Removed** Admin link |
-| `CustomerHeader` | Full template mega-menu incl. Providers + Admin | **Replaced** with `CustomerTopNav` (MVP only) |
-| `ProviderHeader` | No cross-role menus; orphan search bar | **Added** `ProviderTopNav`; deduped Visit Website |
+| `CustomerHeader` | Full template mega-menu incl. Providers + Admin | **Replaced** with utility-only header; MVP navigation lives in sidebar |
+| `ProviderHeader` | No cross-role menus; orphan search bar | **Kept** utility-only header; MVP navigation lives in sidebar |
 | `useSiteHeaderRole` | Read legacy keys, not PocketBase session | **Fixed** — uses `AuthContext` + `lif3line_pb_auth` |
 | `customerSidebarData` | Bookings, wallet, chat in MVP path | **Trimmed** to MVP sidebar |
 | `providerSidebarData` | Payout, staffs, customers list, etc. | **Trimmed** to MVP sidebar |

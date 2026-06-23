@@ -10,7 +10,6 @@ import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import type { AppState } from '../../../../core/models/interface';
 import { useAuth } from '../../../../core/auth/AuthContext';
-import ProviderTopNav from './ProviderTopNav';
 
 const ProviderHeader = () => {
   const routes = all_routes;
@@ -168,7 +167,6 @@ const ProviderHeader = () => {
       </Link>
       <div className="header-user">
         <div className="nav user-menu">
-          <ProviderTopNav />
           {/* Search */}
           <div className="d-flex align-items-center nav-item nav-search-inputs gap-3">
             <div className="top-nav-search">
@@ -189,6 +187,13 @@ const ProviderHeader = () => {
           </div>
           {/* /Search */}
           <div className="d-flex align-items-center">
+            <Link
+              to={routes.home}
+              className="btn btn-primary d-none d-sm-inline-flex align-items-center me-2"
+            >
+              <i className="ti ti-world me-1" />
+              Visit Website
+            </Link>
             <div className="provider-head-links">
               <div>
                 

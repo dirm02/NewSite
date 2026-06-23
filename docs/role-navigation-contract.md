@@ -36,21 +36,21 @@ Source of truth for guest, customer, provider, and admin navigation. Agents impl
 
 ## Customer shell
 
-**Top nav (MVP):** Dashboard, Create Job, Jobs, Quote Comparison, Visit Website.
+**Top header (MVP):** dashboard utilities only: logo/sidebar toggle, Home escape link, notifications, profile/logout.
 
 **Sidebar (MVP):** Dashboard, Create Job, Jobs, Quote Comparison, Reviews, Profile & Settings (submenu), Logout.
 
-**Must not show:** Providers menu, Admin link, provider-only actions (Create Service in customer context).
+**Must not show:** public mega-nav, Providers menu, Admin link, provider-only actions (Create Service in customer context).
 
 **Deferred (Later — not in MVP nav):** Bookings, Job Bookings, Favorites, Wallet, Chat, notification demo widgets.
 
 ## Provider shell
 
-**Top nav (MVP):** Dashboard, Job Feed, Proposals, My Jobs, Visit Website.
+**Top header (MVP):** dashboard utilities only: logo/sidebar toggle, search, Visit Website escape link, notifications, profile/logout.
 
 **Sidebar (MVP):** Dashboard, Job Feed, Proposals, My Jobs, My Services, Reviews, Profile & Settings (submenu), Logout.
 
-**Must not show:** Customers mega-menu, Admin link, customer-only booking/wallet flows.
+**Must not show:** public mega-nav, Customers mega-menu, Admin link, customer-only booking/wallet flows.
 
 **Visit Website:** **Keep** as a public-site escape hatch (`/index`). Providers need to preview marketing/discovery pages without logging out.
 

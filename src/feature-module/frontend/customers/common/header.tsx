@@ -3,7 +3,6 @@ import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import { all_routes } from "../../../../core/data/routes/all_routes";
 import { useEffect, useState, useRef } from "react";
 import { useAuth } from "../../../../core/auth/AuthContext";
-import CustomerTopNav from "./CustomerTopNav";
 
 interface CustomerHeaderProps {
   sidebarRef: React.RefObject<HTMLDivElement | null>;
@@ -165,10 +164,14 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
     </Link>
     <div className="header-user">
       <div className="nav user-menu">
-        <ul className="main-nav">
-          <CustomerTopNav />
-        </ul>
         <div className="header-btn d-flex align-items-center">
+          <Link
+            to={routes.home}
+            className="btn btn-light d-none d-sm-inline-flex align-items-center me-2"
+          >
+            <i className="ti ti-home me-1" />
+            Home
+          </Link>
           <div className="provider-head-links gap-2">
             <Link
               to="javascript:void(0);"
