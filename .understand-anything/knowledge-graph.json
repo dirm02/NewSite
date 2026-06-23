@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "title": "Lif3line role-flow navigation graph",
+    "task": "GHST-22",
+    "generatedAt": "2026-06-23T00:00:00.000Z",
+    "repo": "NewSite",
+    "doc": "docs/role-flow-navigation-inventory.md"
+  },
+  "nodes": [
+    { "id": "role:guest", "type": "role", "label": "Guest" },
+    { "id": "role:customer", "type": "role", "label": "Customer" },
+    { "id": "role:provider", "type": "role", "label": "Provider" },
+    { "id": "role:admin", "type": "role", "label": "Admin" },
+
+    { "id": "shell:public", "type": "shell", "label": "Public SiteHeader", "component": "SiteHeader.tsx" },
+    { "id": "shell:customer", "type": "shell", "label": "CustomerLayout", "component": "customerLayout.tsx" },
+    { "id": "shell:provider", "type": "shell", "label": "ProviderLayout", "component": "providerLayout.tsx" },
+
+    { "id": "nav:home", "type": "nav_item", "label": "Home", "path": "/index" },
+    { "id": "nav:services", "type": "nav_section", "label": "Services" },
+    { "id": "nav:customers_section", "type": "nav_section", "label": "Customers (top nav)" },
+    { "id": "nav:providers_section", "type": "nav_section", "label": "Providers (top nav)" },
+    { "id": "nav:pages", "type": "nav_section", "label": "Pages" },
+    { "id": "nav:admin", "type": "nav_item", "label": "Admin", "path": "/admin/dashboard" },
+
+    { "id": "sidebar:customer", "type": "sidebar", "label": "Customer sidebar", "source": "customerSidebarData.ts" },
+    { "id": "sidebar:provider", "type": "sidebar", "label": "Provider sidebar", "source": "providerSidebarData.ts" },
+
+    { "id": "guard:require_auth", "type": "guard", "label": "RequireAuth", "component": "RequireAuth.tsx" },
+    { "id": "leak:L-01", "type": "leak", "label": "Customer sees Providers mega-menu", "severity": "critical" },
+    { "id": "leak:L-02", "type": "leak", "label": "Customer sees Admin link", "severity": "critical" },
+    { "id": "leak:L-03", "type": "leak", "label": "Guest sees Admin link", "severity": "high" },
+    { "id": "leak:L-06", "type": "leak", "label": "SiteHeader role uses legacy storage keys", "severity": "medium" }
+  ],
+  "edges": [
+    { "from": "role:guest", "to": "shell:public", "relation": "uses" },
+    { "from": "role:customer", "to": "shell:customer", "relation": "uses" },
+    { "from": "role:provider", "to": "shell:provider", "relation": "uses" },
+
+    { "from": "shell:public", "to": "nav:home", "relation": "shows" },
+    { "from": "shell:public", "to": "nav:services", "relation": "shows" },
+    { "from": "shell:public", "to": "nav:pages", "relation": "shows" },
+    { "from": "shell:public", "to": "nav:admin", "relation": "shows", "note": "leak for guest" },
+
+    { "from": "shell:public", "to": "nav:customers_section", "relation": "shows_when", "condition": "legacy role=customer" },
+    { "from": "shell:public", "to": "nav:providers_section", "relation": "shows_when", "condition": "legacy role=provider" },
+
+    { "from": "shell:customer", "to": "nav:home", "relation": "shows" },
+    { "from": "shell:customer", "to": "nav:services", "relation": "shows" },
+    { "from": "shell:customer", "to": "nav:customers_section", "relation": "shows" },
+    { "from": "shell:customer", "to": "nav:providers_section", "relation": "shows", "note": "leak L-01" },
+    { "from": "shell:customer", "to": "nav:pages", "relation": "shows" },
+    { "from": "shell:customer", "to": "nav:admin", "relation": "shows", "note": "leak L-02" },
+    { "from": "shell:customer", "to": "sidebar:customer", "relation": "shows" },
+
+    { "from": "shell:provider", "to": "sidebar:provider", "relation": "shows" },
+    { "from": "shell:provider", "to": "nav:home", "relation": "link", "via": "Visit Website" },
+
+    { "from": "shell:customer", "to": "guard:require_auth", "relation": "protected_by", "roles": ["customer"] },
+    { "from": "shell:provider", "to": "guard:require_auth", "relation": "protected_by", "roles": ["provider"] },
+
+    { "from": "leak:L-01", "to": "shell:customer", "relation": "found_in" },
+    { "from": "leak:L-02", "to": "shell:customer", "relation": "found_in" },
+    { "from": "leak:L-03", "to": "shell:public", "relation": "found_in" },
+    { "from": "leak:L-06", "to": "shell:public", "relation": "found_in" }
+  ],
+  "fixTasks": {
+    "L-01": "GHST-24",
+    "L-02": "GHST-24",
+    "L-03": "GHST-26",
+    "L-06": "GHST-23"
+  }
+}

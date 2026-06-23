@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   set_dark_mode,
   set_is_mobile_sidebar,
@@ -9,14 +9,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import type { AppState } from '../../../../core/models/interface';
+import { useAuth } from '../../../../core/auth/AuthContext';
+import ProviderTopNav from './ProviderTopNav';
 
 const ProviderHeader = () => {
   const routes = all_routes;
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
   const toggle_data = useSelector((state: AppState) => state.toggleSidebar2);
  
   const dispatch = useDispatch();
   const mobileBtnRef = useRef<HTMLAnchorElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate(routes.login);
+  };
   const toggleFullscreen = () => {
     if (!isFullscreen) {
       // Request fullscreen
@@ -159,6 +168,7 @@ const ProviderHeader = () => {
       </Link>
       <div className="header-user">
         <div className="nav user-menu">
+          <ProviderTopNav />
           {/* Search */}
           <div className="d-flex align-items-center nav-item nav-search-inputs gap-3">
             <div className="top-nav-search">
@@ -175,15 +185,6 @@ const ProviderHeader = () => {
                   </div>
                 </div>
               </form>
-            </div>
-            <div className="site-link">
-              <Link
-                to={routes.home}
-                className="d-flex align-items-center justify-content-center me-2"
-              >
-                <i className="feather-globe me-1" />
-                Visit Website
-              </Link>
             </div>
           </div>
           {/* /Search */}
@@ -412,13 +413,14 @@ const ProviderHeader = () => {
               </Link>
               <ul className="dropdown-menu p-2">
                 <li>
-                  <Link
-                    className="dropdown-item d-flex align-items-center"
-                    to={routes.login}
+                  <button
+                    type="button"
+                    className="dropdown-item d-flex align-items-center border-0 bg-transparent w-100 text-start"
+                    onClick={handleLogout}
                   >
                     <i className="ti ti-logout me-1" />
-                    Logout
-                  </Link>
+                    Logout{user?.name ? ` (${user.name})` : ""}
+                  </button>
                 </li>
               </ul>
             </div>
@@ -442,9 +444,9 @@ const ProviderHeader = () => {
           <Link className="dropdown-item" to={routes.providerProfileSettings}>
             Settings
           </Link>
-          <Link className="dropdown-item" to={routes.login}>
+          <button type="button" className="dropdown-item border-0 bg-transparent w-100 text-start" onClick={handleLogout}>
             Logout
-          </Link>
+          </button>
         </div>
       </div>
       {/* /Mobile Menu */}

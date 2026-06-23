@@ -9,6 +9,10 @@ import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import DefaultEditor from 'react-simple-wysiwyg';
 import HomeHeader from '../../home/header/home-header';
 import NewFooter from '../../home/footer/newFooter';
+import {
+  cityOption,
+  countryOption,
+} from '../../../../core/data/locations/canada-locations';
 
 const CreateService = () => {
   const routes = all_routes;
@@ -80,18 +84,12 @@ const CreateService = () => {
     { label: 'Minutes', value: '1' },
     { label: 'Hours', value: '2' },
   ];
-  const Options4 = [
-    { label: 'Canada', value: '1' },
-    { label: 'Brazil', value: '2' },
-  ];
+  const Options4 = countryOption;
   const Options5 = [
     { label: 'Percentage', value: '1' },
     { label: 'Price', value: '2' },
   ];
-  const Options6 = [
-    { label: 'London', value: '1' },
-    { label: 'Paris', value: '2' },
-  ];
+  const Options6 = cityOption;
 
   return (
     <>

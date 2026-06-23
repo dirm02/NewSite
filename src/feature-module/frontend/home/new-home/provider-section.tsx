@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import { all_routes } from '../../../../core/data/routes/all_routes'
+import { useProviders } from '../../../../core/hooks/useDiscoveryData'
+import {
+  formatHourlyRate,
+  formatRating,
+  providerDetailUrl,
+  providerImage,
+} from '../../../../core/api/pocketbase/format'
+import DiscoveryStatus from '../../common/discovery/DiscoveryStatus'
 
 const ProviderSection = () => {
   const routes = all_routes
+  const { data: providers, loading, error, source } = useProviders()
+
   return (
     <>
   {/* Popular Providers */}
@@ -26,232 +36,47 @@ const ProviderSection = () => {
             </div>
           </div>
         </div>
+        <DiscoveryStatus
+          loading={loading}
+          error={error}
+          source={source}
+          empty={!loading && providers.length === 0}
+          emptyMessage="No providers available."
+        >
         <div className="row gx-0">
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
+          {providers.slice(0, 8).map((provider, index) => (
+          <div className="col-xl-3 col-lg-4 col-md-6 d-flex" key={provider.id}>
             <div className="provider-item flex-fill">
               <div className="d-flex align-items-center">
                 <Link
-                  to={routes.providerDetails}
+                  to={providerDetailUrl(provider.id)}
                   className="avatar avatar-xl me-2"
                 >
                   <ImageWithBasePath
-                    src="assets/img/profiles/avatar-18.jpg"
-                    alt="img"
+                    src={providerImage(index)}
+                    alt={provider.business_name}
                     className="rounded-circle"
                   />
                 </Link>
                 <div>
                   <h6>
-                    <Link to={routes.providerDetails}>Hendry Thompson</Link>
+                    <Link to={providerDetailUrl(provider.id)}>{provider.business_name}</Link>
                   </h6>
                   <p className="fs-14 mb-0">
                     <i className="ti ti-star-filled text-warning me-1" />
-                    4.4 (123 Reviews)
+                    {formatRating(provider.rating_avg, provider.rating_count)}
                   </p>
                   <p className="mb-0">
-                    46 Services, From <span className="text-gray-9">$60</span>
+                    {provider.services_count ?? 0} Services, From{' '}
+                    <span className="text-gray-9">{formatHourlyRate(provider.hourly_rate_min)}</span>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-07.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>William Patterson</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.8 (200 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    40 Services, From <span className="text-gray-9">$70</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-08.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>Lorenzo Verduzco</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.6 (270 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    52 Services, From <span className="text-gray-9">$55</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-09.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>Rafael Smith</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.8 (300 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    40 Services, From <span className="text-gray-9">$05</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-08.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>Robert Boyd</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.8 (300 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    40 Services, From <span className="text-gray-9">$70</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-19.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>Joe Fletcher</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.9 (370 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    65 Services, From <span className="text-gray-9">$50</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-11.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>Benjamin Wade</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.2 (220 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    30 Services, From <span className="text-gray-9">$40</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex">
-            <div className="provider-item flex-fill">
-              <div className="d-flex align-items-center">
-                <Link
-                  to={routes.providerDetails}
-                  className="avatar avatar-xl me-2"
-                >
-                  <ImageWithBasePath
-                    src="assets/img/profiles/avatar-12.jpg"
-                    alt="img"
-                    className="rounded-circle"
-                  />
-                </Link>
-                <div>
-                  <h6>
-                    <Link to={routes.providerDetails}>William Hughes</Link>
-                  </h6>
-                  <p className="fs-14 mb-0">
-                    <i className="ti ti-star-filled text-warning me-1" />
-                    4.3 (280 Reviews)
-                  </p>
-                  <p className="mb-0">
-                    35 Services, From <span className="text-gray-9">$45</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
+        </DiscoveryStatus>
         <div
           className="text-center view-all wow fadeInUp"
           data-wow-delay="0.2s"

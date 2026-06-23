@@ -155,6 +155,7 @@ export const all_routes = {
   installer: "/pages/installer",
   success: "/authentication/success",
   resetPassword: "/authentication/reset-password",
+  verifyEmail: "/authentication/verify-email",
   forgotPassword: "/authentication/forgot-password",
 
   test: "",

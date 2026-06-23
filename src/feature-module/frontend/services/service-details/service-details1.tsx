@@ -5,16 +5,24 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import VideoModal from '../../../../core/hooks/video-modal';
 import StickyBox from 'react-sticky-box';
 import HomeHeader from '../../home/header/home-header';
 import NewFooter from '../../home/footer/newFooter';
+import { useService } from '../../../../core/hooks/useDiscoveryData';
+import {
+  serviceLocationLabel,
+} from '../../../../core/api/pocketbase/format';
+import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 
 const ServiceDetails1 = () => {
   const routes = all_routes;
+  const [searchParams] = useSearchParams();
+  const serviceId = searchParams.get('id');
+  const { data: service, loading, error, source } = useService(serviceId);
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const sliderRef1 = useRef(null);
@@ -99,19 +107,25 @@ const ServiceDetails1 = () => {
               <div className="col-xl-8">
                 <div className="card border-0">
                   <div className="card-body">
+                    <DiscoveryStatus loading={loading} error={error} source={source} empty={!loading && !service}>
                     <div className="service-head mb-2">
                       <div className="d-flex align-items-center justify-content-between flex-wrap">
-                        <h3 className="mb-2">Lighting Services</h3>
+                        <h3 className="mb-2">{service?.title ?? 'Lighting Services'}</h3>
                         <span className="badge badge-purple-transparent mb-2">
                           <i className="ti ti-calendar-check me-1" />
-                          6000+ Bookings
+                          {service?.expand?.category?.name ?? 'Service'}
                         </span>
                       </div>
                       <div className="d-flex align-items-center justify-content-between flex-wrap mb-2">
                         <div className="d-flex align-items-center flex-wrap">
                           <p className="me-3 mb-2">
                             <i className="ti ti-map-pin me-2" />
-                            18 Boon Lay Way, Singapore{' '}
+                            {service
+                              ? serviceLocationLabel(
+                                  service.expand?.city?.name,
+                                  service.expand?.city?.region,
+                                )
+                              : '18 Boon Lay Way, Singapore'}{' '}
                             <Link
                               to="#"
                               className="link-primary text-decoration-underline"
@@ -121,7 +135,10 @@ const ServiceDetails1 = () => {
                           </p>
                           <p className="mb-2">
                             <i className="ti ti-star-filled text-warning me-2" />
-                            <span className="text-gray-9">4.9</span>(255
+                            <span className="text-gray-9">
+                              {(service?.rating_avg ?? 4.9).toFixed(1)}
+                            </span>
+                            ({service?.expand?.provider?.rating_count ?? 255}
                             reviews)
                           </p>
                         </div>
@@ -141,7 +158,7 @@ const ServiceDetails1 = () => {
                         </div>
                       </div>
                     </div>
-                    {/* Slider */}
+                    </DiscoveryStatus>
                     <div className="service-wrap mb-4">
                       <div className="slider-wrap">
                         <Slider

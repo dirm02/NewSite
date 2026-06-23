@@ -4,9 +4,12 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { serviceSlideData } from '../../../../core/data/json/services-slide';
+import { useServices } from '../../../../core/hooks/useDiscoveryData';
+import { formatPrice, serviceDetailUrl, serviceImage } from '../../../../core/api/pocketbase/format';
+import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 const FeatureSection = () => {
     const routes = all_routes;
+    const { data: featuredServices, loading, error, source } = useServices({ featuredOnly: true });
     const imgslideroption = {
         dots: false,
         nav: false,
@@ -100,28 +103,24 @@ const FeatureSection = () => {
           </div>
         </div>
       </div>
+      <DiscoveryStatus loading={loading} error={error} source={source} empty={!loading && featuredServices.length === 0}>
       <Slider {...imgslideroption} className="service-slider  owl-carousel nav-center">
-      {serviceSlideData.map((res:any,index:number)=>{
+      {featuredServices.map((service,index:number)=>{
         return(
-            <div className="service-item wow fadeInUp" data-wow-delay="0.2s" key={index}>
+            <div className="service-item wow fadeInUp" data-wow-delay="0.2s" key={service.id}>
           <div className="service-img">
             <Slider {...slideslideroption} className="img-slider home-sliders feature-new-slide owl-carousel nav-center">
-
-            {res.Slider.map((img:any,index:number)=>{
-                return(
-                        <div className="slide-images" key={index}>
-                <Link to={routes.serviceDetails1}>
+                        <div className="slide-images">
+                <Link to={serviceDetailUrl(service.id)}>
                   <ImageWithBasePath
-                    src={`assets/img/services/${img.Image}`}
+                    src={serviceImage(index)}
                     className="img-fluid"
-                    alt="img"
+                    alt={service.title}
                   />
                 </Link>
               </div>
-                )
-            })}
             </Slider>
-            {res.TradeIcon ? <div className="trend-icon">
+            {service.featured ? <div className="trend-icon">
               <span className="bg-success">
                 <i className="feather icon-trending-up" />
               </span>
@@ -135,13 +134,13 @@ const FeatureSection = () => {
           </div>
           <div className="service-content">
             <h6 className="text-truncate mb-1">
-              <Link to={routes.serviceDetails1}>{res.Title}</Link>
+              <Link to={serviceDetailUrl(service.id)}>{service.title}</Link>
             </h6>
             <div className="d-flex align-items-center justify-content-between">
-              <p className="fw-medium fs-14 mb-0">{res.Text}</p>
+              <p className="fw-medium fs-14 mb-0">{formatPrice(service.price_from, service.price_to)}</p>
               <span className="d-inline-flex align-items-center fs-14">
                 <i className="ti ti-star-filled text-warning me-1" />
-                {res.Rating}
+                {(service.rating_avg ?? 0).toFixed(1)}
               </span>
             </div>
           </div>
@@ -149,6 +148,7 @@ const FeatureSection = () => {
         )
     })}
     </Slider>
+      </DiscoveryStatus>
       
       <div className="row">
         <div className="col-md-12">

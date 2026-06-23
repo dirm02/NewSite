@@ -1,7 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import { all_routes } from "../../../../core/data/routes/all_routes";
 import { useEffect, useState, useRef } from "react";
+import { useAuth } from "../../../../core/auth/AuthContext";
+import CustomerTopNav from "./CustomerTopNav";
 
 interface CustomerHeaderProps {
   sidebarRef: React.RefObject<HTMLDivElement | null>;
@@ -9,8 +11,14 @@ interface CustomerHeaderProps {
 }
 
 const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOverlayRef }) => {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
   const routes = all_routes;
+
+  const handleLogout = () => {
+    logout();
+    navigate(routes.login);
+  };
   
   // Initialize sidebar state from localStorage
   const [isMiniSidebar, setIsMiniSidebar] = useState(() => {
@@ -127,138 +135,6 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
     }
   };
 
-  // Function to check if a route is active (supports exact and relative matching)
-  const isRouteActive = (itemTo: string, currentPath: string): boolean => {
-    if (itemTo === "javascript:void(0);" || itemTo === "#") return false;
-    
-    // Exact match
-    if (itemTo === currentPath) return true;
-    
-    // Relative match - check if current path starts with the item path
-    if (itemTo !== "/" && currentPath.startsWith(itemTo)) {
-      // Ensure we're not matching partial segments
-      const nextCharInCurrentPath = currentPath[itemTo.length];
-      return nextCharInCurrentPath === undefined || nextCharInCurrentPath === "/";
-    }
-    
-    return false;
-  };
-
-  // Check if any related route is active
-  const hasActiveRelatedRoute = (relatedRoutes: string[] | undefined, currentPath: string): boolean => {
-    if (!relatedRoutes) return false;
-    return relatedRoutes.some(route => isRouteActive(route, currentPath));
-  };
-
-  // Check if any child route is active for submenu highlighting
-  const hasActiveChild = (children: { to: string; relatedRoutes?: string[] }[], currentPath: string): boolean => {
-    return children.some(child => {
-      const isActive = isRouteActive(child.to, currentPath);
-      const hasActiveRelated = hasActiveRelatedRoute(child.relatedRoutes, currentPath);
-      return isActive || hasActiveRelated;
-    });
-  };
-
-  // Home demo data for megamenu
-  const homeDemos = [
-    { to: routes.home, img: "assets/img/home-01.jpg", label: "General Home" },
-    { to: routes.home11, img: "assets/img/home-02.jpg", label: "General Home 2", badge: "NEW" },
-    { to: routes.home12, img: "assets/img/home-3.jpg", label: "Painting Services", badge: "NEW" },
-    { to: routes.home3, img: "assets/img/home-04.jpg", label: "Cleaning Services" },
-    { to: routes.home4, img: "assets/img/home-05.jpg", label: "Salon Services" },
-    { to: routes.home5, img: "assets/img/home-06.jpg", label: "Catering Services" },
-    { to: routes.home6, img: "assets/img/home-07.jpg", label: "Car Wash" },
-    { to: routes.home7, img: "assets/img/home-08.jpg", label: "House Problems" },
-    { to: routes.home9, img: "assets/img/home-09.jpg", label: "Mechanic Services" },
-    { to: routes.home8, img: "assets/img/home-10.jpg", label: "Pet Grooming Services" },
-  ];
-
-  // Service menu items
-  const serviceItems = [
-    { to: routes.serviceGrid, label: "Service Grid" },
-    { to: routes.serviceList, label: "Service List" },
-    { to: routes.serviceDetails1, label: "Service Details 1" },
-    { to: routes.serviceDetails2, label: "Service Details 2" },
-    { to: routes.serviceRequest, label: "Service Request" },
-    { to: routes.search, label: "Search" },
-    { to: routes.provider, label: "Providers List" },
-    { to: routes.providerDetails, label: "Providers Details" },
-    { to: routes.categories, label: "Categories 1" },
-    { to: "/pages/categories-2", label: "Categories 2" },
-    { to: routes.createService, label: "Create Service" },
-  ];
-
-  // Customer menu items
-  const customerItems = [
-    { to: routes.customerDashboard, label: "Dashboard" },
-    { to: routes.customerBooking, label: "Booking",relatedRoutes: [routes.customerBookingCalendar] },
-    { to: routes.userJobBooking, label: "Job Bookings", relatedRoutes: [routes.userJobBookingDetails,routes.userJobBookingCompleted] },
-    { to: routes.userJob, label: "Jobs" ,relatedRoutes: [routes.customerJobDetails,routes.customerCreateJob,routes.customerEditJob] },
-    { to: routes.customers, label: "Quote Comparison" },
-    { to: routes.customerFavourite, label: "Favorites" },
-    { to: routes.customerWallet, label: "Wallet" },
-    { to: routes.customerReviews, label: "Reviews" },
-    { to: routes.customerChat, label: "Chat" },
-    { to: routes.customerProfile, label: "Settings",relatedRoutes:[routes.customerSecurity,routes.customerNotification,routes.customerConnectedApps] },
-  ];
-
-  // Provider menu items
-  const providerItems = [
-    { to: routes.providerDashboard, label: "Dashboard" },
-    { to: routes.providerService, label: "My Services" },
-    { to: routes.providerBooking, label: "Booking" },
-    { to: "/providers/job-feed", label: "Job Feed" },
-    { to: "/providers/proposal", label: "Proposals" },
-    { to: "/providers/active-jobs", label: "My Jobs" },
-    { to: routes.providerPayout, label: "Payout" },
-    { to: routes.providerAppointmentSettings, label: "Appointment Settings" },
-    { to: routes.providerProfileSettings, label: "Account Settings" },
-    { to: routes.providerSocialProfile, label: "Social Profiles" },
-    { to: routes.ProviderSecuritySettings, label: "Security" },
-    { to: routes.providerPlan, label: "Plan & Billings" },
-    { to: routes.providerNotification, label: "Notifications" },
-    { to: routes.providerConnectedApps, label: "Connected Apps" },
-    { to: routes.providerHoliday, label: "Holidays & Leave" },
-    { to: routes.providerCoupons, label: "Coupons" },
-    { to: routes.providerOffer, label: "Offers" },
-    { to: routes.providerReview, label: "Reviews" },
-    { to: routes.providerEarnings, label: "Earnings" },
-    { to: routes.providerChat, label: "Chat" },
-  ];
-
-  // Pages menu items
-  const pagesItems = [
-    { to: routes.aboutUs, label: "About" },
-    { to: routes.blogGrid, label: "Blog Grid" },
-    { to: "/blog/blogs", label: "Blog List" },
-    { to: routes.blogDetails, label: "Blog Details" },
-    { to: routes.contactUs, label: "Contact Us" },
-    { to: routes.howItWorks, label: "How It Works" },
-    { to: routes.error404, label: "404 Error" },
-    { to: routes.error500, label: "500 Error" },
-    { to: routes.login, label: "Login" },
-    { to: routes.userSignup, label: "Customer Signup" },
-    { to: routes.providerRegister, label: "Provider Signup" },
-    { to: routes.resetPassword, label: "Reset Password" },
-    { to: routes.phoneOtp, label: "Phone OTP" },
-    { to: routes.emailOtp, label: "Email OTP" },
-    { to: routes.freeTrail, label: "Free Trial" },
-    { to: routes.booking1, label: "Booking 1" },
-    { to: routes.bookings, label: "Booking 2" },
-    { to: routes.bookingPayment, label: "Booking Checkout" },
-    { to: routes.bookingDone, label: "Booking Success" },
-    { to: routes.bookingDetails, label: "Booking Details" },
-    { to: routes.categories, label: "Categories" },
-    { to: routes.pricingPlan, label: "Pricing Plan" },
-    { to: routes.faq, label: "FAQ" },
-    { to: routes.maintenance, label: "Maintenance" },
-    { to: routes.comingSoon, label: "Coming Soon" },
-    { to: routes.privacyPolicy, label: "Privacy Policy" },
-    { to: routes.termsCondition, label: "Terms & Conditions" },
-    { to: routes.sessionExpired, label: "Session Expired" },
-    { to: routes.installer, label: "Installer" },
-  ];
-
   return (
     <>
   {/* Header */}
@@ -290,214 +166,10 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
     <div className="header-user">
       <div className="nav user-menu">
         <ul className="main-nav">
-          <li className={`has-submenu megamenu ${hasActiveChild(homeDemos, location.pathname) ? 'active' : ''}`}>
-            <Link to="#">
-              Home <i className="fas fa-chevron-down" />
-            </Link>
-            <ul className="submenu mega-submenu">
-              <li>
-                <div className="megamenu-wrapper">
-                  <div className="row row-cols-lg-5">
-                    {homeDemos.map((demo, index) => (
-                      <div className="col" key={index}>
-                        <div className={`single-demo ${isRouteActive(demo.to, location.pathname) ? 'active' : ''}`}>
-                          <div className="demo-img">
-                            <Link to={demo.to}>
-                              <ImageWithBasePath
-                                src={demo.img}
-                                className="img-fluid"
-                                alt="img"
-                              />
-                            </Link>
-                          </div>
-                          <div className="demo-info">
-                            <Link to={demo.to}>
-                              {demo.label}
-                              {demo.badge && (
-                                <>
-                                  {" "}
-                                  <span className="new-home">{demo.badge}</span>
-                                </>
-                              )}
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li className={`has-submenu ${hasActiveChild(serviceItems, location.pathname) ? 'active' : ''}`}>
-            <Link to="#">
-              Services <i className="fas fa-chevron-down" />
-            </Link>
-            <ul className="submenu">
-              {serviceItems.slice(0, 2).map((item, index) => (
-                <li key={index} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                  <Link to={item.to}>{item.label}</Link>
-                </li>
-              ))}
-              <li className="has-submenu">
-                <Link to="#">Service Details</Link>
-                <ul className="submenu">
-                  {serviceItems.slice(2, 4).map((item, index) => (
-                    <li key={index} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              {serviceItems.slice(4, 6).map((item, index) => (
-                <li key={index + 4} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                  <Link to={item.to}>{item.label}</Link>
-                </li>
-              ))}
-              <li className="has-submenu">
-                <Link to="#">Providers</Link>
-                <ul className="submenu">
-                  {serviceItems.slice(6, 8).map((item, index) => (
-                    <li key={index + 6} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li className="has-submenu">
-                <Link to="#">Categories</Link>
-                <ul className="submenu">
-                  {serviceItems.slice(8, 10).map((item, index) => (
-                    <li key={index + 8} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li className={isRouteActive(serviceItems[10].to, location.pathname) ? 'active' : ''}>
-                <Link to={serviceItems[10].to}>{serviceItems[10].label}</Link>
-              </li>
-            </ul>
-          </li>
-          <li className={`has-submenu ${hasActiveChild(customerItems, location.pathname) ? 'active' : ''}`}>
-            <Link to="#">
-              Customers <i className="fas fa-chevron-down" />
-            </Link>
-            <ul className="submenu">
-              {customerItems.map((item, index) => {
-                const isActive = isRouteActive(item.to, location.pathname);
-                const hasActiveRelated = hasActiveRelatedRoute((item as any).relatedRoutes, location.pathname);
-                const shouldHighlight = isActive || hasActiveRelated;
-                return (
-                  <li key={index} className={shouldHighlight ? 'active' : ''}>
-                    <Link to={item.to}>{item.label}</Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </li>
-          <li className={`has-submenu ${hasActiveChild(providerItems, location.pathname) ? 'active' : ''}`}>
-            <Link to="#">
-              Providers <i className="fas fa-chevron-down" />
-            </Link>
-            <ul className="submenu">
-              {providerItems.slice(0, 7).map((item, index) => (
-                <li key={index} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                  <Link to={item.to}>{item.label}</Link>
-                </li>
-              ))}
-              <li className="has-submenu">
-                <Link to="#">Settings</Link>
-                <ul className="submenu">
-                  {providerItems.slice(7, 14).map((item, index) => (
-                    <li key={index + 7} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              {providerItems.slice(14).map((item, index) => (
-                <li key={index + 14} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                  <Link to={item.to}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-          <li className={`nav-item has-submenu ${hasActiveChild(pagesItems, location.pathname) ? 'active' : ''}`}>
-            <Link className="nav-link" to="#">
-              Pages
-              <i className="fas fa-chevron-down" />
-            </Link>
-            <ul className="submenu">
-              <li className={isRouteActive(pagesItems[0].to, location.pathname) ? 'active' : ''}>
-                <Link to={pagesItems[0].to}>{pagesItems[0].label}</Link>
-              </li>
-              <li className="has-submenu">
-                <Link to="#">Blog</Link>
-                <ul className="submenu">
-                  {pagesItems.slice(1, 4).map((item, index) => (
-                    <li key={index + 1} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              {pagesItems.slice(4, 6).map((item, index) => (
-                <li key={index + 4} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                  <Link to={item.to}>{item.label}</Link>
-                </li>
-              ))}
-              <li className="has-submenu">
-                <Link to="#">Error Page</Link>
-                <ul className="submenu">
-                  {pagesItems.slice(6, 8).map((item, index) => (
-                    <li key={index + 6} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li className="has-submenu">
-                <Link to="#">Authentication</Link>
-                <ul className="submenu">
-                  {pagesItems.slice(8, 15).map((item, index) => (
-                    <li key={index + 8} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li className="has-submenu">
-                <Link to="#">Booking</Link>
-                <ul className="submenu">
-                  {pagesItems.slice(15, 20).map((item, index) => (
-                    <li key={index + 15} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                      <Link to={item.to}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              {pagesItems.slice(20).map((item, index) => (
-                <li key={index + 20} className={isRouteActive(item.to, location.pathname) ? 'active' : ''}>
-                  <Link to={item.to}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" target="_blank" rel="noreferrer" to="/admin/dashboard">
-              Admin
-            </Link>
-          </li>
+          <CustomerTopNav />
         </ul>
         <div className="header-btn d-flex align-items-center">
           <div className="provider-head-links gap-2">
-            <Link
-              to={routes.customerChat}
-              className="link-icon d-flex align-items-center justify-content-center"
-            >
-              <i className="isax isax-message-2" />
-            </Link>
             <Link
               to="javascript:void(0);"
               className="d-flex align-items-center justify-content-center notify-link link-icon"
@@ -689,13 +361,14 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
             </Link>
             <ul className="dropdown-menu p-2">
               <li>
-                <Link
-                  className="dropdown-item d-flex align-items-center"
-                  to={routes.login}
+                <button
+                  type="button"
+                  className="dropdown-item d-flex align-items-center border-0 bg-transparent w-100 text-start"
+                  onClick={handleLogout}
                 >
                   <i className="ti ti-logout me-1" />
-                  Logout
-                </Link>
+                  Logout{user?.name ? ` (${user.name})` : ""}
+                </button>
               </li>
             </ul>
           </div>
@@ -719,9 +392,9 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
         <Link className="dropdown-item" to={routes.customerProfile}>
           Settings
         </Link>
-        <Link className="dropdown-item" to={routes.login}>
+        <button type="button" className="dropdown-item border-0 bg-transparent w-100 text-start" onClick={handleLogout}>
           Logout
-        </Link>
+        </button>
       </div>
     </div>
     {/* /Mobile Menu */}

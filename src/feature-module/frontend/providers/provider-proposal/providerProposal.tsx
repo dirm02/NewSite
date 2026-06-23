@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import Modal from "./modal";
 import { all_routes } from "../../../../core/data/routes/all_routes";
+import ProviderProposalsPanel from "../../common/jobs/ProviderProposalsPanel";
 
 const ProviderProposal = () => {
   return (
@@ -9,6 +10,8 @@ const ProviderProposal = () => {
       {/* Page Wrapper */}
       <div className="page-wrapper">
         <div className="content container-fluid">
+          <ProviderProposalsPanel />
+          <div className="d-none">
           <div className="row">
             <div className="d-flex align-items-center justify-content-between flex-wrap row-gap-3 mb-4">
               <h2 className="fw-semibold mb-0 fs-20 text-dark">Proposals</h2>
@@ -464,6 +467,7 @@ const ProviderProposal = () => {
               </div>
               {/* /Coupons List */}
             </div>
+          </div>
           </div>
         </div>
       </div>

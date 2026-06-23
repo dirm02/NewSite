@@ -15,6 +15,7 @@ import EmailOtp from "../frontend/pages/authentication/email-otp";
 import Login from "../frontend/pages/authentication/login";
 import ResetPassword from "../frontend/pages/authentication/reset-password";
 import PasswordRecovery from "../frontend/pages/authentication/password-recovery";
+import VerifyEmail from "../frontend/pages/authentication/verify-email";
 import Success from "../frontend/pages/authentication/success";
 import FreeTrail from "../frontend/pages/authentication/free-trail";
 import ProviderRegister from "../frontend/pages/authentication/provider-signup";
@@ -46,9 +47,6 @@ import ProviderBookDetails from "../frontend/providers/provider-book-details/pro
 import StaffList from "../frontend/providers/staff/staffList";
 import StaffGrid from "../frontend/providers/staff/staffGrid";
 import StaffDetails from "../frontend/providers/staff/staffDetails";
-import CustomerList from "../frontend/providers/customer/customerList";
-import CustomerGrid from "../frontend/providers/customer/customerGrid";
-import CustomerDetails from "../frontend/providers/customer/customerDetails";
 import ProviderPayout from "../frontend/providers/provider-payout/provider-payout";
 import ProviderTransaction from "../frontend/providers/provider-payout/providerTransaction";
 import ProviderHoliday from "../frontend/providers/provider-holiday/provider-holiday";
@@ -223,11 +221,9 @@ import JobDetailsDelivered from "../frontend/providers/provider-active-jobs/jobD
 import JobDetailsCompleted from "../frontend/providers/provider-active-jobs/jobDetailsCompleted";
 import JobDetailsInprogress from "../frontend/providers/provider-active-jobs/jobDetailsInprogress";
 import JobDetailsCancelled from "../frontend/providers/provider-active-jobs/jobDetailsCancelled";
-import Register from "../frontend/pages/authentication/register";
 import ProviderCustomerList from "../frontend/providers/customer/customerList";
 import ProviderCustomerGrid from "../frontend/providers/customer/customerGrid";
 import ProviderCustomerDetails from "../frontend/providers/customer/customerDetails";
-import ProviderNotifcations from "../frontend/providers/provider-notifcations/providerNotifcations";
 import ProviderSubscription from "../frontend/providers/provider-subscription/provider-subscription";
 import CustomerBookingCalendar from "../frontend/customers/customer-booking-calendar/customer-booking-calendar";
 
@@ -243,7 +239,7 @@ const publicRoutes = [
   {
     path: "*",
     name: "NotFound",
-    element: <Navigate to="/index" />,
+    element: <Error404 />,
     route: Route,
   },
   {
@@ -602,18 +598,6 @@ export const customerRoutes = [
     element: <UserQuoteComparison />,
     route: Route,
   },
-  {
-    path: routes.customerList,
-    name: "Customer List",
-    element: <CustomerList />,
-    route: Route,
-  },
-  {
-    path: routes.customerGrid,
-    name: "Customer Grid",
-    element: <CustomerGrid />,
-    route: Route,
-  },
  
   {
     path: routes.customerBooking,
@@ -634,18 +618,6 @@ export const providerRoutes = [
     path: routes.providerSubscription,
     name: "Provider Subscription",
     element: <ProviderSubscription />,
-    route: Route,
-  },
-  {
-    path: routes.providerNotification,
-    name: "Provider Notification",
-    element: <ProviderNotifcations />,
-    route: Route,
-  },
-  {
-    path: routes.providerNotification,
-    name: "Provider Notification",
-    element: <ProviderNotifcations />,
     route: Route,
   },
   
@@ -874,12 +846,6 @@ export const providerRoutes = [
     route: Route,
   },
    {
-    path: routes.customerDetails,
-    name: "Customer Details",
-    element: <CustomerDetails />,
-    route: Route,
-  },
-   {
     path: routes.providerJobsDetailsDelivered,
     name: "provider job details delivered",
     element: <JobDetailsDelivered />,
@@ -909,6 +875,12 @@ export const authRoutes = [
     path: "/authentication/reset-password",
     name: "reset-password",
     element: <ResetPassword />,
+    route: Route,
+  },
+  {
+    path: routes.verifyEmail,
+    name: "verify-email",
+    element: <VerifyEmail />,
     route: Route,
   },
   {
@@ -975,7 +947,7 @@ export const authRoutes = [
   {
     path: "/authentication/register",
     name: "register",
-    element: <Register />,
+    element: <Navigate to={routes.chooseSignUp} replace />,
     route: Route,
   },
 ];

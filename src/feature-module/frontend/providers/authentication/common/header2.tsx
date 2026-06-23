@@ -195,9 +195,6 @@ const ProviderAuthHeader2 = () => {
                 );
               })}
 
-              <li>
-                <Link to="/admin/dashboard">Admin</Link>
-              </li>
               <li className="login-link">
                 <Link to={routes.chooseSignUp}>Register</Link>
               </li>

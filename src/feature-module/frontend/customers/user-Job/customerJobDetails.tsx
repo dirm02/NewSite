@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { all_routes } from "../../../../core/data/routes/all_routes"
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath"
 import Modal from "./modal"
+import CustomerJobDetailPanel from "../../common/jobs/CustomerJobDetailPanel"
 
 const CustomerJobDetails = () => {
   return (
@@ -15,6 +16,8 @@ const CustomerJobDetails = () => {
           Back to Job List
         </Link>
       </div>
+      <CustomerJobDetailPanel />
+      <div className="d-none">
       {/* TOP SECTION */}
       <div className="row row-gap-4">
         {/* JOB INFO */}
@@ -524,6 +527,7 @@ const CustomerJobDetails = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>

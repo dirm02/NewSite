@@ -4,6 +4,7 @@ import { all_routes } from "../../../../core/data/routes/all_routes";
 import { Country, Feed } from "../../../../core/data/json/dropDownData";
 import CustomDropdown from "../../common/dropdown/commonSelect";
 import Modal from "./modal";
+import ProviderJobFeedPanel from "../../common/jobs/ProviderJobFeedPanel";
 
 const ProviderJobFeed = () => {
   return (
@@ -11,6 +12,8 @@ const ProviderJobFeed = () => {
       {/* Page Wrapper */}
       <div className="page-wrapper">
         <div className="content container-fluid">
+          <ProviderJobFeedPanel />
+          <div className="d-none">
           {/* Title */}
           <div className="mb-4">
             <h2 className="fw-semibold mb-0 fs-20 text-dark">Find a Job</h2>
@@ -582,6 +585,7 @@ const ProviderJobFeed = () => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

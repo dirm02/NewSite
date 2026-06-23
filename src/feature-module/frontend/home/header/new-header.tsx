@@ -241,20 +241,6 @@ const NewHeader: React.FC<props> = ({ type }) => {
                     <></>
                   )}
 
-                  <li className="nav-item">
-                    <Link className="nav-link" to={routes.dashboard}>
-                      Admin
-                    </Link>
-                  </li>
-                  {/* <li className={`has-submenu ${type == 10 ? 'd-none' : ''}`}>
-                  <Link to="/admin/dashboard">Admin</Link>
-                </li> */}
-                  {/* <li className="login-link">
-                  <Link to={routes.chooseSignUp}>Register</Link>
-                </li>
-                <li className="login-link">
-                  <Link to={routes.login}>Login</Link>
-                </li> */}
                 </ul>
               </nav>
               {type === 1 && 

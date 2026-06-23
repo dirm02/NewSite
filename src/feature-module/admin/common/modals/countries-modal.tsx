@@ -72,18 +72,18 @@ const CountriesModal = () => {
                             <form>
                                 <div className="mb-3">
                                     <label className="form-label">Country Code</label>
-                                    <input type="text" className="form-control" defaultValue="US" />
+                                    <input type="text" className="form-control" defaultValue="CA" />
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Country ID</label>
-                                    <input type="text" className="form-control" defaultValue={684} />
+                                    <input type="text" className="form-control" defaultValue={1} />
                                 </div>
                                 <div className="mb-4">
                                     <label className="form-label">Country Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        defaultValue="United States"
+                                        defaultValue="Canada"
                                     />
                                 </div>
                                 <div className="text-end">

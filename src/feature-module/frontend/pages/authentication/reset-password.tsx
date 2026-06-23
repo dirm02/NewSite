@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useMemo, useState, type FormEvent } from 'react';
 import PagesAuthHeader from './common/header';
 import { all_routes } from '../../../../core/data/routes/all_routes';
-import {  useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 import AuthFooter from './common/footer';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import { confirmPasswordReset } from '../../../../core/api/pocketbase/auth';
 
 const ResetPassword = () => {
   const routes = all_routes;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const resetToken = useMemo(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get('token') ?? '';
+  }, [location.search]);
 
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [passwordResponce, setPasswordResponce] = useState({
     passwordResponceText: "Use 8 or more characters with a mix of letters, number's symbols.",
     passwordResponceKey: '',
@@ -54,6 +63,35 @@ const ResetPassword = () => {
       });
     }
   };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!resetToken) {
+      setError('This reset link is missing a token. Please request a new password reset email.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await confirmPasswordReset(resetToken, password);
+      navigate(routes.success, { replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Password reset failed');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <>
       <PagesAuthHeader />
@@ -61,7 +99,7 @@ const ResetPassword = () => {
   <div className="container">
     <div className="row justify-content-center">
       <div className="col-md-5 mx-auto">
-        <form onSubmit={()=>navigate(routes.success)}>
+        <form onSubmit={handleSubmit}>
           <div className="d-flex flex-column justify-content-center">
             <div className="card p-sm-4 my-5">
               <div className="card-body">
@@ -72,6 +110,16 @@ const ResetPassword = () => {
                     passwords.
                   </p>
                 </div>
+                {error && (
+                  <div className="alert alert-danger py-2 small" role="alert">
+                    {error}
+                  </div>
+                )}
+                {!resetToken && (
+                  <div className="alert alert-warning py-2 small" role="status">
+                    Open this page from the reset link in your email.
+                  </div>
+                )}
                 <div>
                   <div className="input-block mb-3">
                     <div className="mb-3">
@@ -114,14 +162,22 @@ const ResetPassword = () => {
                     <div className="d-flex align-items-center justify-content-between flex-wrap">
                       <label className="form-label">Confirm Password</label>
                     </div>
-                    <input type="password" className="form-control" />
+                    <input
+                      type="password"
+                      className="form-control"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      autoComplete="new-password"
+                    />
                   </div>
                   <div>
                     <button
                       type="submit"
                       className="btn btn-lg btn-linear-primary w-100"
+                      disabled={submitting}
                     >
-                      Save Change
+                      {submitting ? 'Saving...' : 'Save Change'}
                     </button>
                   </div>
                 </div>

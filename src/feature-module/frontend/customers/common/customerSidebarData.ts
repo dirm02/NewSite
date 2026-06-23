@@ -1,4 +1,5 @@
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import { CUSTOMER_MVP_SIDEBAR } from '../../../../core/navigation/role-navigation-mvp';
 
 export interface CustomerSidebarItem {
   id: string;
@@ -15,116 +16,61 @@ export interface CustomerSidebarItem {
   relatedRoutes?: string[];
 }
 
-export const customerSidebarData: CustomerSidebarItem[] = [
+const icons: Record<string, string> = {
+  dashboard: 'isax isax-category-25',
+  'create-job': 'isax isax-add-square5',
+  jobs: 'isax isax-briefcase5',
+  'quote-comparison': 'isax isax-dollar-circle4',
+  reviews: 'isax isax-star5',
+  'profile-settings': 'isax isax-setting-35',
+  logout: 'isax isax-logout-15',
+};
+
+const profileChildren: CustomerSidebarItem[] = [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    to: all_routes.customerDashboard,
-    icon: 'isax isax-category-25',
+    id: 'account-settings',
+    label: 'Account Settings',
+    to: all_routes.customerProfile,
+    icon: 'ti ti-chevrons-right me-2',
   },
   {
-    id: 'bookings',
-    label: 'Bookings',
-    to: all_routes.customerBooking,
-    icon: 'isax isax-calendar-25',
-    relatedRoutes: [all_routes.customerBookingCalendar],
+    id: 'security-settings',
+    label: 'Security Settings',
+    to: all_routes.customerSecurity,
+    icon: 'ti ti-chevrons-right me-2',
   },
   {
-    id: 'job-bookings',
-    label: 'Job Bookings',
-    to: all_routes.userJobBooking,
-    icon: 'isax isax-message-search5',
-    badge: {
-      text: '4',
-      className: 'bg-danger',
-    },
-    relatedRoutes: [all_routes.userJobBookingDetails,all_routes.userJobBookingCompleted],
+    id: 'notification-settings',
+    label: 'Notifications',
+    to: all_routes.customerNotification,
+    icon: 'ti ti-chevrons-right me-2',
   },
   {
-    id: 'jobs',
-    label: 'Jobs',
-    to: all_routes.userJob,
-    icon: 'isax isax-briefcase5',
-    badge: {
-      text: '3',
-      className: 'bg-secondary',
-    },
-    relatedRoutes: [all_routes.customerJobDetails,all_routes.customerCreateJob,all_routes.customerEditJob],
-  },
-  {
-    id: 'quote-comparison',
-    label: 'Quote Comparison',
-    to: all_routes.userQuoteComparison,
-    icon: 'isax isax-dollar-circle4',
-  },
-  {
-    id: 'favorites',
-    label: 'Favorites',
-    to: all_routes.customerFavourite,
-    icon: 'isax isax-heart5',
-  },
-  {
-    id: 'wallet',
-    label: 'Wallet',
-    to: all_routes.customerWallet,
-    icon: 'isax isax-wallet5',
-  },
-  {
-    id: 'reviews',
-    label: 'Reviews',
-    to: all_routes.customerReviews,
-    icon: 'isax isax-star5',
-  },
-  {
-    id: 'chat',
-    label: 'Chat',
-    to: all_routes.customerChat,
-    icon: 'isax isax-messages-15',
-  },
-  {
-    id: 'settings',
-    label: 'Settings',
-    to: 'javascript:void(0);',
-    icon: 'isax isax-setting-35',
-    children: [
-      {
-        id: 'account-settings',
-        label: 'Account Settings',
-        to: all_routes.customerProfile,
-        icon: 'ti ti-chevrons-right me-2',
-      },
-      {
-        id: 'security-settings',
-        label: 'Security Settings',
-        to: all_routes.customerSecurity,
-        icon: 'ti ti-chevrons-right me-2',
-      },
-      {
-        id: 'notification-settings',
-        label: 'Notifications',
-        to: all_routes.customerNotification,
-        icon: 'ti ti-chevrons-right me-2',
-      },
-      {
-        id: 'connected-apps',
-        label: 'Connected Apps',
-        to: all_routes.customerConnectedApps,
-        icon: 'ti ti-chevrons-right me-2',
-      },
-      {
-        id: 'delete-account',
-        label: 'Delete Account',
-        to: '#',
-        icon: 'ti ti-chevrons-right me-2',
-        isModal: true,
-        modalTarget: '#del-account',
-      },
-    ],
-  },
-  {
-    id: 'logout',
-    label: 'Logout',
-    to: all_routes.login,
-    icon: 'isax isax-logout-15',
+    id: 'connected-apps',
+    label: 'Connected Apps',
+    to: all_routes.customerConnectedApps,
+    icon: 'ti ti-chevrons-right me-2',
   },
 ];
+
+export const customerSidebarData: CustomerSidebarItem[] = CUSTOMER_MVP_SIDEBAR.map(
+  (item) => {
+    const base: CustomerSidebarItem = {
+      id: item.id,
+      label: item.label,
+      to: item.to,
+      icon: icons[item.id] ?? 'isax isax-arrow-right-3',
+      relatedRoutes: item.relatedRoutes,
+    };
+
+    if (item.id === 'profile-settings') {
+      return {
+        ...base,
+        to: 'javascript:void(0);',
+        children: profileChildren,
+      };
+    }
+
+    return base;
+  },
+);

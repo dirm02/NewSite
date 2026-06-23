@@ -1,9 +1,9 @@
-
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { MultiSelect } from "primereact/multiselect"
 import CustomDropdown from "../../common/dropdown/commonSelect"
 import { Compare } from "../../../../core/data/json/dropDownData"
+import QuoteComparisonPanel from "../../common/jobs/QuoteComparisonPanel"
 
 
 const UserQuoteComparison = () => {
@@ -21,6 +21,8 @@ const UserQuoteComparison = () => {
       {/* Page Wrapper */}
       <div className="page-wrapper">
         <div className="content container-fluid">
+          <QuoteComparisonPanel />
+          <div className="d-none">
           {/* Title */}
           <div className="row mb-4">
             <div className="col-12">
@@ -510,6 +512,7 @@ const UserQuoteComparison = () => {
               </div>
               {/* Quote Content List */}
             </div>
+          </div>
           </div>
         </div>
       </div>

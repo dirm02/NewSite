@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath"
 import { all_routes } from "../../../../core/data/routes/all_routes"
+import ProviderActiveJobsPanel from "../../common/jobs/ProviderActiveJobsPanel"
 
 
 const ProviderActiveJobs = () => {
@@ -9,6 +10,8 @@ const ProviderActiveJobs = () => {
   {/* Page Wrapper */}
   <div className="page-wrapper">
     <div className="content container-fluid">
+      <ProviderActiveJobsPanel />
+      <div className="d-none">
       <div className="d-flex align-items-center justify-content-between flex-wrap row-gap-3 mb-4">
         <h2 className="fw-semibold mb-0 fs-20 text-dark">Active Jobs</h2>
         <div className="d-flex align-items-center">
@@ -1639,6 +1642,7 @@ const ProviderActiveJobs = () => {
           </div>
         </div>
       </div>
+          </div>
     </div>
   </div>
   {/* /Page Wrapper */}

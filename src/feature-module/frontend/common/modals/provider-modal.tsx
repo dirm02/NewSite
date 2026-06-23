@@ -2,6 +2,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import CustomDropdown from '../dropdown/commonSelect'
+import {
+  cityOption,
+  countryOption,
+  stateOption,
+} from '../../../../core/data/locations/canada-locations'
 
 const BecomeProvider = () => {
     const [activeTab, setActiveTab] = useState(1);
@@ -10,20 +15,9 @@ const Options1 = [
     { label: 'House Cleaning', value: '1' },
     { label: 'Car Wash', value: '2' },
 ];
-const Options4 = [
-    { label: 'United States', value: '1' },
-    { label: 'United Kingdom', value: '2' },
-];
-const Options2 = [
-    { label: 'Rochester', value: '1' },
-    { label: 'Wisbech', value: '2' },
-    { label: 'Marlow', value: '3' },
-];
-const Options3 = [
-    { label: 'Newyork', value: '1' },
-    { label: 'Fenland', value: '2' },
-    { label: 'Wycombe', value: '3' },
-];
+const Options4 = countryOption;
+const Options2 = cityOption;
+const Options3 = stateOption;
 return (
     <>
   {/* Provider Modal */}

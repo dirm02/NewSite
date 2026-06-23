@@ -1,11 +1,12 @@
 import { Dropdown } from 'primereact/dropdown';
 import { useState } from 'react';
 import * as Icon from 'react-feather';
+import { CANADA, CANADA_PROVINCES } from '../../../../core/data/locations/canada-locations';
 
 const StateModal = () => {
   const [selectedValue, setSelectedValue] = useState(null);
-  const value = [{ name: 'India' }, { name: 'United States' }];
-  const citiesname = [{ name: 'Swains Island' }, { name: 'Andorra la Vella' }];
+  const value = [{ name: CANADA.name }];
+  const citiesname = CANADA_PROVINCES.map((p) => ({ name: p.name }));
   return (
     <>
       <div className="modal fade" id="add-state">

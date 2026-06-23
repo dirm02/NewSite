@@ -15,9 +15,7 @@ const SiteHeaderRightActions: React.FC<Props> = ({ variantType }) => {
           <li className="nav-item pe-1" key="signin-btn">
             <Link
               className="nav-link btn btn-light"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#login-modal"
+              to={routes.login}
             >
               <i className="ti ti-lock me-2" />
               Sign In
@@ -26,9 +24,7 @@ const SiteHeaderRightActions: React.FC<Props> = ({ variantType }) => {
           <li className="nav-item" key="joinus-btn">
             <Link
               className="nav-link btn btn-linear-primary"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#register-modal"
+              to={routes.chooseSignUp}
             >
               <i className="ti ti-user-filled me-2" />
               Join Us

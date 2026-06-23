@@ -11,6 +11,7 @@ import CustomDropdown from "../../common/dropdown/commonSelect";
 import CommonTagInputs from "../../common/tagInput/commonTagInputs";
 import { useState } from "react";
 import Modal from "./modal";
+import CustomerCreateJobPanel from "../../common/jobs/CustomerCreateJobPanel";
 
 const CustomerCreateJob = () => {
   const [tags, setTags] = useState<string[]>([
@@ -25,7 +26,8 @@ const CustomerCreateJob = () => {
       {/* Page Wrapper */}
       <div className="page-wrapper">
         <div className="content">
-          <div className="row justify-content-center">
+          <CustomerCreateJobPanel />
+          <div className="row justify-content-center d-none">
             <div className="col-lg-10">
               <Link to={all_routes.userJob} className="fw-medium fs-14 mb-0">
                 <i className="fa-solid fa-angle-left" />

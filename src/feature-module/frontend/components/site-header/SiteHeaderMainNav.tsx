@@ -218,19 +218,9 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
         <li className="nav-item" key="become-provider">
           <Link
             className="nav-link"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#provider"
+            to={routes.providerSignup}
           >
             Become a Provider
-          </Link>
-        </li>
-      ) : null}
-
-      {variantType !== 10 ? (
-        <li className="nav-item" key="admin-link">
-          <Link className="nav-link" target="_blank" rel="noreferrer" to={routes.adminDashboard}>
-            Admin
           </Link>
         </li>
       ) : null}
@@ -240,9 +230,7 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
           <li className="nav-item d-sm-none" key="mobile-signin">
             <Link
               className="nav-link"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#login-modal"
+              to={routes.login}
             >
               Sign In
             </Link>
@@ -250,9 +238,7 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
           <li className="nav-item d-sm-none" key="mobile-join">
             <Link
               className="nav-link"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#register-modal"
+              to={routes.chooseSignUp}
             >
               Join Us
             </Link>

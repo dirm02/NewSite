@@ -3,6 +3,7 @@ import CustomerSidebar from "../frontend/customers/common/customerSidebar";
 import { useEffect, useRef } from "react";
 import CustomerHeader from "../frontend/customers/common/header";
 import Modal from "../frontend/customers/customer-dashboard/modal";
+import RequireAuth from "../../core/auth/RequireAuth";
 
 const CustomerLayout = () => {
   const location = useLocation();
@@ -30,7 +31,9 @@ const CustomerLayout = () => {
     <CustomerHeader sidebarRef={sidebarRef} sidebarOverlayRef={sidebarOverlayRef}/>
       <CustomerSidebar ref={sidebarRef} />
       <Modal/>
-      <Outlet />
+      <RequireAuth allowedRoles={["customer"]}>
+        <Outlet />
+      </RequireAuth>
       <div className="sidebar-overlay" ref={sidebarOverlayRef}></div>
     </div>
   );

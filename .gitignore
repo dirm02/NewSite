@@ -25,3 +25,18 @@ dist-ssr
 # env files (can opt-in for committing if needed)
 .env*
 !.env.production
+!.env.example
+
+# Playwright E2E artifacts (never commit)
+test-results/
+playwright-report/
+playwright/.cache/
+tests/e2e/.auth/
+*.storageState.json
+docs/e2e/a11y-report.md
+docs/e2e/crawl-results.json
+docs/e2e/crawl-report.md
+docs/e2e/role-nav/*.png
+
+# Crawlee/local scraper runtime state
+storage/

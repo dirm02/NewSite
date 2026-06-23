@@ -4,6 +4,7 @@ import ProviderHeader from "../frontend/providers/common/header";
 import ProviderSidebar from "../frontend/providers/common/sidebar";
 import { useSelector } from "react-redux";
 import type { AppState } from "../../core/models/interface";
+import RequireAuth from "../../core/auth/RequireAuth";
 
 const ProviderLayout = () => {
   const location = useLocation();
@@ -30,7 +31,9 @@ const ProviderLayout = () => {
       <ProviderHeader />
       <ProviderSidebar />
 
-      <Outlet />
+      <RequireAuth allowedRoles={["provider"]}>
+        <Outlet />
+      </RequireAuth>
       <div
         className={`sidebar-overlay ${mobileSidebar ? "opened" : ""}`}
         ref={sidebarOverlayRef}

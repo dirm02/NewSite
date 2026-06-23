@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { all_routes } from "../../../../core/data/routes/all_routes";
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
+import ProviderJobDetailPanel from "../../common/jobs/ProviderJobDetailPanel";
 
 const JobDetails = () => {
   return (
@@ -17,6 +18,8 @@ const JobDetails = () => {
                 <i className="fa-solid fa-angle-left me-2" />
                 Back to Active Jobs
               </Link>
+              <ProviderJobDetailPanel />
+              <div className="d-none">
               {/* Job Summary Card */}
               <div className="row g-4">
                 <div className="col-xl-7">
@@ -221,6 +224,7 @@ const JobDetails = () => {
                 </div>
               </div>
             </div>
+              </div>
           </div>
         </div>
       </div>

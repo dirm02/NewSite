@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import AllRoutes from './feature-module/router/router';
 import store from './core/data/redux/store';
 import { base_path } from './environment';
+import { AuthProvider } from './core/auth/AuthContext';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
@@ -29,8 +30,10 @@ if (window.location.pathname.includes("admin")) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
      <Provider store={store}>
-        <BrowserRouter basename={base_path}>  
-          <AllRoutes />
+        <BrowserRouter basename={base_path}>
+          <AuthProvider>
+            <AllRoutes />
+          </AuthProvider>
         </BrowserRouter>
       </Provider>
   </StrictMode>

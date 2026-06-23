@@ -22,7 +22,7 @@ const Localization = () => {
   ];
   const value3 = [{ name: '12:00PM' }, { name: '01:00PM' }];
   const value4 = [{ name: 'USD' }, { name: 'INR' }];
-  const value5 = [{ name: 'Allow all countries' }, { name: 'USA' }];
+  const value5 = [{ name: 'Canada only' }];
   const value6 = [{ name: 'English' }, { name: 'Chinese' }];
   const value7 = [
     { name: 'USD' },

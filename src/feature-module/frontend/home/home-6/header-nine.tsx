@@ -199,14 +199,11 @@ const HeaderNine = () => {
                   );
                 },
               )}
-              <li>
-                <Link to="/admin/index">Admin</Link>
+              <li className="login-link">
+                <Link to="/authentication/choose-signup">Register</Link>
               </li>
               <li className="login-link">
-                <Link to="/choose-signup">Register</Link>
-              </li>
-              <li className="login-link">
-                <Link to="/login">Login</Link>
+                <Link to="/authentication/login">Login</Link>
               </li>
             </ul>
           </div>

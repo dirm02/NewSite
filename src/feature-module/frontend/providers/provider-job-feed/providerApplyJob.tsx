@@ -4,6 +4,7 @@ import { all_routes } from "../../../../core/data/routes/all_routes";
 import { useState } from "react";
 import CommonTagInputs from "../../common/tagInput/commonTagInputs";
 import Modal from "./modal";
+import ProviderApplyPanel from "../../common/jobs/ProviderApplyPanel";
 
 const ProviderApplyJob = () => {
   const [tags, setTags] = useState<string[]>(["Diagostics", "Repairs"]);
@@ -15,14 +16,15 @@ const ProviderApplyJob = () => {
       {/* Page Wrapper */}
       <div className="page-wrapper">
         <div className="content container-fluid">
-          <div className="row row-gap-4">
-            <Link
-              to={all_routes.providerJobFeed}
-              className="fw-medium fs-14 mb-0"
-            >
-              <i className="fa-solid fa-angle-left me-2" />
-              Back to Job feed
-            </Link>
+          <Link
+            to={all_routes.providerJobFeed}
+            className="fw-medium fs-14 mb-3 d-inline-block"
+          >
+            <i className="fa-solid fa-angle-left me-2" />
+            Back to Job feed
+          </Link>
+          <ProviderApplyPanel />
+          <div className="d-none">
             {/* Left Content */}
             <div className="col-xxl-4 col-xl-5">
               <div className="card mb-0">

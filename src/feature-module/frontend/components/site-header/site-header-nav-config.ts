@@ -20,53 +20,6 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
           to: r.home,
           img: 'assets/img/home-01.jpg',
         },
-        {
-          label: 'General Home 2',
-          to: r.home11,
-          img: 'assets/img/home-02.jpg',
-          badge: 'NEW',
-        },
-        {
-          label: 'Painting Services',
-          to: r.home12,
-          img: 'assets/img/home-3.jpg',
-          badge: 'NEW',
-        },
-        {
-          label: 'Cleaning Services',
-          to: r.home2,
-          img: 'assets/img/home-04.jpg',
-        },
-        {
-          label: 'Salon Services',
-          to: r.home3,
-          img: 'assets/img/home-05.jpg',
-        },
-        {
-          label: 'Catering Services',
-          to: r.home4,
-          img: 'assets/img/home-06.jpg',
-        },
-        {
-          label: 'Car Wash',
-          to: r.home5,
-          img: 'assets/img/home-07.jpg',
-        },
-        {
-          label: 'House Problems',
-          to: r.home6,
-          img: 'assets/img/home-08.jpg',
-        },
-        {
-          label: 'Mechanic Services',
-          to: r.home9,
-          img: 'assets/img/home-09.jpg',
-        },
-        {
-          label: 'Pet Grooming Services',
-          to: r.home8,
-          img: 'assets/img/home-10.jpg',
-        },
       ],
     },
     {
@@ -109,7 +62,7 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
       id: 'customers',
       label: 'Customers',
       type: 'dropdown',
-      roles: ['guest', 'customer'],
+      roles: ['customer'],
       items: [
         { label: 'Dashboard', to: r.customerDashboard },
         { label: 'Booking', to: r.customerBooking },
@@ -127,14 +80,14 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
       id: 'providers',
       label: 'Providers',
       type: 'dropdown',
-      roles: ['guest', 'provider'],
+      roles: ['provider'],
       items: [
         { label: 'Dashboard', to: r.providerDashboard },
         { label: 'My Services', to: r.providerService },
         { label: 'Booking', to: r.providerBooking },
-        { label: 'Job Feed', to: r.providerDashboard },
-        { label: 'Proposals', to: r.providerEnquiry },
-        { label: 'My Jobs', to: r.providerBooking },
+        { label: 'Job Feed', to: r.providerJobFeed },
+        { label: 'Proposals', to: r.providerProposal },
+        { label: 'My Jobs', to: r.providerActiveJobs },
         { label: 'Payout', to: r.providerPayout },
         {
           label: 'Settings',
@@ -196,7 +149,6 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
             { label: 'Reset Password', to: r.resetPassword },
             { label: 'Phone OTP', to: r.phoneOtp },
             { label: 'Email OTP', to: r.emailOtp },
-            { label: 'Free Trial', to: r.freeTrail },
           ],
         },
         {
@@ -213,12 +165,9 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
         { label: 'Categories', to: r.categories },
         { label: 'Pricing Plan', to: r.pricingPlan },
         { label: 'FAQ', to: r.faq },
-        { label: 'Maintenance', to: r.maintenance },
-        { label: 'Coming Soon', to: r.comingSoon },
         { label: 'Privacy Policy', to: r.privacyPolicy },
         { label: 'Terms & Conditions', to: r.termsCondition },
         { label: 'Session Expired', to: r.sessionExpired },
-        { label: 'Installer', to: r.installer },
       ],
     },
   ];

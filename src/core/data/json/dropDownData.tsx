@@ -1,7 +1,8 @@
-export const countryOption = [
-    { label: 'Brazil', value: '1' },
-    { label: 'Canada', value: '2' },
-  ];
+export {
+  countryOption,
+  stateOption,
+  cityOption,
+} from "../locations/canada-locations";
 export const statusOption = [
     { label: 'Active', value: '1' },
     { label: 'Inactive', value: '2' },
@@ -11,16 +12,6 @@ export const statusOption2 = [
     { label: 'Pending', value: '2' },
     { label: 'Failed', value: '3' },
   ];
-export const cityOption = [
-    { label: 'Rochester', value: '1' },
-    { label: 'Wisbech', value: '2' },
-    { label: 'Marlow', value: '3' },
-];
-export const stateOption = [
-    { label: 'Newyork', value: '1' },
-    { label: 'Fenland', value: '2' },
-    { label: 'Wycombe', value: '3' },
-];
 export const serviceOption = [
     { label: 'Computer Repair', value: '1' },
     { label: 'Plumbing', value: '2' },

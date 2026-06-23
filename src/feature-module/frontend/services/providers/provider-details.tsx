@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import { all_routes } from "../../../../core/data/routes/all_routes";
 import BreadCrumb from "../../common/breadcrumb/breadCrumb";
@@ -11,8 +11,19 @@ import "yet-another-react-lightbox/styles.css";
 import StickyBox from "react-sticky-box";
 import NewFooter from "../../home/footer/newFooter";
 import HomeHeader from "../../home/header/home-header";
+import { useProvider } from "../../../../core/hooks/useDiscoveryData";
+import {
+  formatHourlyRate,
+  formatRating,
+  providerImage,
+  serviceLocationLabel,
+} from "../../../../core/api/pocketbase/format";
+import DiscoveryStatus from "../../common/discovery/DiscoveryStatus";
 const ProviderDetails = () => {
   const routes = all_routes;
+  const [searchParams] = useSearchParams();
+  const providerId = searchParams.get('id');
+  const { data: provider, loading, error, source } = useProvider(providerId);
   const [open, setOpen] = React.useState(false);
   const two = {
     dots: false,
@@ -126,41 +137,51 @@ const ProviderDetails = () => {
                         <div className="provider-detail d-flex align-items-center flex-wrap row-gap-2">
                           <span className="avatar provider-pic flex-shrink-0 me-3">
                             <ImageWithBasePath
-                              src="assets/img/profiles/avatar-20.jpg"
+                              src={providerImage(0)}
                               alt="Img"
                             />
                           </span>
                           <div>
+                            <DiscoveryStatus loading={loading} error={error} source={source} empty={!loading && !provider}>
                             <div className="rating mb-2">
                               <i className="fas fa-star filled" />
                               <i className="fas fa-star filled" />
                               <i className="fas fa-star filled" />
                               <i className="fas fa-star filled" />
                               <i className="fa-solid fa-star-half-stroke filled me-1" />{" "}
-                              4.9
+                              {(provider?.rating_avg ?? 4.9).toFixed(1)}
                               <span className="ms-2 d-inline-block">
-                                (255 reviews)
+                                ({provider?.rating_count ?? 255} reviews)
                               </span>
                             </div>
                             <h5 className="d-flex align-items-center mb-1">
-                              <Link to="provider-details">Thomas Herzberg</Link>
+                              <Link to="#">{provider?.business_name ?? 'Thomas Herzberg'}</Link>
+                              {provider?.verified && (
                               <span className="text-success ms-2">
                                 <i className="fa fa-check-circle fs-14" />
                               </span>
+                              )}
                             </h5>
-                            <p className="mb-2">
-                              We connect top talents with top companies
+                            <p className="mb-1">
+                              {provider
+                                ? serviceLocationLabel(
+                                    provider.expand?.city?.name,
+                                    provider.expand?.city?.region,
+                                  )
+                                : 'Illinois, USA'}
                             </p>
-                            <div className="d-flex align-items-center flex-wrap row-gap-2">
-                              <p className="mb-0 fs-14 me-2">
-                                <i className="feather feather icon-grid me-1" />
-                                Electrician
+                            <p className="mb-0">
+                              From {formatHourlyRate(provider?.hourly_rate_min)}/hr ·{' '}
+                              {formatRating(provider?.rating_avg, provider?.rating_count)}
+                            </p>
+                            </DiscoveryStatus>
+                            {provider?.bio ? (
+                              <p className="mb-2">{provider.bio}</p>
+                            ) : (
+                              <p className="mb-2">
+                                We connect top talents with top companies
                               </p>
-                              <p className="mb-0 fs-14">
-                                <i className="ti ti-calendar me-1" />
-                                Member Since 19 Aug 2023
-                              </p>
-                            </div>
+                            )}
                           </div>
                         </div>
                       </div>

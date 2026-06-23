@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom'
+import { useCities } from '../../../../core/hooks/useDiscoveryData'
+import DiscoveryStatus from '../../common/discovery/DiscoveryStatus'
 
 const ServiceCities = () => {
+  const { data: cities, loading, error, source } = useCities()
+
+  const cityColumns = [
+    cities.slice(0, 4),
+    cities.slice(4, 8),
+    cities.slice(8, 12),
+    cities.slice(12, 16),
+    cities.slice(16),
+  ].filter((col) => col.length > 0)
+
   return (
     <>
   {/* Links Section */}
@@ -49,35 +61,33 @@ const ServiceCities = () => {
                     <div className="col">
                       <div className="main-links">
                         <Link to="#">Contractors</Link>
-                        <Link to="#">Exterior Painting</Link>
-                        <Link to="#">Gutter Repair</Link>
-                        <Link to="#">Landscaping</Link>
+                        <Link to="#">Exterminators</Link>
+                        <Link to="#">Handyman</Link>
+                        <Link to="#">Home Inspection</Link>
                       </div>
                     </div>
                     <div className="col">
                       <div className="main-links">
-                        <Link to="#">Drywall </Link>
-                        <Link to="#">Plumbing</Link>
-                        <Link to="#">Home Builders</Link>
-                        <Link to="#">Lawn &amp; Yard Work</Link>
+                        <Link to="#">Junk Removal</Link>
+                        <Link to="#">Lawn Care</Link>
+                        <Link to="#">Locksmiths</Link>
+                        <Link to="#">Movers</Link>
                       </div>
                     </div>
                     <div className="col">
                       <div className="main-links">
-                        <Link to="#">
-                          Electrical &amp; Services
-                        </Link>
-                        <Link to="#">Remodeling</Link>
-                        <Link to="#">Home Builders</Link>
-                        <Link to="#">Sprinkler Systems</Link>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">House Cleaning</Link>
-                        <Link to="#">Interior Painting</Link>
+                        <Link to="#">Pest Control</Link>
+                        <Link to="#">Pool Cleaning</Link>
                         <Link to="#">Roofing</Link>
-                        <Link to="#">More Services</Link>
+                        <Link to="#">Snow Removal</Link>
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="main-links">
+                        <Link to="#">Tree Service</Link>
+                        <Link to="#">Window Cleaning</Link>
+                        <Link to="#">Window Installation</Link>
+                        <Link to="#">Window Repair</Link>
                       </div>
                     </div>
                   </div>
@@ -85,7 +95,7 @@ const ServiceCities = () => {
               </div>
             </div>
             <div
-              className="accordion-item mb-0 wow fadeInUp bg-transparent"
+              className="accordion-item wow fadeInUp bg-transparent"
               data-wow-delay="0.2s"
             >
               <h2 className="accordion-header">
@@ -96,61 +106,32 @@ const ServiceCities = () => {
                   data-bs-target="#city"
                   aria-expanded="false"
                 >
-                  Popular Cities
+                  Popular Cities in Canada
                 </button>
               </h2>
               <div id="city" className="accordion-collapse collapse show">
                 <div className="accordion-body border-0 px-0">
+                  <DiscoveryStatus
+                    loading={loading}
+                    error={error}
+                    source={source}
+                    empty={!loading && cities.length === 0}
+                    emptyMessage="No cities available."
+                  >
                   <div className="row row-cols-xl-6 row-cols-md-4 row-cols-sm-2 row-cols-1">
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">Detroit</Link>
-                        <Link to="#">Greensboro</Link>
-                        <Link to="#">Kansas City</Link>
-                        <Link to="#">Memphis</Link>
+                    {cityColumns.map((column, columnIndex) => (
+                      <div className="col" key={columnIndex}>
+                        <div className="main-links">
+                          {column.map((city) => (
+                            <Link to="#" key={city.slug}>
+                              {city.name}, {city.region}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">El Paso</Link>
-                        <Link to="#">Harrisburg</Link>
-                        <Link to="#">Las Vegas</Link>
-                        <Link to="#">Miami</Link>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">Fort Lauderdale</Link>
-                        <Link to="#">Hartford</Link>
-                        <Link to="#">Long Beach</Link>
-                        <Link to="#">Milwaukee</Link>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">Fort Worth </Link>
-                        <Link to="#">Houston</Link>
-                        <Link to="#">Los Angeles</Link>
-                        <Link to="#">Minneapolis</Link>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">Fresno</Link>
-                        <Link to="#">Indianapolis</Link>
-                        <Link to="#">Louisville</Link>
-                        <Link to="#">Modesto</Link>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="main-links">
-                        <Link to="#">Grand Rapids</Link>
-                        <Link to="#">Jacksonville</Link>
-                        <Link to="#">Madison</Link>
-                        <Link to="#">Nashville</Link>
-                      </div>
-                    </div>
+                    ))}
                   </div>
+                  </DiscoveryStatus>
                 </div>
               </div>
             </div>
