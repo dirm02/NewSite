@@ -119,7 +119,7 @@ const HomeSix = () => {
                     alt="image"
                     className="rounded-circle"
                   />
-                  <p>WHY TRUELY SELL?</p>
+                  <p>WHY LIF3LINE?</p>
                 </div>
                 <h2>
                   Reasons to <span>Choose Us</span>

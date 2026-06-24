@@ -68,14 +68,14 @@ const AdminSidebar = () => {
         <div className="admin-sidebar-logo">
           <Link to="/admin/dashdoard">
             <ImageWithBasePath
-              src="assets/admin/img/logo.svg"
+              src="assets/admin/img/lif3line-logo.svg"
               className="img-fluid logo"
               alt="Logo"
             />
           </Link>
           <Link to={routes.dashboard}>
             <ImageWithBasePath
-              src="assets/admin/img/logo-small.svg"
+              src="assets/admin/img/lif3line-logo-small.svg"
               className="img-fluid logo-small"
               alt="Logo"
             />

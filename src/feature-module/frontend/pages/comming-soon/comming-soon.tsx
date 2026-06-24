@@ -9,7 +9,7 @@ const CommingSoon = () => {
       <div className="container">
         <div className="col-md-12">
           <div className="text-center">
-            <ImageWithBasePath src="assets/img/logo.svg" alt="logo" />
+            <ImageWithBasePath src="assets/img/lif3line-logo.svg" alt="logo" />
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@ Schema/legend: see `README.md`. Evidence = code `path:line` + runtime capture `_
 
 | ID | Area | Label | Selector | Action type | href | Auth | What happens | Destination | Backend | Classification | PB need | Notes |
 |----|------|-------|----------|-------------|------|------|--------------|-------------|---------|----------------|---------|-------|
-| HOME-WORK-01 | Section-Work | 3 step blurbs | `.work-item` | display | none | guest | Static | — | none | external/static | — | no links; copy says "Truelysell" (brand leftover) |
+| HOME-WORK-01 | Section-Work | 3 step blurbs | `.work-item` | display | none | guest | Static | — | none | external/static | — | no links; copy now uses "Lif3Line" |
 
 ## 7. Preferred services (`preferredSection.tsx`) — static JSON `home-work`
 
@@ -153,7 +153,7 @@ Schema/legend: see `README.md`. Evidence = code `path:line` + runtime capture `_
 | HOME-FOOT-14 | Footer | Currency dropdown (USD/EURO/YEN) | `.dropdown-toggle` | dropdown-toggle | `#` | guest | Opens menu; items `#` | — | none | demo-later | — | :238-262 |
 | HOME-FOOT-15 | Footer-bottom | Terms and Conditions | `.menu-links a` | no-op | `#` | guest | Nothing | — | none | broken | — | should link `/pages/terms-condition`; :279 |
 | HOME-FOOT-16 | Footer-bottom | Privacy Policy | `.menu-links a` | no-op | `#` | guest | Nothing | — | none | broken | — | should link `/pages/privacy-policy`; :282 |
-| HOME-FOOT-17 | Footer-bottom | Copyright "Truelysell" | `p` | display | none | guest | Static | — | none | external/static | — | brand leftover ("Truelysell"); :275 |
+| HOME-FOOT-17 | Footer-bottom | Copyright "Lif3Line" | `p` | display | none | guest | Static | — | none | external/static | — | rebranded; :275 |
 
 ## 14. Modals rendered on `/index` (orphaned)
 
@@ -191,7 +191,7 @@ Schema/legend: see `README.md`. Evidence = code `path:line` + runtime capture `_
 3. **Footer is mostly non-functional** — Product/Support columns, social icons, Careers, Terms/Privacy (footer-bottom), and the newsletter Subscribe are all no-op (`#` / no handler).
 4. **Large demo surface** — Preferred services (×N) and High-rated services (×28) all hardcode `/services/service-details/service-details1`; blog cards all hardcode `/blog/blog-details`. These are template fillers, not live data.
 5. **Orphaned modals** — `#quote_modal` and `#provider` are mounted on `/index` but have **no trigger**; not reachable by a user here.
-6. **Brand leftovers** — "How Truelysell Works" and footer copyright "Truelysell" instead of Lif3line.
+6. **Brand leftovers** — fixed; homepage work section and footer now use "Lif3Line".
 7. **Genuinely live (PocketBase)**: categories grid, featured services, popular services tabs, popular providers, testimonials, and "Popular Cities in Canada" data — all sourced from discovery hooks (`useCategories/useServices/useProviders/useReviews/useCities`). City links themselves are still `#`.
 
 Runtime evidence: `docs/entrypoint-audit/_runtime/home.json`, `home.png` (gitignored).

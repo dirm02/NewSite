@@ -1,5 +1,5 @@
 /**
- * Canonical Canada-only location data for Lif3line MVP.
+ * Canonical Canada-only location data for Lif3Line MVP.
  * GHST-9 source of truth — GHST-4 PocketBase city seed must use MVP_CITIES.
  */
 

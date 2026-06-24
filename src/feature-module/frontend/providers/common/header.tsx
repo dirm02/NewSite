@@ -148,10 +148,10 @@ const ProviderHeader = () => {
       onMouseEnter={handleHeaderMouseEnter}
       onMouseLeave={handleHeaderMouseLeave}>
         <Link to={routes.home} className="logo logo-normal">
-          <ImageWithBasePath src="assets/img/logo-white.svg" alt="Logo" />
+          <ImageWithBasePath src="assets/img/lif3line-logo-white.svg" alt="Logo" />
         </Link>
         <Link to={routes.home} className="logo-small">
-          <ImageWithBasePath src="assets/img/logo-small-white.svg" alt="Logo" />
+          <ImageWithBasePath src="assets/img/lif3line-logo-small-white.svg" alt="Logo" />
         </Link>
         <Link id="toggle_btn" onClick={toogle} to="#">
           <i className="isax isax-sidebar-left" />

@@ -11,7 +11,7 @@ const ProviderAuthHeader = () => {
           <div className="navbar-header">
             <Link to={routes.home} className="navbar-brand logo">
               <ImageWithBasePath
-                src="assets/img/logo.svg"
+                src="assets/img/lif3line-logo.svg"
                 className="img-fluid"
                 alt="Logo"
               />

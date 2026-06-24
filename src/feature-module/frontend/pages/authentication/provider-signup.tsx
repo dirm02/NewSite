@@ -65,7 +65,7 @@ const ProviderRegister = () => {
               <div className="card-body">
                 <div className="text-center mb-3">
                   <h3 className="mb-2">Provider Signup</h3>
-                  <p>Offer services across Canada on Lif3line</p>
+                  <p>Offer services across Canada on Lif3Line</p>
                 </div>
                 {error && (
                   <div className="alert alert-danger py-2 small" role="alert">

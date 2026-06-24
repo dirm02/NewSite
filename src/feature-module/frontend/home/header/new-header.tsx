@@ -32,7 +32,7 @@ const NewHeader: React.FC<props> = ({ type }) => {
                 <div className="offcanvas-head d-flex justify-content-between align-items-center mb-3">
                   <Link to={routes.home}>
                     <ImageWithBasePath
-                      src="assets/img/logo.svg"
+                      src="assets/img/lif3line-logo.svg"
                       alt="logo-img"
                     />
                   </Link>
@@ -65,7 +65,7 @@ const NewHeader: React.FC<props> = ({ type }) => {
               <div className="navbar-logo">
                 <Link className="header-logo" to={routes.home}>
                   <ImageWithBasePath
-                    src="assets/img/logo.svg"
+                    src="assets/img/lif3line-logo.svg"
                     className="logo"
                     alt="Logo"
                   />

@@ -11,7 +11,7 @@ const WorkSection = () => {
           <div className="col-md-12 wow fadeInUp" data-wow-delay="0.2s">
             <div className="section-header text-center">
               <h2 className="text-white">
-                How Lif3line{" "}
+                How Lif3Line{" "}
                 <span className="text-linear-primary">Works</span>
               </h2>
               <p className="text-light">

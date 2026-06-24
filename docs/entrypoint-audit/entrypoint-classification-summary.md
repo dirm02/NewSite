@@ -107,7 +107,7 @@ Inputs: `homepage-entrypoints.md`, `customer-dashboard-entrypoints.md`, `provide
 
 1. **Sidebar Logout doesn't clear PB session** (customer + provider) — `fix`.
 2. **Provider header notification → customer route** — cross-role `fix`.
-3. **Brand leftovers** — "Truelysell" in homepage work section + footer copyright.
+3. **Brand leftovers** — fixed; homepage work section + footer now use "Lif3Line".
 4. **Static demo data dominates dashboards** — both dashboards render zero PocketBase data today.
 5. **Existing collections are under-used** — the biggest MVP win is *wiring* `service_requests`/`quotes`/`reviews`/`services` into the dashboards, not building new collections.
 
@@ -128,12 +128,12 @@ Status of the high-impact `fix` items, implemented in code (no backend schema ch
 | 5 | Hero **search** + popular chips navigate to `/services/search` with query params | Home | Controlled inputs + submit → `buildSearchUrl(...)`; search page now reads `query` | `new-home/index.tsx`, `services/search/search.tsx`, `core/api/pocketbase/format.ts` | ✅ done |
 | 6 | City / profession links prefer filtered search | Home | `#` → `buildSearchUrl({ location })` / `buildSearchUrl({ query })` | `new-home/serviceCities.tsx` | ✅ done |
 | 7 | Admin nav hidden from guest/customer/provider | All | **Verified already absent** — no Admin entry in `site-header-nav-config.ts` and no admin-route links in any frontend surface; covered by `@navigation` guest/customer/provider header tests | (n/a — verification + tests) | ✅ verified |
-| 8 | Replace visible **Truelysell** branding with Lif3line | Home | "How Truelysell Works" → "How Lif3line Works"; footer copyright → Lif3line | `new-home/workSection.tsx`, `home/footer/newFooter.tsx` | ✅ done |
+| 8 | Replace visible legacy branding with Lif3Line | Home | "How Lif3Line Works"; footer copyright → Lif3Line | `new-home/workSection.tsx`, `home/footer/newFooter.tsx` | ✅ done |
 
 **Verification:** `npm run build` passes (tsc -b + vite build). Focused `@navigation` Playwright suite: **13/13 passing** (incl. new tests: hero search query, popular chip, customer+provider sidebar logout clears `lif3line_pb_auth`, provider header has no `/customers/` links).
 
 **Intentionally deferred (out of GHST-37 scope):**
 - Footer Product/Support columns, social icons, newsletter Subscribe (`delete-later` / needs `newsletter`).
 - `SiteHeaderRightActions` variant 11 (a non-audited template header variant) still references `commonNotification`/`customerChat`; not on the audited `/index` or dashboard surfaces.
-- Sample "Truelysell" address text on the non-audited `customers/invoice/invoice.tsx` template page.
+- Sample brand/address text on the non-audited `customers/invoice/invoice.tsx` template page now uses Lif3Line/support@lif3line.me.
 - Hardcoded hero stat counters and dashboard demo data (tracked in `demo-cleanup-candidates.md`).

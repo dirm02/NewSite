@@ -145,10 +145,10 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
       onMouseLeave={handleMouseLeave}
     >
       <Link to={routes.home} className="logo logo-normal">
-        <ImageWithBasePath src="assets/img/logo.svg" alt="Logo" />
+        <ImageWithBasePath src="assets/img/lif3line-logo.svg" alt="Logo" />
       </Link>
       <Link to={routes.home} className="logo-small">
-        <ImageWithBasePath src="assets/img/logo-small.svg" alt="Logo" />
+        <ImageWithBasePath src="assets/img/lif3line-logo-small.svg" alt="Logo" />
       </Link>
       <Link id="toggle_btn" to="javascript:void(0);" onClick={toggleSidebar}>
         <i className="ti ti-menu-deep" />
@@ -164,7 +164,7 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
     </Link>
     <div className="header-user">
       <div className="nav user-menu">
-        <div className="header-btn d-flex align-items-center">
+        <div className="header-btn d-flex align-items-center w-100">
           <Link
             to={routes.home}
             className="btn btn-light d-none d-sm-inline-flex align-items-center me-2"
@@ -172,15 +172,16 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
             <i className="ti ti-home me-1" />
             Home
           </Link>
-          <div className="provider-head-links gap-2">
-            <Link
-              to="javascript:void(0);"
-              className="d-flex align-items-center justify-content-center notify-link link-icon"
-              data-bs-toggle="dropdown"
-            >
-              <i className="isax isax-notification" />
-            </Link>
-            <div className="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+          <div className="d-flex align-items-center gap-2 ms-auto">
+            <div className="provider-head-links gap-2">
+              <Link
+                to="javascript:void(0);"
+                className="d-flex align-items-center justify-content-center notify-link link-icon"
+                data-bs-toggle="dropdown"
+              >
+                <i className="isax isax-notification" />
+              </Link>
+              <div className="dropdown-menu dropdown-menu-end notification-dropdown p-4">
               <div className="d-flex dropdown-body align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
                 <h1 className="notification-title">
                   Notifications <span className="fs-18 text-gray">(2)</span>
@@ -347,33 +348,34 @@ const CustomerHeader: React.FC<CustomerHeaderProps> = ({ sidebarRef, sidebarOver
                   View All
                 </Link>
               </div>
-            </div>
-          </div>
-          <div className="dropdown">
-            <Link
-              to="javascript:void(0);"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              className=""
-            >
-              <div className="booking-user d-flex align-items-center">
-                <span className="user-img">
-                  <ImageWithBasePath src="assets/img/profiles/avatar-02.jpg" alt="user" />
-                </span>
               </div>
-            </Link>
-            <ul className="dropdown-menu p-2">
-              <li>
-                <button
-                  type="button"
-                  className="dropdown-item d-flex align-items-center border-0 bg-transparent w-100 text-start"
-                  onClick={handleLogout}
-                >
-                  <i className="ti ti-logout me-1" />
-                  Logout{user?.name ? ` (${user.name})` : ""}
-                </button>
-              </li>
-            </ul>
+            </div>
+            <div className="dropdown">
+              <Link
+                to="javascript:void(0);"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                className=""
+              >
+                <div className="booking-user d-flex align-items-center">
+                  <span className="user-img">
+                    <ImageWithBasePath src="assets/img/profiles/avatar-02.jpg" alt="user" />
+                  </span>
+                </div>
+              </Link>
+              <ul className="dropdown-menu p-2">
+                <li>
+                  <button
+                    type="button"
+                    className="dropdown-item d-flex align-items-center border-0 bg-transparent w-100 text-start"
+                    onClick={handleLogout}
+                  >
+                    <i className="ti ti-logout me-1" />
+                    Logout{user?.name ? ` (${user.name})` : ""}
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

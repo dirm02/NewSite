@@ -535,7 +535,7 @@ const InstallerNew = () => {
                 )}
               </div>
               <div className="installation-footer">
-                <p>Copyright ⓒ 2025 Truelysell - All Rights Reserved.</p>
+                <p>Copyright ⓒ 2025 Lif3Line - All Rights Reserved.</p>
               </div>
             </div>
           </div>

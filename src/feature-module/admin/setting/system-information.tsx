@@ -39,7 +39,7 @@ const SystemInformation = () => {
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
-                                                                defaultValue="Truelysell"
+                                                                defaultValue="Lif3Line"
                                                             />
                                                         </div>
                                                     </div>
@@ -57,7 +57,7 @@ const SystemInformation = () => {
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
-                                                                defaultValue="https://truelysell.com"
+                                                                defaultValue="https://lif3line.me"
                                                             />
                                                         </div>
                                                     </div>
@@ -75,7 +75,7 @@ const SystemInformation = () => {
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
-                                                                defaultValue="https://app.truelysell.com"
+                                                                defaultValue="https://lif3line.me"
                                                             />
                                                         </div>
                                                     </div>
@@ -165,7 +165,7 @@ const SystemInformation = () => {
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
-                                                                defaultValue="/truelysell/public"
+                                                                defaultValue="/lif3line/public"
                                                             />
                                                         </div>
                                                     </div>
@@ -248,7 +248,7 @@ const SystemInformation = () => {
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
-                                                                defaultValue="Truelysell"
+                                                                defaultValue="Lif3Line"
                                                             />
                                                         </div>
                                                     </div>
@@ -267,7 +267,7 @@ const SystemInformation = () => {
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    defaultValue="https://truelysell.com"
+                                                                    defaultValue="https://lif3line.me"
                                                                 />
                                                                 <ImageWithBasePath src="assets/admin/img/icons/info.svg" alt="img" />
                                                             </div>

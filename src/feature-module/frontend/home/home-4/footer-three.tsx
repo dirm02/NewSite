@@ -16,7 +16,7 @@ const FooterThree = () => {
                 <div className="footer-widget">
                   <div className="footer-logo">
                     <Link to={routes.home}>
-                      <ImageWithBasePath src="assets/img/logo.svg" alt="logo" />
+                      <ImageWithBasePath src="assets/img/lif3line-logo.svg" alt="logo" />
                     </Link>
                   </div>
                   <div className="footer-content footer-content-three">
@@ -112,7 +112,7 @@ const FooterThree = () => {
                   <h2 className="footer-title footer-subtitle-three fs-14">
                     Need live support?
                   </h2>
-                  <p className="fs-16">truelysell@example.com</p>
+                  <p className="fs-16">support@lif3line.me</p>
                 </div>
                 <div className="footer-widget footer-menu footer-menu-three">
                   <h2 className="footer-title footer-subtitle-three fs-14">
@@ -134,7 +134,7 @@ const FooterThree = () => {
 							<div className="col-lg-4 col-md-6 d-flex">
 								<div className="copyright-text copyright-color">
 									<p className="mb-0 fs-16">
-										&copy; 2025 Truelysell. All Rights Reserved.
+										&copy; 2025 Lif3Line. All Rights Reserved.
 									</p>
 								</div>
 							</div>

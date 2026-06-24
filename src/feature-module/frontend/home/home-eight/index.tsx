@@ -682,14 +682,14 @@ const HomeEight = () => {
             <div className="col-lg-6 col-12">
               <div className="about-eight-main">
                 <ImageWithBasePath src="assets/img/about-us-eight.png" alt="image" />
-                <div className="truely-eight-bg">
+                <div className="lif3line-eight-bg">
                   <ImageWithBasePath
                     src="assets/img/her-section-eight-bg.png"
                     alt="image"
                     className="img-fluid"
                   />
                 </div>
-                <div className="truely-eight-bg-two">
+                <div className="lif3line-eight-bg-two">
                   <ImageWithBasePath src="assets/img/her-section-eight-bg.png" alt="image" />
                 </div>
               </div>
@@ -701,7 +701,7 @@ const HomeEight = () => {
                   data-aos="fade-up"
                 >
                   <ImageWithBasePath src="assets/img/icons/dog.svg" alt="image" />
-                  <h2>About Truely sell pet care</h2>
+                  <h2>About Lif3Line pet care</h2>
                   <p>Mauris ut cursus nunc. </p>
                 </div>
                 <p>

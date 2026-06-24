@@ -17,7 +17,7 @@ const FooterTwo = () => {
             <div className="footer-widget">
               <div className="footer-logo">
                 <Link to={routes.home}>
-                  <ImageWithBasePath src="assets/img/logo.svg" alt="logo" />
+                  <ImageWithBasePath src="assets/img/lif3line-logo.svg" alt="logo" />
                 </Link>
               </div>
               {/* Footer Widget */}
@@ -38,7 +38,7 @@ const FooterTwo = () => {
                     </span>
                     <div>
                       <h6>Email Address</h6>
-                      <p>truelysell@example.com</p>
+                      <p>support@lif3line.me</p>
                     </div>
                   </div>
                   <div className="footer-address">

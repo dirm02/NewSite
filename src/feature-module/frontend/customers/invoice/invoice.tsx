@@ -37,7 +37,7 @@ const Invoice = () => {
               <div className="col-md-4">
                 <div>
                   <ImageWithBasePath
-                    src="assets/img/logo.svg"
+                    src="assets/img/lif3line-logo.svg"
                     alt="img"
                     className="img-fluid"
                   />
@@ -70,11 +70,11 @@ const Invoice = () => {
                   <div className="invoice-address">
                     <h6 className="mb-2">Invoice From:</h6>
                     <ul>
-                      <li>Truelysell</li>
+                      <li>Lif3Line</li>
                       <li>
                         367 Hillcrest Lane, Irvine, California, United States
                       </li>
-                      <li className="mb-0">truelysell@example.com</li>
+                      <li className="mb-0">support@lif3line.me</li>
                     </ul>
                   </div>
                 </div>

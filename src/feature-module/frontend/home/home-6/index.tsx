@@ -156,7 +156,7 @@ const HomeSix = () => {
           <div className="top-bar-nine-all">
             <div className="navbar-header">
               <Link className="navbar-brand logo" to="#">
-                <ImageWithBasePath src="assets/img/logo.svg" className="img-fluid" alt="Logo" />
+                <ImageWithBasePath src="assets/img/lif3line-logo.svg" className="img-fluid" alt="Logo" />
               </Link>
             </div>
             <div className="top-bar-ryt">
@@ -244,7 +244,7 @@ const HomeSix = () => {
                   data-aos="fade-up"
                 >
                   <span className="badge badge-primary-transparent">
-                    Welcome to TruelySell Mechanic
+                    Welcome to Lif3Line Mechanic
                   </span>
                   <h1 className="display-5">
                     Providing A Professional Reliable service

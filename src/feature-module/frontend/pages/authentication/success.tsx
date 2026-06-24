@@ -48,7 +48,7 @@ const Success = () => {
             </div>
             <div className="p-4 text-center">
               <p className="mb-0 ">
-                Copyright © 2025 - All Rights Reserved Truelysell
+                Copyright © 2025 - All Rights Reserved Lif3Line
               </p>
             </div>
           </div>

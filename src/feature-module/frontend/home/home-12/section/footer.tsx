@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="footer-about">
             <Link to="#" className="logo">
               <ImageWithBasePath
-                src="assets/img/logo-white.svg"
+                src="assets/img/lif3line-logo-white.svg"
                 alt="logo"
                 className="img-fluid"
               />
@@ -122,8 +122,8 @@ const Footer = () => {
                   <div className="footer-text">
                     <p>Mail Address</p>
                     <h4>
-                      <Link to="mailto:support@truelysell.com">
-                        support@truelysell.com
+                      <Link to="mailto:support@lif3line.me">
+                        support@lif3line.me
                       </Link>
                     </h4>
                   </div>
@@ -145,7 +145,7 @@ const Footer = () => {
       </div>
       {/* End row */}
       <div className="footer-name">
-        <div className="footer-name-title">TRUELYSELL</div>
+        <div className="footer-name-title">LIF3LINE</div>
         <ImageWithBasePath
           src="assets/img/team/footer-img.png"
           alt="footer"
@@ -158,7 +158,7 @@ const Footer = () => {
       <div className="container">
         <div className="copyright-content">
           <p className="copyright">
-            Copyright © 2026 <Link to={all_routes.home12}>TruelySell</Link>. All rights
+            Copyright © 2026 <Link to={all_routes.home12}>Lif3Line</Link>. All rights
             reserved
           </p>
           <div className="policy-links">

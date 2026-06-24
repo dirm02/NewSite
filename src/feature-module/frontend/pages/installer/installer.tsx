@@ -20,7 +20,7 @@ const Installer = () => {
   <div className="installation-header">
     <div className="container">
       <div>
-        <ImageWithBasePath src="./assets/img/logo.svg" alt="Logo" className="img-fluid" />
+        <ImageWithBasePath src="./assets/img/lif3line-logo.svg" alt="Logo" className="img-fluid" />
       </div>
     </div>
   </div>
@@ -496,7 +496,7 @@ const Installer = () => {
               )}
             </div>
             <div className="installation-footer py-4 text-center">
-              <p>Copyright ⓒ 2025 Truelysell - All Rights Reserved.</p>
+              <p>Copyright ⓒ 2025 Lif3Line - All Rights Reserved.</p>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ const BookingFooter = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <p>Copyright © 2025. All Rights Reserved Truelysell</p>
+            <p>Copyright © 2025. All Rights Reserved Lif3Line</p>
           </div>
         </div>
       </div>

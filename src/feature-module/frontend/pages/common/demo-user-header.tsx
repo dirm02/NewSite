@@ -12,7 +12,7 @@ const DemoUserHeader = () => {
             <div className="navbar-logo">
               <Link className="header-logo" to={routes.home}>
                 <ImageWithBasePath
-                  src="assets/img/logo.svg"
+                  src="assets/img/lif3line-logo.svg"
                   className="logo"
                   alt="Logo"
                 />

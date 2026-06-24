@@ -30,11 +30,19 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
   );
   const [submenuOpen, setSubmenuOpen] = useState<Record<string, boolean>>({});
 
+  const closeSubmenus = useCallback(() => {
+    setSubmenuOpen({});
+    setOpenBranches({});
+  }, []);
+
+  const openSubmenu = useCallback((id: string) => {
+    setSubmenuOpen({ [id]: true });
+    setOpenBranches({});
+  }, []);
+
   const toggleSubmenu = useCallback((id: string) => {
-    setSubmenuOpen((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+    setSubmenuOpen((prev) => (prev[id] ? {} : { [id]: true }));
+    setOpenBranches({});
   }, []);
 
   const onToggleBranch = useCallback((key: string) => {
@@ -58,7 +66,7 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
   }, [pathname]);
 
   return (
-    <ul className="main-nav align-items-lg-center">
+    <ul className="main-nav align-items-lg-center" onMouseLeave={closeSubmenus}>
       {variantType === 1 ? (
         <li className="d-none d-lg-block" key="categories-menu">
           <div>
@@ -102,6 +110,7 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
             <li
               key={section.id}
               className={`has-submenu megamenu ${megaActive ? 'active' : ''} `}
+              onMouseEnter={() => openSubmenu(section.id)}
             >
               {variantType === 12 ? (
                 <Link
@@ -178,6 +187,7 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
               className={`${isPages ? 'nav-item ' : ''}has-submenu ${
                 dropActive ? 'active' : ''
               }`}
+              onMouseEnter={() => openSubmenu(section.id)}
             >
              {variantType === 12 ? (
                 <Link
@@ -219,6 +229,7 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
           <Link
             className="nav-link"
             to={routes.providerSignup}
+            onMouseEnter={closeSubmenus}
           >
             Become a Provider
           </Link>

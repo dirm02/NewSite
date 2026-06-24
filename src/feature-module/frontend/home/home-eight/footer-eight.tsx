@@ -15,7 +15,7 @@ const FooterEight = () => {
           <div className="footer-widget">
             <div className="footer-logo">
               <Link to={routes.home}>
-                <ImageWithBasePath src="assets/img/logo.svg" alt="logo" />
+                <ImageWithBasePath src="assets/img/lif3line-logo.svg" alt="logo" />
               </Link>
             </div>
             <p>
@@ -226,7 +226,7 @@ const FooterEight = () => {
         <div className="row text-center">
           <div className="col-md-12">
             <div className="copyright-text">
-              <p>Copyright 2025 © Truelysell. All right reserved.</p>
+              <p>Copyright 2025 © Lif3Line. All right reserved.</p>
             </div>
           </div>
         </div>

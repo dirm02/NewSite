@@ -183,7 +183,7 @@ const FooterFive = () => {
                 <div>
                   <p className="fs-14 text-white  mb-1">Mail Address</p>
                   <p className="fs-14 text-white mb-0">
-                    contact@truelysell.com
+                    support@lif3line.me
                   </p>
                 </div>
               </div>

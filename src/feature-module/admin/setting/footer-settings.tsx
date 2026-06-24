@@ -118,7 +118,7 @@ const FooterSettings = () => {
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            defaultValue="https://truelysell-testing.dreamguystech.com/about"
+                                                            defaultValue="https://lif3line.me/pages/about-us"
                                                         />
                                                     </div>
                                                     <div className="col-lg-1 col-sm-12">
@@ -139,7 +139,7 @@ const FooterSettings = () => {
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            defaultValue="https://truelysell-testing.dreamguystech.com/contact"
+                                                            defaultValue="https://lif3line.me/pages/contact-us"
                                                         />
                                                     </div>
                                                     <div className="col-lg-1 col-sm-12">
@@ -160,7 +160,7 @@ const FooterSettings = () => {
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            defaultValue="https://truelysell-testing.dreamguystech.com/faq"
+                                                            defaultValue="https://lif3line.me/pages/faq"
                                                         />
                                                     </div>
                                                     <div className="col-lg-1 col-sm-12">
@@ -226,7 +226,7 @@ const FooterSettings = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    placeholder="truelysell@example.com"
+                                                    placeholder="support@lif3line.me"
                                                 />
                                             </div>
                                         </div>
@@ -400,7 +400,7 @@ const FooterSettings = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    placeholder="@ 2023 Truelysell	"
+                                                    placeholder="© 2026 Lif3Line"
                                                 />
                                             </div>
                                         </div>
@@ -425,7 +425,7 @@ const FooterSettings = () => {
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            defaultValue="https://truelysell.com/privacy"
+                                                            defaultValue="https://lif3line.me/pages/privacy-policy"
                                                         />
                                                     </div>
                                                     <div className="col-lg-1 col-sm-12">
@@ -446,7 +446,7 @@ const FooterSettings = () => {
                                                         <input
                                                             type="text"
                                                             className="form-control"
-                                                            defaultValue="https://truelysell.com/terms&conditions"
+                                                            defaultValue="https://lif3line.me/pages/terms-condition"
                                                         />
                                                     </div>
                                                     <div className="col-lg-1 col-sm-12">

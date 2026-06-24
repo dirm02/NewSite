@@ -28,7 +28,7 @@ const FooterOne = () => {
           <div className="footer-widget">
             <div className="footer-logo">
               <Link to={routes.home}>
-                <ImageWithBasePath src="assets/img/logo.svg" alt="logo" />
+                <ImageWithBasePath src="assets/img/lif3line-logo.svg" alt="logo" />
               </Link>
             </div>
             <div className="footer-content">
@@ -209,7 +209,7 @@ const FooterOne = () => {
           <div className="col-md-6">
             <div className="copyright-text">
               <p className="mb-0 fs-14">
-                © 2025 Truelysell. All Rights Reserved.
+                © 2025 Lif3Line. All Rights Reserved.
               </p>
             </div>
           </div>

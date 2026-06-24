@@ -32,7 +32,7 @@ const AdminHeader = () => {
       <div className="header-left">
         <Link to="index" className="logo">
           <ImageWithBasePath
-            src="assets/img/logo.svg"
+            src="assets/img/lif3line-logo.svg"
             alt="Logo"
             width={30}
             height={30}
@@ -40,7 +40,7 @@ const AdminHeader = () => {
         </Link>
         <Link to="index" className=" logo-small">
           <ImageWithBasePath
-            src="assets/admin/img/logo-small.svg"
+            src="assets/admin/img/lif3line-logo-small.svg"
             alt="Logo"
             width={30}
             height={30}

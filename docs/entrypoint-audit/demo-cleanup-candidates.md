@@ -74,8 +74,8 @@ Legend: **hide** = keep route, remove from visible nav/CTA; **delete-later** = r
 
 | Item | Surface | Location | Issue |
 |------|---------|----------|-------|
-| "How Truelysell Works" | Home | `workSection.tsx:14` | Brand leftover → Lif3line |
-| Footer copyright "Truelysell" | Home | `newFooter.tsx:275` | Brand leftover → Lif3line |
+| "How Lif3Line Works" | Home | `workSection.tsx:14` | Rebranded; keep wired section |
+| Footer copyright "Lif3Line" | Home | `newFooter.tsx:275` | Rebranded; keep footer |
 | Stat counters (215,292 providers etc.) | Home | `new-home/index.tsx:104+` | Hardcoded marketing numbers |
 
 ---

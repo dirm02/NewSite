@@ -69,7 +69,7 @@ const AboutUs = () => {
                     <h6>ABOUT OUR COMPANY</h6>
                     <h2>Best Solution For Cleaning Services</h2>
                     <p>
-                      Welcome to Truelysell, your premier destination for connecting
+                      Welcome to Lif3Line, your premier destination for connecting
                       with top-rated service providers and finding the perfect match
                       for your needs. Our platform is designed to simplify the
                       process of discovering, evaluating, and hiring trusted
@@ -77,7 +77,7 @@ const AboutUs = () => {
                       improvement and IT support to personal care and more.
                     </p>
                     <p>
-                      At Truelysell, our mission is to bridge the gap between
+                      At Lif3Line, our mission is to bridge the gap between
                       service providers and customers by offering a seamless and
                       efficient marketplace experience. We aim to empower both
                       parties by providing a reliable platform where quality,

@@ -45,7 +45,7 @@ const Footer = () => {
               <div className="footer-logo">
                 <Link to={routes.home11}>
                   <ImageWithBasePath
-                    src="assets/img/logo-03-white.svg"
+                    src="assets/img/lif3line-logo-white.svg"
                     className="img-fluid"
                     alt="logo"
                   />
@@ -170,7 +170,7 @@ const Footer = () => {
             <div className="copyright-content">
               <div className="copyright">
                 <p className="mb-0">
-                  © 2026 <Link to={routes.home11}>TruelySell</Link>. All rights
+                  © 2026 <Link to={routes.home11}>Lif3Line</Link>. All rights
                   reserved
                 </p>
               </div>

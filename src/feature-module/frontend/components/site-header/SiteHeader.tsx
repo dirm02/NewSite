@@ -48,7 +48,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
       ? setImageUrl({
           logo: "assets/img/logo.png",
           logoSmall: "assets/img/logo-small.png",
-          logoSvg: "assets/img/logo.svg",
+          logoSvg: "assets/img/lif3line-logo.svg",
         })
       : setImageUrl({
           logo: "assets/img/logo-02.svg",
@@ -106,7 +106,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
               {location.pathname === "/index-11" ? (
                 <Link to={all_routes.home} className="navbar-brand logo">
                   <ImageWithBasePath
-                    src="assets/img/logo-03.svg"
+                    src="assets/img/lif3line-logo.svg"
                     className="img-fluid"
                     alt="Logo"
                   />
@@ -119,8 +119,8 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
                   <ImageWithBasePath
                     src={
                       scrollYPosition > 200
-                        ? `assets/img/logo.svg`
-                        : `assets/img/logo-white.svg`
+                        ? `assets/img/lif3line-logo.svg`
+                        : `assets/img/lif3line-logo-white.svg`
                     }
                     className="img-fluid"
                     alt="Logo"
@@ -133,7 +133,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
                   key="logo-main"
                 >
                   <ImageWithBasePath
-                    src="assets/img/logo.svg"
+                    src="assets/img/lif3line-logo.svg"
                     className="img-fluid"
                     alt="Logo"
                   />
@@ -146,7 +146,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
                 key="logo-small"
               >
                 <ImageWithBasePath
-                  src="assets/img/logo-small.svg"
+                  src="assets/img/lif3line-logo-small.svg"
                   className="img-fluid"
                   alt="Logo"
                 />
@@ -157,13 +157,13 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
                 <Link to={menuLogoPath} className="menu-logo" key="menu-logo">
                   {location.pathname === "/index-11" ? (
                     <ImageWithBasePath
-                      src="assets/img/logo-03.svg"
+                      src="assets/img/lif3line-logo.svg"
                       className="img-fluid"
                       alt="Logo"
                     />
                   ) : (
                     <ImageWithBasePath
-                      src="assets/img/logo.svg"
+                      src="assets/img/lif3line-logo.svg"
                       className="img-fluid"
                       alt="Logo"
                     />

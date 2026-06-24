@@ -61,7 +61,7 @@ const ProviderAuthHeader2 = () => {
             <div className="menu-header">
               <Link to={routes.home} className="menu-logo">
                 <ImageWithBasePath
-                  src="assets/img/logo.svg"
+                  src="assets/img/lif3line-logo.svg"
                   className="img-fluid"
                   alt="Logo"
                 />

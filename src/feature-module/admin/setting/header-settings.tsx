@@ -9,27 +9,27 @@ const HeaderSettings = () => {
   const [headerMenu, setHeaderMenu] = useState<HeaderData[]>([
     {
       content: 'Home',
-      link: 'https://truelysell-testing.dreamguystech.com/home',
+      link: 'https://lif3line.me/index',
     },
     {
       content: 'About',
-      link: 'https://truelysell-testing.dreamguystech.com/about',
+      link: 'https://lif3line.me/pages/about-us',
     },
     {
       content: 'Categories',
-      link: 'https://truelysell-testing.dreamguystech.com/categories',
+      link: 'https://lif3line.me/categories',
     },
     {
       content: 'Blog',
-      link: 'https://truelysell-testing.dreamguystech.com/blog',
+      link: 'https://lif3line.me/blog',
     },
     {
       content: 'Contact Us',
-      link: 'https://truelysell-testing.dreamguystech.com/contactus',
+      link: 'https://lif3line.me/pages/contact-us',
     },
     {
       content: 'Pages',
-      link: 'https://truelysell-testing.dreamguystech.com/pages',
+      link: 'https://lif3line.me/pages/about-us',
     },
   ]);
 

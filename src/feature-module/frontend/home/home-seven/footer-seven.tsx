@@ -15,7 +15,7 @@ const FooterSeven = () => {
           <div className="footer-widget footer-widget-seven">
             <div className="footer-logo">
               <Link to={routes.home}>
-                <ImageWithBasePath src="assets/img/logo-white.svg" alt="logo" />
+                <ImageWithBasePath src="assets/img/lif3line-logo-white.svg" alt="logo" />
               </Link>
             </div>
             <div className="footer-content">
@@ -141,7 +141,7 @@ const FooterSeven = () => {
                 </span>
                 <div className="footer-six-ryt">
                   <span>Mail Address</span>
-                  <h6>support@truelysell.com</h6>
+                  <h6>support@lif3line.me</h6>
                 </div>
               </div>
               <div className="footer-six-left ">
@@ -169,7 +169,7 @@ const FooterSeven = () => {
         <div className="row gy-2">
           <div className="col-md-6">
             <div className="copyright-text">
-              <p>Copyright 2025 © Truelysell. All right reserved.</p>
+              <p>Copyright 2025 © Lif3Line. All right reserved.</p>
             </div>
           </div>
           <div className="col-md-6">
