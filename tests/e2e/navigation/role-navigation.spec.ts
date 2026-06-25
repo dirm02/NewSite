@@ -12,9 +12,16 @@ test.describe("Role navigation contract @navigation", () => {
   test("guest homepage has no admin or role dashboard menus", async ({ page }) => {
     await page.goto("/index", { waitUntil: "domcontentloaded" });
 
-    await expect(page.getByRole("link", { name: /^admin$/i })).toHaveCount(0);
-    await expect(page.getByRole("link", { name: /^customers$/i })).toHaveCount(0);
-    await expect(page.getByRole("link", { name: /^providers$/i })).toHaveCount(0);
+    // Assert by dashboard route href, not label text: a public "Providers"
+    // directory link (footer / Services menu) is legitimate and must not trip
+    // this check. The contract is that guests never see role *dashboard* nav.
+    await expect(page.locator('a[href^="/admin"]')).toHaveCount(0);
+    await expect(
+      page.locator('a[href*="/customers/customer-dashboard"]'),
+    ).toHaveCount(0);
+    await expect(
+      page.locator('a[href*="/providers/dashboard"]'),
+    ).toHaveCount(0);
 
     await page.getByRole("link", { name: /join us/i }).first().click();
     await expect(page).toHaveURL(/\/authentication\/choose-signup$/);

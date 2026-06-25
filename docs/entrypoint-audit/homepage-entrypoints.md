@@ -195,3 +195,38 @@ Schema/legend: see `README.md`. Evidence = code `path:line` + runtime capture `_
 7. **Genuinely live (PocketBase)**: categories grid, featured services, popular services tabs, popular providers, testimonials, and "Popular Cities in Canada" data — all sourced from discovery hooks (`useCategories/useServices/useProviders/useReviews/useCities`). City links themselves are still `#`.
 
 Runtime evidence: `docs/entrypoint-audit/_runtime/home.json`, `home.png` (gitignored).
+
+---
+
+## 15. GHST-41 / GHST-42 CTA normalization changelog
+
+Status of every previously broken/demo/static homepage entrypoint after the PocketBase-wiring (GHST-41) and CTA/nav-normalization (GHST-42) passes. **No routes were deleted** — demo-only items are hidden in nav config / removed from the homepage and documented for a future phase.
+
+| Audit ID(s) | Entrypoint | Old state | New state (task) |
+|---|---|---|---|
+| HOME-HERO-01/02/03 | Hero search service + location inputs / Search button | Inputs unbound; button → static `/services/search` | Controlled inputs → `buildSearchUrl({query,location})`; search page consumes params (GHST-37) |
+| HOME-HERO-04/05/06 | Popular chips (Plumber/Interior/Nail) | `#`/no filter | `buildSearchUrl({query})` keyword search (GHST-37) |
+| HOME-HERO-07 | Stat counters (215,292 / 90,000 / 2,390,968) | Hardcoded fake numbers | Live counts from `useProviders/useServices/useReviews`; honest `0` fallback (GHST-41) |
+| Hero floating badges | `4.9/5 (255 reviews)`, `300 Booking Completed` | Hardcoded | Real review average (hidden when 0) + live "Services Listed" count (GHST-41) |
+| HOME-PREF-01..04 | "Most Preferred Services" | Static `home-work` JSON cards → `service-details1` | PocketBase `services` (top rating), real detail links + empty state (GHST-41) |
+| HOME-RATE-01/02 | "Browse High Rated Services" 7 tabs / 28 cards | Static demo cards → `service-details1` | PocketBase `services` (top rating) cards + empty state; static tabs removed (GHST-41) |
+| HOME-BLOG-01/02 | "Recent Blogs" cards + View All | Static demo blog → `/blog/*` | Section removed from `/index`; returns with provider blog (GHST-48 schema / GHST-49 UI) |
+| HOME-CTA-01/02 | Body "Join Us" CTAs | `to="#"` | `chooseSignUp` (GHST-37) |
+| HOME-CITY-02/04 | Profession + city links | `to="#"` | `buildSearchUrl({query})` / `buildSearchUrl({location})` (GHST-37) |
+| HOME-HDR-02 | Header "Categories" dropdown (Construction/Removals/Interior) | `to="#"` | `searchWithCategory(slug)` real category search (GHST-42) |
+| HOME-HDR Services dropdown | Service Details 1/2, Service Request, Providers Details, Categories 1/2, Create Service | Mixed live + demo/template | Trimmed to **Service Grid, Service List, Search, Providers**; demo/template items hidden (routes kept) (GHST-42) |
+| HOME-HDR Pages dropdown | Blog, Error 404/500, Auth/OTP submenu, Booking flow, Categories, Session Expired | Template/demo links | Trimmed to **About, How It Works, Pricing, FAQ, Contact, Privacy, Terms**; rest hidden (routes kept) (GHST-42) |
+| HOME-FOOT-01/02/05/08 | Footer Product/Support columns, Careers | No-op `#` | Replaced with real columns: Explore / Company / Support / Get Started — all real routes (GHST-42) |
+| HOME-FOOT-09/10 | Newsletter email + Subscribe | Unbound, no collection | Removed (no `newsletter` collection; revisit in Admin CMS phase) (GHST-42) |
+| HOME-FOOT-11 | Social icons | Dead `#` | Removed (reintroduce with real profile URLs) (GHST-42) |
+| HOME-FOOT-12 | App Store / Google Play badges | Fake static images | Removed (no mobile apps) (GHST-42) |
+| HOME-FOOT-13/14 | Language / Currency dropdowns | No i18n/multi-currency | Removed (out of MVP scope) (GHST-42) |
+| HOME-FOOT-15/16 | Footer-bottom Terms / Privacy | `#` | Real `termsCondition` / `privacyPolicy` routes (GHST-37) |
+
+**Verification (GHST-42):** `npm run build` PASS. Browser check on `http://localhost:4173/index` (vite preview): guest header = Home / Services / Pages / Become a Provider; Services dropdown opens with 4 MVP items and **toggles closed** (no stuck-open); Pages dropdown shows the 7 marketing/legal routes; footer contains **0** dead `#`/`/index` links (16 links, all real); Categories chips resolve to `/services/search?category=…`.
+
+**Deferred / where hidden CTAs return:**
+- Blog nav + homepage blog → **GHST-49** (provider blog public display), schema in **GHST-48**.
+- Booking / payment demo flow → future **Payments/Appointments** phase (out of MVP).
+- Newsletter, social links, language/currency → future **Admin CMS / settings** phase.
+- Service Details/Request/Categories template pages + Create Service (public) → Create Service lives in the provider shell; template pages remain reachable by direct URL only.

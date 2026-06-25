@@ -1,5 +1,7 @@
 import { pbGetOne, pbList } from "./client";
 import type {
+  PbBlogCategory,
+  PbBlogPost,
   PbCity,
   PbProviderProfile,
   PbReview,
@@ -10,6 +12,7 @@ import type {
 const SERVICE_EXPAND = "category,provider,city";
 const PROVIDER_EXPAND = "city,user";
 const REVIEW_EXPAND = "author,provider,service";
+const BLOG_EXPAND = "provider,category,service";
 
 export async function fetchCategories(options?: {
   featuredOnly?: boolean;
@@ -69,5 +72,37 @@ export async function fetchReviews(options?: { perPage?: number }) {
     sort: "-@rowid",
     expand: REVIEW_EXPAND,
     filter: "(status='published')",
+  });
+}
+
+/** Public blog list — published posts only (GHST-49). */
+export async function fetchPublishedBlogPosts(options?: { perPage?: number }) {
+  return pbList<PbBlogPost>("blog_posts", {
+    perPage: String(options?.perPage ?? 50),
+    sort: "-published_at",
+    expand: BLOG_EXPAND,
+    filter: "(status='published')",
+  });
+}
+
+/** Public blog detail — resolves a single published post by slug. */
+export async function fetchPublishedBlogPostBySlug(
+  slug: string,
+): Promise<PbBlogPost | null> {
+  const safe = slug.replace(/'/g, "");
+  const result = await pbList<PbBlogPost>("blog_posts", {
+    perPage: "1",
+    expand: BLOG_EXPAND,
+    filter: `(status='published' && slug='${safe}')`,
+  });
+  return result.items[0] ?? null;
+}
+
+/** Active blog categories (admin-managed taxonomy). */
+export async function fetchBlogCategories(options?: { perPage?: number }) {
+  return pbList<PbBlogCategory>("blog_categories", {
+    perPage: String(options?.perPage ?? 50),
+    sort: "sort_order",
+    filter: "(status='active')",
   });
 }

@@ -86,6 +86,36 @@ export interface PbReview extends PbRecordBase {
   };
 }
 
+export interface PbBlogCategory extends PbRecordBase {
+  name: string;
+  slug: string;
+  sort_order?: number;
+  status: string;
+}
+
+export interface PbBlogPost extends PbRecordBase {
+  provider: string;
+  author: string;
+  service?: string;
+  category?: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  content?: string;
+  cover_image?: string;
+  status: string;
+  rejection_reason?: string;
+  published_at?: string;
+  seo_title?: string;
+  seo_description?: string;
+  expand?: {
+    provider?: PbProviderProfile;
+    author?: PbUserExpand;
+    service?: PbService;
+    category?: PbBlogCategory;
+  };
+}
+
 export type PbUserRole = "customer" | "provider" | "admin";
 
 export interface PbUser extends PbRecordBase {

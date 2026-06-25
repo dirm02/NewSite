@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import { searchWithCategory } from '../../../../core/api/pocketbase/format';
 import { getSiteHeaderNavSections } from './site-header-nav-config';
 import {
   filterNavSections,
@@ -80,18 +81,19 @@ const SiteHeaderMainNav: React.FC<Props> = ({ variantType, role }) => {
                 Categories
               </Link>
               <ul className="dropdown-menu">
+                {/* GHST-42: wired to real category search instead of dead `#`. */}
                 <li>
-                  <Link className="dropdown-item" to="#">
+                  <Link className="dropdown-item" to={searchWithCategory('construction')}>
                     Construction
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="#">
+                  <Link className="dropdown-item" to={searchWithCategory('removals')}>
                     Removals
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="#">
+                  <Link className="dropdown-item" to={searchWithCategory('interior')}>
                     Interior
                   </Link>
                 </li>

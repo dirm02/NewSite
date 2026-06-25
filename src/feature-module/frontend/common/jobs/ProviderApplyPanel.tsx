@@ -6,7 +6,11 @@ import {
   requestStatusLabel,
   serviceLocationLabel,
 } from "../../../../core/api/pocketbase/format";
-import { useJobActions, useServiceRequest } from "../../../../core/hooks/useJobData";
+import {
+  useJobActions,
+  useProviderRequestQuote,
+  useServiceRequest,
+} from "../../../../core/hooks/useJobData";
 import { useAuth } from "../../../../core/auth/AuthContext";
 import JobFlowStatus from "./JobFlowStatus";
 import { useState } from "react";
@@ -17,6 +21,8 @@ const ProviderApplyPanel = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { data: job, loading, error } = useServiceRequest(requestId);
+  const { data: existingQuote, loading: existingLoading } =
+    useProviderRequestQuote(requestId);
   const { submitQuote } = useJobActions();
 
   const [amount, setAmount] = useState("");
@@ -102,7 +108,18 @@ const ProviderApplyPanel = () => {
             <h5 className="mb-0">Submit Your Proposal</h5>
           </div>
           <div className="card-body">
-            {job?.status !== "open" ? (
+            {existingQuote ? (
+              <div className="alert alert-info" data-testid="already-quoted-notice">
+                You&apos;ve already submitted a proposal for this job
+                {` ($${existingQuote.amount})`}.
+                {job && (
+                  <>
+                    {" "}
+                    <Link to={providerJobDetailUrl(job.id)}>View job</Link>
+                  </>
+                )}
+              </div>
+            ) : job?.status !== "open" ? (
               <div className="alert alert-info">
                 This job is no longer accepting proposals.
                 {job && (
@@ -111,6 +128,12 @@ const ProviderApplyPanel = () => {
                     <Link to={providerJobDetailUrl(job.id)}>View job</Link>
                   </>
                 )}
+              </div>
+            ) : existingLoading ? (
+              <div className="text-center py-3">
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit}>

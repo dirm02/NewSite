@@ -158,6 +158,18 @@ export async function fetchFirstActiveProvider() {
   return body.items[0];
 }
 
+/**
+ * Probes whether the GHST-48 `blog_posts` collection is deployed on the target
+ * PocketBase. Returns false when the collection is missing (404) so blog E2E
+ * tests can skip cleanly before the schema migration is applied.
+ */
+export async function blogCollectionExists(): Promise<boolean> {
+  const { status } = await pbFetch(
+    "/collections/blog_posts/records?perPage=1&filter=(status='published')",
+  );
+  return status !== 404;
+}
+
 export async function fetchProviderProfileForUser(token: string, userId: string) {
   const result = await listRecords<{ id: string }>(
     "provider_profiles",

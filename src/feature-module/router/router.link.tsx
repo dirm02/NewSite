@@ -215,6 +215,9 @@ import UserQuoteComparison from "../frontend/customers/user-quote-comparison/use
 import ProviderJobFeed from "../frontend/providers/provider-job-feed/providerJobFeed";
 import ProviderApplyJob from "../frontend/providers/provider-job-feed/providerApplyJob";
 import ProviderProposal from "../frontend/providers/provider-proposal/providerProposal";
+import ProviderAllBlog from "../frontend/providers/provider-blog/providerAllBlog";
+import ProviderAddBlog from "../frontend/providers/provider-blog/providerAddBlog";
+import ProviderSubmittedBlog from "../frontend/providers/provider-blog/providerSubmittedBlog";
 import ProviderActiveJobs from "../frontend/providers/provider-active-jobs/providerActiveJobs";
 import JobDetails from "../frontend/providers/provider-active-jobs/jobDetails";
 import JobDetailsDelivered from "../frontend/providers/provider-active-jobs/jobDetailsDelivered";
@@ -640,6 +643,30 @@ export const providerRoutes = [
     route: Route,
   },
   
+  {
+    path: routes.providerBlog,
+    name: "Provider Blog",
+    element: <ProviderAllBlog />,
+    route: Route,
+  },
+  {
+    path: routes.providerAddBlog,
+    name: "Provider Add Blog",
+    element: <ProviderAddBlog />,
+    route: Route,
+  },
+  {
+    path: routes.providerEditBlog,
+    name: "Provider Edit Blog",
+    element: <ProviderAddBlog />,
+    route: Route,
+  },
+  {
+    path: routes.providerSubmittedBlog,
+    name: "Provider Submitted Blog",
+    element: <ProviderSubmittedBlog />,
+    route: Route,
+  },
   {
     path: routes.providerService,
     name: "Provider Service",

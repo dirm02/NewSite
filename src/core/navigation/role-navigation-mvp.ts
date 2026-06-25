@@ -34,7 +34,15 @@ export const CUSTOMER_MVP_SIDEBAR: RoleNavLink[] = [
   { id: "logout", label: "Logout", to: r.login },
 ];
 
-/** Sidebar items expected in the provider dashboard. */
+/**
+ * Sidebar items expected in the provider dashboard — MVP only.
+ *
+ * GHST-50: trimmed to surfaces wired to live PocketBase data. Demo-only/deferred
+ * surfaces (Bookings, Staffs, Customers, Payout, Holidays, Coupons, Offers,
+ * Reviews page, Enquiries, Earnings, Chat) were removed from the sidebar — their
+ * routes are kept and they return in their respective future phases. Blog
+ * (GHST-49) was added.
+ */
 export const PROVIDER_MVP_SIDEBAR: RoleNavLink[] = [
   { id: "dashboard", label: "Dashboard", to: r.providerDashboard },
   {
@@ -43,9 +51,18 @@ export const PROVIDER_MVP_SIDEBAR: RoleNavLink[] = [
     to: r.providerService,
     relatedRoutes: [r.providerServiceList],
   },
-  { id: "bookings", label: "Bookings", to: r.providerBooking },
   { id: "job-feed", label: "Job Feed", to: r.providerJobFeed, relatedRoutes: [r.providerApplyJobs] },
   { id: "proposals", label: "Proposals", to: r.providerProposal },
+  {
+    id: "blog",
+    label: "Blog",
+    to: r.providerBlog,
+    relatedRoutes: [
+      r.providerAddBlog,
+      r.providerEditBlog,
+      r.providerSubmittedBlog,
+    ],
+  },
   {
     id: "my-jobs",
     label: "My Jobs",
@@ -58,16 +75,6 @@ export const PROVIDER_MVP_SIDEBAR: RoleNavLink[] = [
       r.providerJobsDetailsCancelled,
     ],
   },
-  { id: "staffs", label: "Staffs", to: r.staffList },
-  { id: "customers", label: "Customers", to: r.providerCustomerList },
-  { id: "payout", label: "Payout", to: r.providerPayout },
-  { id: "holidays", label: "Holidays & Leave", to: r.providerHoliday },
-  { id: "coupons", label: "Coupons", to: r.providerCoupons },
-  { id: "offers", label: "Offers", to: r.providerOffer },
-  { id: "reviews", label: "Reviews", to: r.providerReview },
-  { id: "enquiries", label: "Enquiries", to: r.providerEnquiry },
-  { id: "earnings", label: "Earnings", to: r.providerEarnings },
-  { id: "chat", label: "Chat", to: r.providerChat },
   { id: "settings", label: "Settings", to: r.providerProfileSettings },
   { id: "logout", label: "Logout", to: r.login },
 ];
@@ -81,5 +88,17 @@ export const DEFERRED_NAV_LABELS = {
     "Wallet",
     "Chat",
   ],
-  provider: [],
+  provider: [
+    "Bookings",
+    "Staffs",
+    "Customers",
+    "Payout",
+    "Holidays & Leave",
+    "Coupons",
+    "Offers",
+    "Reviews",
+    "Enquiries",
+    "Earnings",
+    "Chat",
+  ],
 } as const;

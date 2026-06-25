@@ -8,6 +8,7 @@ import { all_routes } from "../../../../core/data/routes/all_routes";
 import BreadCrumb from "../../common/breadcrumb/breadCrumb";
 import HomeHeader from "../../home/header/home-header";
 import FooterOne from "../../home/home-2/footer-one";
+import PublicBlogList from "../components/PublicBlogList";
 
 const BlogGrid = () => {
   const routes = all_routes;
@@ -22,7 +23,10 @@ const BlogGrid = () => {
       <div className="page-wrapper">
         <div className="content">
           <div className="container">
-            <div className="row justify-content-center align-items-center">
+            {/* GHST-49: live published blog posts from PocketBase */}
+            <PublicBlogList />
+            {/* Static demo grid retained but hidden (kept for reference). */}
+            <div className="row justify-content-center align-items-center d-none">
               <div className="col-xl-4 col-md-6">
                 <div className="card p-0">
                   <div className="card-body p-0">
@@ -632,7 +636,7 @@ const BlogGrid = () => {
                 </div>
               </div>
             </div>
-            <div className="table-paginate d-flex justify-content-center align-items-center flex-wrap row-gap-3">
+            <div className="table-paginate d-none d-flex justify-content-center align-items-center flex-wrap row-gap-3">
               <div className="d-flex align-items-center justify-content-center">
                 <nav aria-label="Page navigation">
                   <ul className="paginations d-flex justify-content-center align-items-center">

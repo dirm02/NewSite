@@ -8,6 +8,7 @@ import { all_routes } from '../../../../core/data/routes/all_routes';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import HomeHeader from '../../home/header/home-header';
 import FooterOne from '../../home/home-2/footer-one';
+import PublicBlogDetail from '../components/PublicBlogDetail';
 
 const BlogDetails = () => {
   const routes = all_routes;
@@ -21,7 +22,10 @@ const BlogDetails = () => {
       <div className="page-wrapper">
         <div className="content">
           <div className="container">
-            <div className="row">
+            {/* GHST-49: live published blog post resolved from ?slug */}
+            <PublicBlogDetail />
+            {/* Static demo detail retained but hidden (kept for reference). */}
+            <div className="row d-none">
               <div className="col-lg-8 col-md-12 blog-details">
                 <div className="blog-head">
                   <div className="blog-category">

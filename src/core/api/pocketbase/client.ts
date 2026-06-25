@@ -144,3 +144,39 @@ export async function pbCreate<T>(
 
   return response.json();
 }
+
+/**
+ * Authenticated record update (PATCH). Used for owner-editable collections such
+ * as `services`; ownership is enforced by PocketBase update rules. Not used for
+ * `service_requests`/`quotes` status, which go through the GHST-12 hook routes.
+ */
+export async function pbUpdate<T>(
+  collection: string,
+  id: string,
+  token: string,
+  body: Record<string, unknown>,
+): Promise<T> {
+  const url = `${POCKETBASE_API_URL}/collections/${collection}/records/${id}`;
+  const response = await fetch(url, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...pbAuthHeaders(token),
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    let message = `PocketBase update ${collection}/${id} failed (${response.status})`;
+    try {
+      const err = await response.json();
+      message = err.message ?? message;
+    } catch {
+      // ignore
+    }
+    throw new PocketBaseError(message, response.status);
+  }
+
+  return response.json();
+}

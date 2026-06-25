@@ -196,3 +196,64 @@ export function initialsFromName(name: string): string {
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
+
+export function blogStatusLabel(status: string): string {
+  switch (status) {
+    case "draft":
+      return "Draft";
+    case "submitted":
+      return "Submitted";
+    case "approved":
+      return "Approved";
+    case "rejected":
+      return "Rejected";
+    case "published":
+      return "Published";
+    default:
+      return status;
+  }
+}
+
+export function blogStatusBadgeClass(status: string): string {
+  switch (status) {
+    case "draft":
+      return "bg-light text-dark border";
+    case "submitted":
+      return "bg-info";
+    case "approved":
+      return "bg-primary";
+    case "rejected":
+      return "bg-danger";
+    case "published":
+      return "bg-success";
+    default:
+      return "bg-light text-dark border";
+  }
+}
+
+/** Public blog detail URL for a published post slug. */
+export function blogDetailUrl(slug: string): string {
+  return `/blog/blog-details?slug=${encodeURIComponent(slug)}`;
+}
+
+/** URL-safe slug from a title. */
+export function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function formatBlogDate(iso?: string): string {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime())
+    ? ""
+    : d.toLocaleDateString("en-CA", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+}

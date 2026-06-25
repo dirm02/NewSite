@@ -71,6 +71,34 @@ ghist task update GHST-XX --status blocked
 | GHST-18 | `npm run audit:a11y` |
 | GHST-19 | Docs only — verify README + this runbook |
 | GHST-20 | E2E audit fixes — smoke, discovery, a11y (not marketplace without approval) |
+| GHST-51 | `npm run test:e2e -- --grep @blog` and `--grep @navigation` |
+
+## GHST-51 — coverage + skip matrix
+
+Suites by tag: `@navigation` (role nav + homepage), `@auth`, `@marketplace`
+(mutates PB), `@discovery`, `@blog` (provider blog), `health` (a11y/responsive).
+
+Env vars (local only, `.env.e2e` — never commit):
+
+| Var | Purpose | Default |
+|-----|---------|---------|
+| `BASE_URL` | Target site | `https://lif3line.me` (set `http://127.0.0.1:4173` to test the local `dist` via auto vite preview) |
+| `POCKETBASE_URL` / `VITE_POCKETBASE_URL` | PB API | `https://pocket.lif3line.me/api` |
+| `E2E_SEED_CUSTOMER_EMAIL` / `_PASSWORD` | seed customer | — |
+| `E2E_SEED_PROVIDER_EMAIL` / `_PASSWORD` | seed provider | — |
+
+Skip matrix (production-safe by default):
+
+| Test | Mutates PB? | Skips when |
+|------|-------------|-----------|
+| `@navigation` guest homepage / hero search | no | never |
+| `@navigation` customer/provider shell | no (login + read) | seed creds for that role missing |
+| `@blog` guest grid / unknown-slug detail | no | never (shows empty/not-found states) |
+| `@blog` provider submit + guest-hidden | yes (creates a *submitted* post) | provider seed missing **or** `blog_posts` collection not deployed (GHST-48 migration not applied) |
+| `@marketplace` lifecycle | yes | either seed missing; run only with explicit approval |
+
+Run `npm run build` first, then the tagged suite. After the GHST-48 migration is
+applied on the VM, re-run `--grep @blog` to exercise the provider submit path.
 
 ## Handoff prompt
 

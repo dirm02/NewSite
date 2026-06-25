@@ -1,6 +1,7 @@
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import { Link } from 'react-router-dom';
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ProviderServicesPanel from '../../common/jobs/ProviderServicesPanel';
 
 const routes = all_routes;
 const ProviderServiceList = () => {
@@ -10,7 +11,9 @@ const ProviderServiceList = () => {
     {/* Page Wrapper */}
     <div className="page-wrapper">
       <div className="content container-fluid">
-        <div className="row">
+        {/* GHST-47: live PocketBase services for the signed-in provider */}
+        <ProviderServicesPanel />
+        <div className="row d-none">
           <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
             <h5>My Services</h5>
             <div className="d-flex align-items-center">

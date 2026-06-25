@@ -8,6 +8,7 @@ import { all_routes } from '../../../../core/data/routes/all_routes';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import HomeHeader from '../../home/header/home-header';
 import FooterOne from '../../home/home-2/footer-one';
+import PublicBlogList from '../components/PublicBlogList';
 
 const BlogList = () => {
   const routes = all_routes;
@@ -21,7 +22,10 @@ const BlogList = () => {
     <div className="page-wrapper">
       <div className="content">
         <div className="container">
-          <div className="row justify-content-center">
+          {/* GHST-49: live published blog posts from PocketBase */}
+          <PublicBlogList />
+          {/* Static demo list retained but hidden (kept for reference). */}
+          <div className="row justify-content-center d-none">
             <div className="col-lg-8 col-md-8">
               <div className="blog-list">
                 <div className="blog-img">

@@ -32,13 +32,6 @@ export const providerSidebarData: ProviderSidebarItem[] = [
     relatedRoutes: [r.providerServiceList],
   },
   {
-    id: 'bookings',
-    label: 'Bookings',
-    to: r.providerBooking,
-    icon: 'ti ti-calendar-month',
-    relatedRoutes: [r.providerBookDetails],
-  },
-  {
     id: 'job-feed',
     label: 'Job Feed',
     to: r.providerJobFeed,
@@ -50,20 +43,12 @@ export const providerSidebarData: ProviderSidebarItem[] = [
     label: 'Proposals',
     to: r.providerProposal,
     icon: 'ti ti-file',
-    badge: {
-      text: '4',
-      className: 'bg-info',
-    },
   },
   {
     id: 'my-jobs',
     label: 'My Jobs',
     to: r.providerActiveJobs,
     icon: 'ti ti-briefcase-2',
-    badge: {
-      text: '9',
-      className: 'bg-success',
-    },
     relatedRoutes: [
       r.providerJobsDetails,
       r.providerJobsDetailsDelivered,
@@ -73,69 +58,44 @@ export const providerSidebarData: ProviderSidebarItem[] = [
     ],
   },
   {
-    id: 'staffs',
-    label: 'Staffs',
-    to: r.staffList,
-    icon: 'ti ti-users',
-    relatedRoutes: [r.staffGrid, r.staffDetails],
+    id: 'blog',
+    label: 'Blog',
+    to: '#',
+    icon: 'ti ti-news',
+    relatedRoutes: [
+      r.providerBlog,
+      r.providerAddBlog,
+      r.providerEditBlog,
+      r.providerSubmittedBlog,
+    ],
+    children: [
+      {
+        id: 'blog-all',
+        label: 'All Blogs',
+        to: r.providerBlog,
+        icon: 'ti ti-chevrons-right me-2',
+        relatedRoutes: [r.providerEditBlog],
+      },
+      {
+        id: 'blog-add',
+        label: 'Add Blog',
+        to: r.providerAddBlog,
+        icon: 'ti ti-chevrons-right me-2',
+      },
+      {
+        id: 'blog-submitted',
+        label: 'Submitted Blogs',
+        to: r.providerSubmittedBlog,
+        icon: 'ti ti-chevrons-right me-2',
+      },
+    ],
   },
-  {
-    id: 'customers',
-    label: 'Customers',
-    to: r.providerCustomerList,
-    icon: 'ti ti-user',
-    relatedRoutes: [r.providerCustomerGrid, r.providerCustomerDetails],
-  },
-  {
-    id: 'payout',
-    label: 'Payout',
-    to: r.providerPayout,
-    icon: 'ti ti-wallet',
-    relatedRoutes: [r.providerTransaction],
-  },
-  {
-    id: 'holidays',
-    label: 'Holidays & Leave',
-    to: r.providerHoliday,
-    icon: 'feather-calendar',
-    relatedRoutes: [r.providerLeaveHistory],
-  },
-  {
-    id: 'coupons',
-    label: 'Coupons',
-    to: r.providerCoupons,
-    icon: 'ti ti-ticket',
-  },
-  {
-    id: 'offers',
-    label: 'Offers',
-    to: r.providerOffer,
-    icon: 'ti ti-square-percentage',
-  },
-  {
-    id: 'reviews',
-    label: 'Reviews',
-    to: r.providerReview,
-    icon: 'ti ti-star',
-  },
-  {
-    id: 'enquiries',
-    label: 'Enquiries',
-    to: r.providerEnquiry,
-    icon: 'ti ti-mail',
-  },
-  {
-    id: 'earnings',
-    label: 'Earnings',
-    to: r.providerEarnings,
-    icon: 'ti ti-cash-banknote',
-  },
-  {
-    id: 'chat',
-    label: 'Chat',
-    to: r.providerChat,
-    icon: 'ti ti-messages',
-  },
+  /*
+    GHST-50: demo-only provider surfaces removed from the sidebar (routes kept,
+    return in future phases): Bookings, Staffs, Customers, Payout, Holidays &
+    Leave, Coupons, Offers, Reviews (static page), Enquiries, Earnings, Chat.
+    See DEFERRED_NAV_LABELS.provider in core/navigation/role-navigation-mvp.ts.
+  */
   {
     id: 'settings',
     label: 'Settings',

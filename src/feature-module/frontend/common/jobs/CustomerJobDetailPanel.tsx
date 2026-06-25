@@ -28,9 +28,36 @@ const CustomerJobDetailPanel = () => {
     error: quotesError,
     reload: reloadQuotes,
   } = useRequestQuotes(requestId);
-  const { acceptQuote, completeRequest, cancelRequest } = useJobActions();
+  const { acceptQuote, completeRequest, cancelRequest, submitReview } =
+    useJobActions();
   const [actionError, setActionError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewMessage, setReviewMessage] = useState("");
+  const [reviewBusy, setReviewBusy] = useState(false);
+  const [reviewError, setReviewError] = useState<string | null>(null);
+  const [reviewDone, setReviewDone] = useState(false);
+
+  const acceptedQuote = quotes.find((q) => q.status === "accepted");
+
+  const handleSubmitReview = async () => {
+    if (!job) return;
+    setReviewBusy(true);
+    setReviewError(null);
+    try {
+      await submitReview({
+        requestId: job.id,
+        providerId: acceptedQuote?.provider,
+        rating: reviewRating,
+        message: reviewMessage,
+      });
+      setReviewDone(true);
+    } catch (err) {
+      setReviewError(err instanceof Error ? err.message : "Could not submit review");
+    } finally {
+      setReviewBusy(false);
+    }
+  };
 
   const runAction = async (
     key: string,
@@ -191,6 +218,59 @@ const CustomerJobDetailPanel = () => {
             );
           })}
         </JobFlowStatus>
+
+        {job?.status === "completed" && (
+          <>
+            <hr className="my-4" />
+            <h5 className="fw-semibold mb-3">Leave a Review</h5>
+            {reviewDone ? (
+              <div className="alert alert-success mb-0">
+                Thanks! Your review has been submitted.
+              </div>
+            ) : (
+              <div className="border rounded-3 p-3">
+                {reviewError && (
+                  <div className="alert alert-danger">{reviewError}</div>
+                )}
+                <div className="mb-3" style={{ maxWidth: 200 }}>
+                  <label className="form-label">Rating</label>
+                  <select
+                    className="form-select"
+                    data-testid="review-rating"
+                    value={reviewRating}
+                    onChange={(e) => setReviewRating(Number(e.target.value))}
+                  >
+                    {[5, 4, 3, 2, 1].map((n) => (
+                      <option key={n} value={n}>
+                        {n} star{n === 1 ? "" : "s"}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Your review</label>
+                  <textarea
+                    className="form-control"
+                    rows={3}
+                    data-testid="review-message"
+                    value={reviewMessage}
+                    onChange={(e) => setReviewMessage(e.target.value)}
+                    placeholder="Share your experience with this provider..."
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-testid="submit-review-btn"
+                  disabled={reviewBusy}
+                  onClick={handleSubmitReview}
+                >
+                  {reviewBusy ? "Submitting..." : "Submit Review"}
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

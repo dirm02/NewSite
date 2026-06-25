@@ -4,6 +4,7 @@ import BecomeProvider from '../../common/modals/provider-modal'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { buildSearchUrl } from '../../../../core/api/pocketbase/format'
+import { useProviders, useServices, useReviews } from '../../../../core/hooks/useDiscoveryData'
 import FeatureSection from './feature-section'
 import PopularSection from './popular-section'
 import WorkSection from './workSection'
@@ -27,6 +28,21 @@ const NewHome = () => {
     event.preventDefault()
     navigate(buildSearchUrl({ query: searchQuery, location: searchLocation }))
   }
+
+  // GHST-41: hero stat counters + floating badges are derived from live
+  // PocketBase data instead of fabricated marketing numbers. Counts reflect the
+  // active discovery records returned by the public API (capped at 50/page,
+  // sufficient for MVP seed volumes). When PocketBase is empty/unreachable the
+  // counts honestly fall back to 0 and the rating badge is hidden.
+  const { data: providers } = useProviders()
+  const { data: services } = useServices()
+  const { data: reviews } = useReviews()
+  const providerCount = providers.length
+  const serviceCount = services.length
+  const reviewCount = reviews.length
+  const avgRating = reviewCount
+    ? reviews.reduce((sum, review) => sum + (review.rating ?? 0), 0) / reviewCount
+    : null
 
   return (
     <>
@@ -118,21 +134,21 @@ const NewHome = () => {
                 <div className="d-flex align-items-center me-4 mt-4">
                   <ImageWithBasePath src="assets/img/icons/success-01.svg" alt="icon" />
                   <div className="ms-2">
-                    <h6>215,292 +</h6>
+                    <h6>{providerCount.toLocaleString('en-CA')}</h6>
                     <p>Verified Providers</p>
                   </div>
                 </div>
                 <div className="d-flex align-items-center me-4 mt-4">
                   <ImageWithBasePath src="assets/img/icons/success-02.svg" alt="icon" />
                   <div className="ms-2">
-                    <h6>90,000+</h6>
-                    <p>Services Completed</p>
+                    <h6>{serviceCount.toLocaleString('en-CA')}</h6>
+                    <p>Services Listed</p>
                   </div>
                 </div>
                 <div className="d-flex align-items-center me-4 mt-4">
                   <ImageWithBasePath src="assets/img/icons/success-03.svg" alt="icon" />
                   <div className="ms-2">
-                    <h6>2,390,968 </h6>
+                    <h6>{reviewCount.toLocaleString('en-CA')}</h6>
                     <p>Reviews Across Canada</p>
                   </div>
                 </div>
@@ -153,20 +169,27 @@ const NewHome = () => {
         </div>
       </div>
       <div className="hero-image">
-        <div className="d-inline-flex bg-white p-2 rounded align-items-center shape-01 floating-x">
-          <span className="avatar avatar-md bg-warning rounded-circle me-2">
-            <i className="ti ti-star-filled" />
-          </span>
-          <span>
-            4.9 / 5<small className="d-block">(255 reviews)</small>
-          </span>
-          <i className="border-edge" />
-        </div>
+        {avgRating !== null && (
+          <div className="d-inline-flex bg-white p-2 rounded align-items-center shape-01 floating-x">
+            <span className="avatar avatar-md bg-warning rounded-circle me-2">
+              <i className="ti ti-star-filled" />
+            </span>
+            <span>
+              {avgRating.toFixed(1)} / 5
+              <small className="d-block">
+                ({reviewCount.toLocaleString('en-CA')} review{reviewCount === 1 ? '' : 's'})
+              </small>
+            </span>
+            <i className="border-edge" />
+          </div>
+        )}
         <div className="d-inline-flex bg-white p-2 rounded align-items-center shape-02 floating-x">
           <span className="me-2">
             <ImageWithBasePath src="assets/img/icons/tick-banner.svg" alt="" />
           </span>
-          <p className="fs-12 text-dark mb-0">300 Booking Completed</p>
+          <p className="fs-12 text-dark mb-0">
+            {serviceCount.toLocaleString('en-CA')} Services Listed
+          </p>
           <i className="border-edge" />
         </div>
         <ImageWithBasePath src="assets/img/bg/bg-03.svg" alt="img" className="shape-03" />

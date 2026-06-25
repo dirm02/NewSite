@@ -1,13 +1,18 @@
 import {
+  fetchBlogCategories,
   fetchCategories,
   fetchCities,
   fetchProviders,
+  fetchPublishedBlogPostBySlug,
+  fetchPublishedBlogPosts,
   fetchReviews,
   fetchServiceById,
   fetchServices,
   fetchProviderById,
 } from "../api/pocketbase/discovery";
 import type {
+  PbBlogCategory,
+  PbBlogPost,
   PbCity,
   PbProviderProfile,
   PbReview,
@@ -71,5 +76,32 @@ export function useProvider(id: string | null) {
     async () => (id ? fetchProviderById(id) : null),
     null,
     [id],
+  );
+}
+
+/** Public published blog posts (GHST-49). Empty list when none/collection absent. */
+export function usePublishedBlogPosts(perPage?: number) {
+  return useAsyncDiscovery<PbBlogPost[]>(
+    async () => (await fetchPublishedBlogPosts({ perPage })).items,
+    [],
+    [perPage],
+  );
+}
+
+/** Public published blog post by slug (null when not found). */
+export function usePublishedBlogPost(slug: string | null) {
+  return useAsyncDiscovery<PbBlogPost | null>(
+    async () => (slug ? fetchPublishedBlogPostBySlug(slug) : null),
+    null,
+    [slug],
+  );
+}
+
+/** Active blog categories. */
+export function useBlogCategories() {
+  return useAsyncDiscovery<PbBlogCategory[]>(
+    async () => (await fetchBlogCategories()).items,
+    [],
+    [],
   );
 }

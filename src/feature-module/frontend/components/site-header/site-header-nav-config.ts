@@ -23,39 +23,19 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
       ],
     },
     {
+      // GHST-42: trimmed to real MVP discovery routes only. Hidden (routes kept,
+      // not deleted): Service Details 1/2 + Service Request (static templates),
+      // Providers Details (static template), Categories 1/2 (template pages), and
+      // Create Service (a provider-only action that belongs in the provider shell,
+      // not the public guest header).
       id: 'services',
       label: 'Services',
       type: 'dropdown',
       items: [
         { label: 'Service Grid', to: r.serviceGrid },
         { label: 'Service List', to: r.serviceList },
-        {
-          label: 'Service Details',
-          to: '#',
-          children: [
-            { label: 'Service Details 1', to: r.serviceDetails1 },
-            { label: 'Service Details 2', to: r.serviceDetails2 },
-          ],
-        },
-        { label: 'Service Request', to: r.serviceRequest },
         { label: 'Search', to: r.search },
-        {
-          label: 'Providers',
-          to: '#',
-          children: [
-            { label: 'Providers List', to: r.provider },
-            { label: 'Providers Details', to: r.providerDetails },
-          ],
-        },
-        {
-          label: 'Categories',
-          to: '#',
-          children: [
-            { label: 'Categories 1', to: r.categories },
-            { label: 'Categories 2', to: r.categories2 },
-          ],
-        },
-        { label: 'Create Service', to: r.createService },
+        { label: 'Providers', to: r.provider },
       ],
     },
     {
@@ -81,93 +61,47 @@ export function getSiteHeaderNavSections(): NavColumnSection[] {
       label: 'Providers',
       type: 'dropdown',
       roles: ['provider'],
+      // GHST-50: trimmed to MVP provider surfaces (live PocketBase). Demo-only
+      // items hidden (routes kept): Booking, Payout, Holidays & Leave, Coupons,
+      // Offers, Reviews page, Earnings, Chat, and demo settings sub-items.
       items: [
         { label: 'Dashboard', to: r.providerDashboard },
         { label: 'My Services', to: r.providerService },
-        { label: 'Booking', to: r.providerBooking },
         { label: 'Job Feed', to: r.providerJobFeed },
         { label: 'Proposals', to: r.providerProposal },
+        { label: 'Blog', to: r.providerBlog },
         { label: 'My Jobs', to: r.providerActiveJobs },
-        { label: 'Payout', to: r.providerPayout },
         {
           label: 'Settings',
           to: '#',
           children: [
-            {
-              label: 'Appointment Settings',
-              to: r.providerAppointmentSettings,
-            },
             { label: 'Account Settings', to: r.providerProfileSettings },
             { label: 'Social Profiles', to: r.providerSocialProfile },
             { label: 'Security', to: r.ProviderSecuritySettings },
-            { label: 'Plan & Billings', to: r.providerPlan },
             { label: 'Notifications', to: r.providerNotification },
-            { label: 'Connected Apps', to: r.providerConnectedApps },
-            { label: 'Payment', to: r.paymentSetting },
           ],
         },
-        { label: 'Holidays & Leave', to: r.providerHoliday },
-        { label: 'Coupons', to: r.providerCoupons },
-        { label: 'Offers', to: r.providerOffer },
-        { label: 'Reviews', to: r.providerReview },
-        { label: 'Earnings', to: r.providerEarnings },
-        { label: 'Chat', to: r.providerChat },
       ],
     },
     {
+      // GHST-42: trimmed to real marketing/legal pages only. GHST-49 re-added
+      // Blog (now wired to published PocketBase posts). Still hidden (routes
+      // kept, not deleted): Error 404/500 + Session Expired (system templates),
+      // the Authentication submenu with OTP demo pages (auth is reached via the
+      // Sign In / Join Us header buttons), the Booking demo flow (appointment
+      // model is out of MVP scope), and Categories (template page).
       id: 'pages',
       label: 'Pages',
       type: 'dropdown',
       items: [
+        { label: 'Blog', to: r.blogGrid },
         { label: 'About', to: r.aboutUs },
-        {
-          label: 'Blog',
-          to: r.blogGrid,
-          children: [
-            { label: 'Blog Grid', to: r.blogGrid },
-            { label: 'Blog List', to: r.blogList },
-            { label: 'Blog Details', to: r.blogDetails },
-          ],
-        },
-        { label: 'Contact Us', to: r.contactUs },
         { label: 'How It Works', to: r.howItWorks },
-        {
-          label: 'Error Page',
-          to: '#',
-          children: [
-            { label: '404 Error', to: r.error404 },
-            { label: '500 Error', to: r.error500 },
-          ],
-        },
-        {
-          label: 'Authentication',
-          to: '#',
-          children: [
-            { label: 'Login', to: r.login },
-            { label: 'Customer Signup', to: r.userSignup },
-            { label: 'Provider Signup', to: r.providerSignup },
-            { label: 'Reset Password', to: r.resetPassword },
-            { label: 'Phone OTP', to: r.phoneOtp },
-            { label: 'Email OTP', to: r.emailOtp },
-          ],
-        },
-        {
-          label: 'Booking',
-          to: '#',
-          children: [
-            { label: 'Booking 1', to: r.bookings },
-            { label: 'Booking 2', to: r.booking2 },
-            { label: 'Booking Checkout', to: r.bookingPayment },
-            { label: 'Booking Success', to: r.bookingDone },
-            { label: 'Booking Details', to: r.bookingDetails },
-          ],
-        },
-        { label: 'Categories', to: r.categories },
         { label: 'Pricing Plan', to: r.pricingPlan },
         { label: 'FAQ', to: r.faq },
+        { label: 'Contact Us', to: r.contactUs },
         { label: 'Privacy Policy', to: r.privacyPolicy },
         { label: 'Terms & Conditions', to: r.termsCondition },
-        { label: 'Session Expired', to: r.sessionExpired },
       ],
     },
   ];
