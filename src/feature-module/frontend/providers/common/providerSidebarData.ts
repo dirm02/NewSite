@@ -32,6 +32,13 @@ export const providerSidebarData: ProviderSidebarItem[] = [
     relatedRoutes: [r.providerServiceList],
   },
   {
+    id: 'bookings',
+    label: 'Bookings',
+    to: r.providerBooking,
+    icon: 'ti ti-calendar-month',
+    relatedRoutes: [r.providerBookDetails],
+  },
+  {
     id: 'job-feed',
     label: 'Job Feed',
     to: r.providerJobFeed,
@@ -56,6 +63,70 @@ export const providerSidebarData: ProviderSidebarItem[] = [
       r.providerJobsDetailsInprogress,
       r.providerJobsDetailsCancelled,
     ],
+  },
+  {
+    id: 'staffs',
+    label: 'Staffs',
+    to: r.staffList,
+    icon: 'ti ti-users',
+    relatedRoutes: [r.staffGrid, r.staffDetails],
+  },
+  {
+    id: 'customers',
+    label: 'Customers',
+    to: r.providerCustomerList,
+    icon: 'ti ti-user',
+    relatedRoutes: [r.providerCustomerGrid, r.providerCustomerDetails],
+  },
+  {
+    id: 'payout',
+    label: 'Payout',
+    to: r.providerPayout,
+    icon: 'ti ti-wallet',
+    relatedRoutes: [r.providerTransaction],
+  },
+  {
+    id: 'holidays',
+    label: 'Holidays & Leave',
+    to: r.providerHoliday,
+    icon: 'feather-calendar',
+    relatedRoutes: [r.providerLeaveHistory],
+  },
+  {
+    id: 'coupons',
+    label: 'Coupons',
+    to: r.providerCoupons,
+    icon: 'ti ti-ticket',
+  },
+  {
+    id: 'offers',
+    label: 'Offers',
+    to: r.providerOffer,
+    icon: 'ti ti-square-percentage',
+  },
+  {
+    id: 'reviews',
+    label: 'Reviews',
+    to: r.providerReview,
+    icon: 'ti ti-star',
+  },
+  {
+    id: 'enquiries',
+    label: 'Enquiries',
+    to: r.providerEnquiry,
+    icon: 'ti ti-mail',
+  },
+  {
+    id: 'earnings',
+    label: 'Earnings',
+    to: r.providerEarnings,
+    icon: 'ti ti-cash-banknote',
+  },
+  {
+    id: 'chat',
+    label: 'Chat',
+    to: r.providerChat,
+    icon: 'ti ti-messages',
   },
   {
     id: 'blog',
@@ -90,12 +161,6 @@ export const providerSidebarData: ProviderSidebarItem[] = [
       },
     ],
   },
-  /*
-    GHST-50: demo-only provider surfaces removed from the sidebar (routes kept,
-    return in future phases): Bookings, Staffs, Customers, Payout, Holidays &
-    Leave, Coupons, Offers, Reviews (static page), Enquiries, Earnings, Chat.
-    See DEFERRED_NAV_LABELS.provider in core/navigation/role-navigation-mvp.ts.
-  */
   {
     id: 'settings',
     label: 'Settings',

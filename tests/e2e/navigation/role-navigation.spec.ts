@@ -73,7 +73,7 @@ test.describe("Role navigation contract @navigation", () => {
       await expect(header.getByRole("link", { name: /home/i }).first()).toBeVisible();
     });
 
-    test("sidebar shows MVP items only", async ({ page }) => {
+    test("sidebar shows the customer feature map", async ({ page }) => {
       await page.goto("/customers/customer-dashboard", {
         waitUntil: "domcontentloaded",
       });
@@ -129,7 +129,7 @@ test.describe("Role navigation contract @navigation", () => {
       await expect(header.getByRole("link", { name: /visit website/i })).toBeVisible();
     });
 
-    test("sidebar shows MVP items only", async ({ page }) => {
+    test("sidebar shows the provider feature map", async ({ page }) => {
       await page.goto("/providers/dashboard", { waitUntil: "domcontentloaded" });
       const sidebar = page.locator("#sidebar");
       for (const item of PROVIDER_MVP_SIDEBAR) {
