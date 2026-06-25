@@ -55,6 +55,35 @@ export function useProviders() {
   );
 }
 
+export interface ServiceCounts {
+  byProvider: Record<string, number>;
+  byCategory: Record<string, number>;
+  total: number;
+}
+
+/**
+ * GHST-55 (honest data): real counts of **active** services grouped by provider
+ * and by category, computed from the live `services` collection — used instead
+ * of the seeded/denormalized `provider_profiles.services_count` and
+ * `service_categories.listing_count` fields, which overstate reality.
+ */
+export function useServiceCounts() {
+  return useAsyncDiscovery<ServiceCounts>(
+    async () => {
+      const res = await fetchServices({ perPage: 200 });
+      const byProvider: Record<string, number> = {};
+      const byCategory: Record<string, number> = {};
+      for (const s of res.items) {
+        if (s.provider) byProvider[s.provider] = (byProvider[s.provider] ?? 0) + 1;
+        if (s.category) byCategory[s.category] = (byCategory[s.category] ?? 0) + 1;
+      }
+      return { byProvider, byCategory, total: res.items.length };
+    },
+    { byProvider: {}, byCategory: {}, total: 0 },
+    [],
+  );
+}
+
 export function useReviews() {
   return useAsyncDiscovery<PbReview[]>(
     async () => (await fetchReviews()).items,

@@ -30,8 +30,13 @@ const ProviderDashboard = () => {
   const completedJobs = accepted.filter(
     (q) => q.expand?.request?.status === "completed",
   ).length;
-  const reviewCount = profile?.rating_count ?? data.reviews.length;
-  const avgRating = profile?.rating_avg ?? null;
+  // GHST-55 (honest data): derive review count/avg from the provider's real
+  // received reviews, not the seeded provider_profiles.rating_count/avg fields.
+  const reviewCount = data.reviews.length;
+  const avgRating =
+    reviewCount > 0
+      ? data.reviews.reduce((sum, r) => sum + (r.rating ?? 0), 0) / reviewCount
+      : null;
 
   const recentQuotes = quotes.slice(0, 6);
 

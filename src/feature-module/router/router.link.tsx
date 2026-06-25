@@ -42,6 +42,7 @@ import Installer from "../frontend/pages/installer/installer";
 import ProviderDashboard from "../frontend/providers/dashboard/dashboard";
 import ProviderServices from "../frontend/providers/provider-service/provider-service";
 import ProviderServiceList from "../frontend/providers/provider-service-list/provider-service-list";
+import ProviderEditService from "../frontend/providers/provider-edit-service/provider-edit-service";
 import ProviderBooking from "../frontend/providers/provider-booking/provider-booking";
 import ProviderBookDetails from "../frontend/providers/provider-book-details/provider-book-details";
 import StaffList from "../frontend/providers/staff/staffList";
@@ -677,6 +678,16 @@ export const providerRoutes = [
     path: routes.providerServiceList,
     name: "Provider Service",
     element: <ProviderServiceList />,
+    route: Route,
+  },
+  {
+    // GHST-56: register the provider create/edit-service route. It was missing,
+    // so the live "Add Service" / "Edit" CTAs (ProviderServicesPanel) 404'd even
+    // though the form panel, hooks, and API existed. Handles Add (`no ?id`) and
+    // Edit (`?id=<serviceId>`, owner-only via PB rules).
+    path: routes.providerEditService,
+    name: "Provider Edit Service",
+    element: <ProviderEditService />,
     route: Route,
   },
   {

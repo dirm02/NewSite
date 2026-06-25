@@ -14,10 +14,13 @@ export function formatHourlyRate(rate?: number): string {
   return `$${rate.toFixed(0)}`;
 }
 
+/**
+ * GHST-55 (honest data): show a rating only when it is backed by at least one
+ * real review. No reviews → "New" (never a fabricated "0.0 (0)" or default).
+ */
 export function formatRating(avg?: number, count?: number): string {
-  const rating = avg != null ? avg.toFixed(1) : "0.0";
-  const reviews = count != null ? count : 0;
-  return `${rating} (${reviews})`;
+  if (!count || count <= 0 || avg == null) return "New";
+  return `${avg.toFixed(1)} (${count})`;
 }
 
 export function serviceLocationLabel(

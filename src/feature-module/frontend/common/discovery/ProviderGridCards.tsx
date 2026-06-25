@@ -16,6 +16,8 @@ interface ProviderGridCardsProps {
   loading?: boolean;
   error?: string | null;
   source?: "pocketbase" | "mock";
+  /** GHST-55: real active-service counts per provider id (honest, computed). */
+  serviceCounts?: Record<string, number>;
 }
 
 /** Renders provider listing cards from PocketBase — GHST-5 */
@@ -24,6 +26,7 @@ const ProviderGridCards: React.FC<ProviderGridCardsProps> = ({
   loading,
   error,
   source,
+  serviceCounts,
 }) => {
   return (
     <DiscoveryStatus
@@ -83,7 +86,7 @@ const ProviderGridCards: React.FC<ProviderGridCardsProps> = ({
                       </p>
                     </div>
                     <p className="fs-13 text-muted mt-2 mb-0">
-                      {provider.services_count ?? 0} services
+                      {(serviceCounts?.[provider.id] ?? 0)} services
                     </p>
                   </div>
                 </div>

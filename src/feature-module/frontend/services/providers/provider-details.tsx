@@ -144,15 +144,9 @@ const ProviderDetails = () => {
                           <div>
                             <DiscoveryStatus loading={loading} error={error} source={source} empty={!loading && !provider}>
                             <div className="rating mb-2">
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fas fa-star filled" />
-                              <i className="fa-solid fa-star-half-stroke filled me-1" />{" "}
-                              {(provider?.rating_avg ?? 4.9).toFixed(1)}
-                              <span className="ms-2 d-inline-block">
-                                ({provider?.rating_count ?? 255} reviews)
-                              </span>
+                              <i className="fas fa-star filled me-1" />
+                              {/* GHST-55: honest rating — "New" when no real reviews, no fabricated 4.9/255 */}
+                              {formatRating(provider?.rating_avg, provider?.rating_count)}
                             </div>
                             <h5 className="d-flex align-items-center mb-1">
                               <Link to="#">{provider?.business_name ?? 'Thomas Herzberg'}</Link>
@@ -163,12 +157,10 @@ const ProviderDetails = () => {
                               )}
                             </h5>
                             <p className="mb-1">
-                              {provider
-                                ? serviceLocationLabel(
-                                    provider.expand?.city?.name,
-                                    provider.expand?.city?.region,
-                                  )
-                                : 'Illinois, USA'}
+                              {serviceLocationLabel(
+                                provider?.expand?.city?.name,
+                                provider?.expand?.city?.region,
+                              )}
                             </p>
                             <p className="mb-0">
                               From {formatHourlyRate(provider?.hourly_rate_min)}/hr ·{' '}

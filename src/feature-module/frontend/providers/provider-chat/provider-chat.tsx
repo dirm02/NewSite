@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
+import { all_routes } from "../../../../core/data/routes/all_routes";
+import FeatureComingSoon from "../../common/state/FeatureComingSoon";
 
 
 const ProviderChat = () => {
@@ -10,7 +12,19 @@ const ProviderChat = () => {
       <div className="page-wrapper">
         <div className="content">
           <div className="container">
-            <div className="customer-chat">
+            {/*
+              GHST-57: messaging has no PocketBase backend yet. Keep the page
+              visible but honest — show a coming-soon state instead of fake
+              conversations. Original chat template preserved below (hidden).
+            */}
+            <FeatureComingSoon
+              title="Messaging is coming soon"
+              message="Direct chat with customers isn't available yet. For now, respond to open jobs in your Job Feed and track them under My Jobs — proposals and job details cover what you need."
+              icon="ti ti-messages"
+              ctaLabel="Go to Job Feed"
+              ctaTo={all_routes.providerJobFeed}
+            />
+            <div className="customer-chat d-none">
               <div className="row chat-window">
                 {/* Chat User List */}
                 <div className="col-lg-4 chat-cont-left d-flex">

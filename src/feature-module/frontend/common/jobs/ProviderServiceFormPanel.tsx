@@ -34,6 +34,7 @@ const ProviderServiceFormPanel = () => {
   const [priceTo, setPriceTo] = useState("");
   const [duration, setDuration] = useState("");
   const [status, setStatus] = useState("active");
+  const [images, setImages] = useState<File[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -58,17 +59,23 @@ const ProviderServiceFormPanel = () => {
       setSubmitError("Service title is required.");
       return;
     }
+    // category is a REQUIRED relation in the PB `services` schema.
+    if (!category) {
+      setSubmitError("Please choose a category.");
+      return;
+    }
     setSubmitting(true);
     setSubmitError(null);
     const input = {
       title: title.trim(),
       description: description.trim(),
-      category: category || undefined,
+      category,
       city: city || undefined,
       price_from: priceFrom ? Number(priceFrom) : undefined,
       price_to: priceTo ? Number(priceTo) : undefined,
       duration_minutes: duration ? Number(duration) : undefined,
       status,
+      images: images.length ? images : undefined,
     };
     try {
       if (isEdit && serviceId) {
@@ -116,12 +123,15 @@ const ProviderServiceFormPanel = () => {
                 </div>
                 <div className="row">
                   <div className="col-md-6 mb-3">
-                    <label className="form-label">Category</label>
+                    <label className="form-label">
+                      Category <span className="text-danger">*</span>
+                    </label>
                     <select
                       className="form-select"
                       data-testid="service-category-select"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
+                      required
                     >
                       <option value="">Select category</option>
                       {categories.map((c) => (
@@ -190,6 +200,35 @@ const ProviderServiceFormPanel = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Describe what this service includes..."
                   />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">
+                    Service Images{" "}
+                    <span className="text-muted fs-13">
+                      (optional — JPG/PNG/WebP, up to 10)
+                    </span>
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    data-testid="service-images-input"
+                    accept="image/jpeg,image/png,image/webp"
+                    multiple
+                    onChange={(e) =>
+                      setImages(e.target.files ? Array.from(e.target.files) : [])
+                    }
+                  />
+                  {isEdit && (
+                    <p className="fs-13 text-muted mt-1 mb-0">
+                      Uploading new images replaces the current set. Leave empty to
+                      keep existing images.
+                    </p>
+                  )}
+                  {images.length > 0 && (
+                    <p className="fs-13 text-dark mt-1 mb-0">
+                      {images.length} image{images.length === 1 ? "" : "s"} selected.
+                    </p>
+                  )}
                 </div>
                 <div className="mb-4" style={{ maxWidth: 220 }}>
                   <label className="form-label">Status</label>

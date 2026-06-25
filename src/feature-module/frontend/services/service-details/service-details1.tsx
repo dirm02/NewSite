@@ -14,6 +14,7 @@ import HomeHeader from '../../home/header/home-header';
 import NewFooter from '../../home/footer/newFooter';
 import { useService } from '../../../../core/hooks/useDiscoveryData';
 import {
+  formatRating,
   serviceLocationLabel,
 } from '../../../../core/api/pocketbase/format';
 import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
@@ -23,10 +24,10 @@ const ServiceDetails1 = () => {
   const [searchParams] = useSearchParams();
   const serviceId = searchParams.get('id');
   const { data: service, loading, error, source } = useService(serviceId);
-  const [nav1, setNav1] = useState(null);
-  const [nav2, setNav2] = useState(null);
-  const sliderRef1 = useRef(null);
-  const sliderRef2 = useRef(null);
+  const [nav1, setNav1] = useState<Slider | null>(null);
+  const [nav2, setNav2] = useState<Slider | null>(null);
+  const sliderRef1 = useRef<Slider | null>(null);
+  const sliderRef2 = useRef<Slider | null>(null);
 
   const [showModal, setShowModal] = useState(false);
   const videoUrl = 'https://www.youtube.com/watch?v=Vdp6x7Bibtk';
@@ -74,7 +75,9 @@ const ServiceDetails1 = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     asNavFor: nav2 || undefined, // Link to the second slider
-    ref: (slider: any) => (sliderRef1.current = slider), // Assign the slider ref
+    ref: (slider: Slider | null) => {
+      sliderRef1.current = slider;
+    },
   };
 
   const settings2 = {
@@ -86,7 +89,9 @@ const ServiceDetails1 = () => {
     slidesToScroll: 1,
     focusOnSelect: true,
     asNavFor: nav1 || undefined, // Link to the first slider
-    ref: (slider: any) => (sliderRef2.current = slider), // Assign the slider ref
+    ref: (slider: Slider | null) => {
+      sliderRef2.current = slider;
+    },
   };
   useEffect(() => {
     setNav1(sliderRef1.current);
@@ -135,11 +140,14 @@ const ServiceDetails1 = () => {
                           </p>
                           <p className="mb-2">
                             <i className="ti ti-star-filled text-warning me-2" />
+                            {/* GHST-55: honest rating — no fabricated 4.9/255 */}
                             <span className="text-gray-9">
-                              {(service?.rating_avg ?? 4.9).toFixed(1)}
+                              {formatRating(
+                                service?.rating_avg ??
+                                  service?.expand?.provider?.rating_avg,
+                                service?.expand?.provider?.rating_count,
+                              )}
                             </span>
-                            ({service?.expand?.provider?.rating_count ?? 255}
-                            reviews)
                           </p>
                         </div>
                         <div className="d-flex align-items-center flex-wrap">

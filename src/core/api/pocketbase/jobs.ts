@@ -1,4 +1,11 @@
-import { pbCreate, pbGetOneAuth, pbListAuth, pbUpdate } from "./client";
+import {
+  pbCreate,
+  pbCreateForm,
+  pbGetOneAuth,
+  pbListAuth,
+  pbUpdateForm,
+} from "./client";
+import { slugify } from "./format";
 import type {
   PbProviderProfile,
   PbQuote,
@@ -228,53 +235,73 @@ export async function fetchProviderServices(
 export interface ServiceFormInput {
   title: string;
   description?: string;
+  /** Required by the PB `services` schema (relation). */
   category?: string;
   city?: string;
   price_from?: number;
   price_to?: number;
   duration_minutes?: number;
   status?: string;
+  /** Optional new image files to upload (services.images, jpg/png/webp). */
+  images?: File[];
 }
 
 /**
- * Create a provider service. MVP decision: provider services are created
- * `active` (no admin approval flow yet) so they appear in public discovery
- * immediately; public discovery still filters to `status='active'`.
+ * Build a unique, URL-safe slug for a new service. The PB `services.slug` field
+ * is required AND unique, so we append a short random suffix to avoid collisions
+ * between providers that pick the same title (no pre-check round-trip needed).
+ */
+function buildServiceSlug(title: string): string {
+  const base = slugify(title) || "service";
+  const suffix = Math.random().toString(36).slice(2, 8);
+  return `${base}-${suffix}`;
+}
+
+function appendServiceFields(form: FormData, input: ServiceFormInput): void {
+  form.set("title", input.title);
+  form.set("description", input.description ?? "");
+  // category is REQUIRED by the schema; callers validate before reaching here.
+  if (input.category) form.set("category", input.category);
+  if (input.city) form.set("city", input.city);
+  if (input.price_from != null) form.set("price_from", String(input.price_from));
+  if (input.price_to != null) form.set("price_to", String(input.price_to));
+  if (input.duration_minutes != null)
+    form.set("duration_minutes", String(input.duration_minutes));
+  for (const file of input.images ?? []) form.append("images", file);
+}
+
+/**
+ * Create a provider service (GHST-56). Sends multipart so optional images upload
+ * in the same request. Sets the required unique `slug`. MVP decision: services
+ * are created `active` (no admin approval flow yet) so they appear in public
+ * discovery immediately; discovery still filters `status='active'`.
  */
 export async function createService(
   token: string,
   providerId: string,
   input: ServiceFormInput,
 ): Promise<PbService> {
-  return pbCreate<PbService>("services", token, {
-    provider: providerId,
-    title: input.title,
-    description: input.description ?? "",
-    category: input.category || undefined,
-    city: input.city || undefined,
-    price_from: input.price_from,
-    price_to: input.price_to,
-    duration_minutes: input.duration_minutes,
-    status: input.status ?? "active",
-  });
+  const form = new FormData();
+  form.set("provider", providerId);
+  form.set("slug", buildServiceSlug(input.title));
+  form.set("status", input.status ?? "active");
+  appendServiceFields(form, input);
+  return pbCreateForm<PbService>("services", token, form);
 }
 
-/** Update a provider-owned service (ownership enforced by PB update rule). */
+/**
+ * Update a provider-owned service (ownership enforced by PB update rule).
+ * `slug` is preserved (not resent) unless absent. New images replace the set.
+ */
 export async function updateService(
   token: string,
   serviceId: string,
   input: ServiceFormInput,
 ): Promise<PbService> {
-  return pbUpdate<PbService>("services", serviceId, token, {
-    title: input.title,
-    description: input.description ?? "",
-    category: input.category || undefined,
-    city: input.city || undefined,
-    price_from: input.price_from,
-    price_to: input.price_to,
-    duration_minutes: input.duration_minutes,
-    status: input.status,
-  });
+  const form = new FormData();
+  if (input.status) form.set("status", input.status);
+  appendServiceFields(form, input);
+  return pbUpdateForm<PbService>("services", serviceId, token, form);
 }
 
 /** Fetch a single service (auth-scoped) for the owner edit screen. */

@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "task": "GHST-54",
+    "title": "Lif3Line entrypoint knowledge graph v2",
+    "generated": "2026-06-25",
+    "commitBaseline": "a581cf9",
+    "verification": ["code", "browser(prod)", "pocketbase-api", "scripts/audit-broken-routes.mjs"],
+    "statusLegend": ["live", "mock", "demo", "broken", "future", "unknown"],
+    "recommendationLegend": ["wire", "keep", "empty-state", "coming-soon", "needs-decision"]
+  },
+  "pocketbase": {
+    "baseUrl": "https://pocket.lif3line.me/api",
+    "collections": [
+      { "name": "services", "total": 18, "active": 18, "featured": 5, "notes": "images empty on all sampled" },
+      { "name": "provider_profiles", "total": 6, "active": 6, "notes": "seeded services_count/rating_count overstate reality" },
+      { "name": "service_categories", "total": 12, "featured": 6 },
+      { "name": "cities", "total": 17, "notes": "Canada-only" },
+      { "name": "reviews", "total": 14, "status": "published" },
+      { "name": "service_requests", "total": 0 },
+      { "name": "quotes", "total": 0 },
+      { "name": "blog_posts", "total": 0 },
+      { "name": "blog_categories", "total": 0 },
+      { "name": "users", "total": null, "notes": "list rule hidden" }
+    ]
+  },
+  "nodes": [
+    { "id": "guest.header", "role": "guest", "location": "public header", "label": "Sign In / Join Us / nav", "route": "login,chooseSignUp,serviceGrid,serviceList,search,provider,blogGrid,...", "behavior": "navigates", "dataSource": "n/a", "status": "live", "recommendation": "keep" },
+    { "id": "guest.header.providersDropdown", "role": "guest", "location": "public header", "label": "Providers mega-dropdown", "route": "provider routes (trimmed subset)", "behavior": "role-gated; trimmed vs restored sidebar", "dataSource": "n/a", "status": "demo", "recommendation": "needs-decision", "note": "nav drift vs GHST-53 full sidebar" },
+    { "id": "guest.footer", "role": "guest", "location": "footer", "label": "Explore/Company/Support/Get Started", "route": "search,serviceGrid,serviceList,provider,aboutUs,...", "behavior": "navigates", "dataSource": "n/a", "status": "live", "recommendation": "needs-decision", "note": "trimmed vs template (GHST-42)" },
+    { "id": "guest.home", "role": "guest", "location": "/index", "label": "Homepage live sections", "route": "home", "behavior": "renders PB services/providers/categories/cities/reviews", "dataSource": "pocketbase", "pbCollection": ["services","provider_profiles","service_categories","cities","reviews"], "status": "live", "recommendation": "keep" },
+    { "id": "guest.home.orphanModals", "role": "guest", "location": "/index", "label": "Cleaning-quote + become-provider wizards", "route": "modal (no trigger)", "behavior": "mounted static multi-step modals, no trigger", "dataSource": "static", "status": "demo", "recommendation": "needs-decision" },
+    { "id": "guest.discovery", "role": "guest", "location": "/services/*", "label": "Service grid/list/search/providers", "route": "serviceGrid,serviceList,search,provider,providerDetails,serviceDetails1", "behavior": "Found 18 Services (verified)", "dataSource": "pocketbase", "pbCollection": ["services","provider_profiles","service_categories","cities"], "status": "live", "recommendation": "keep" },
+    { "id": "guest.discovery.facets", "role": "guest", "location": "/services/service-grid", "label": "Filter facets + promo", "route": "n/a", "behavior": "hardcoded 6 categories, fake rating counts 55/48/13/05/00, Christmas countdown", "dataSource": "static", "status": "demo", "recommendation": "wire" },
+    { "id": "guest.blog", "role": "guest", "location": "/blog/*", "label": "Blog grid/list/details", "route": "blogGrid,blogList,blogDetails", "behavior": "published-only; 0 posts -> empty state", "dataSource": "pocketbase", "pbCollection": ["blog_posts"], "status": "live", "recommendation": "keep" },
+    { "id": "guest.marketing", "role": "guest", "location": "/pages/*", "label": "About/HowItWorks/Pricing/FAQ/Contact/Privacy/Terms", "route": "aboutUs,howItWorks,pricingPlan,faq,contactUs,privacyPolicy,termsCondition", "behavior": "static content; contact form no backend", "dataSource": "static", "status": "demo", "recommendation": "keep" },
+
+    { "id": "customer.sidebar", "role": "customer", "location": "customer sidebar", "label": "Full feature map (11 items)", "route": "customer routes", "behavior": "restored GHST-53", "dataSource": "n/a", "status": "live", "recommendation": "keep" },
+    { "id": "customer.dashboard", "role": "customer", "location": "/customers/customer-dashboard", "label": "Dashboard", "route": "customerDashboard", "behavior": "metrics + recent requests; honest empty", "dataSource": "pocketbase", "pbCollection": ["service_requests","quotes"], "status": "live", "recommendation": "keep" },
+    { "id": "customer.createJob", "role": "customer", "location": "/customers/customer-create-job", "label": "Create Job", "route": "customerCreateJob", "behavior": "writes service_requests", "dataSource": "pocketbase", "pbCollection": ["service_requests","service_categories","cities"], "status": "live", "recommendation": "keep" },
+    { "id": "customer.jobs", "role": "customer", "location": "/customers/user-jobs", "label": "Jobs", "route": "userJob", "behavior": "lists real requests", "dataSource": "pocketbase", "pbCollection": ["service_requests"], "status": "live", "recommendation": "keep" },
+    { "id": "customer.jobDetails", "role": "customer", "location": "/customers/customer-job-details", "label": "Job Details + accept/complete/cancel/review", "route": "customerJobDetails", "behavior": "hook-guarded transitions", "dataSource": "pocketbase", "pbCollection": ["service_requests","quotes","reviews"], "status": "live", "recommendation": "keep" },
+    { "id": "customer.quoteComparison", "role": "customer", "location": "/customers/user-quote-comparison", "label": "Quote Comparison", "route": "userQuoteComparison", "behavior": "compare/accept quotes", "dataSource": "pocketbase", "pbCollection": ["quotes","service_requests"], "status": "live", "recommendation": "keep" },
+    { "id": "customer.reviews", "role": "customer", "location": "/customers/customer-reviews", "label": "Reviews", "route": "customerReviews", "behavior": "authored reviews", "dataSource": "pocketbase", "pbCollection": ["reviews"], "status": "live", "recommendation": "keep" },
+    { "id": "customer.bookings", "role": "customer", "location": "/customers/customer-booking(+calendar,job-booking)", "label": "Bookings / Job Bookings", "route": "customerBooking,userJobBooking", "behavior": "static template; broken booking1 link", "dataSource": "static", "status": "demo", "recommendation": "coming-soon" },
+    { "id": "customer.favorites", "role": "customer", "location": "/customers/customer-favourite", "label": "Favorites", "route": "customerFavourite", "behavior": "static", "dataSource": "static", "status": "future", "recommendation": "wire", "note": "needs favorites collection" },
+    { "id": "customer.wallet", "role": "customer", "location": "/customers/customer-wallet", "label": "Wallet", "route": "customerWallet", "behavior": "static", "dataSource": "static", "status": "future", "recommendation": "wire", "note": "needs payments" },
+    { "id": "customer.chat", "role": "customer", "location": "/customers/customer-chat", "label": "Chat", "route": "customerChat", "behavior": "static chat template", "dataSource": "static", "status": "demo", "recommendation": "needs-decision", "note": "GHST-57" },
+    { "id": "customer.settings", "role": "customer", "location": "/customers/settings/*", "label": "Profile/Security/Notifications/Connected Apps", "route": "customerProfile,customerSecurity,customerNotification,customerConnectedApps", "behavior": "static forms", "dataSource": "static", "status": "demo", "recommendation": "wire", "note": "profile->users" },
+    { "id": "customer.header.notifications", "role": "customer", "location": "customer header", "label": "Notifications dropdown", "route": "customerNotifications (/customers/customer-notifications)", "behavior": "404 (path unregistered)", "dataSource": "static", "status": "broken", "recommendation": "wire", "severity": 1 },
+    { "id": "customer.security.innerLinks", "role": "customer", "location": "/customers/settings/customer-security", "label": "Login Activity / Device Management links", "route": "customerLoginActivity,deviceManagement", "behavior": "404 (paths unregistered for customer)", "dataSource": "static", "status": "broken", "recommendation": "wire", "severity": 2 },
+    { "id": "customer.editJob", "role": "customer", "location": "/customers/customer-edit-job", "label": "Edit Job (CustomerEditJob)", "route": "customerEditJob", "behavior": "static form importing core/data/json", "dataSource": "mock", "status": "mock", "recommendation": "wire" },
+    { "id": "customer.logout", "role": "customer", "location": "sidebar+header", "label": "Logout", "route": "login", "behavior": "clears PB session", "dataSource": "pocketbase", "status": "live", "recommendation": "keep" },
+
+    { "id": "provider.sidebar", "role": "provider", "location": "provider sidebar", "label": "Full feature map (18 items)", "route": "provider routes", "behavior": "restored GHST-53", "dataSource": "n/a", "status": "live", "recommendation": "keep" },
+    { "id": "provider.dashboard", "role": "provider", "location": "/providers/dashboard", "label": "Dashboard", "route": "providerDashboard", "behavior": "useProviderDashboard composite", "dataSource": "pocketbase", "pbCollection": ["provider_profiles","services","quotes","reviews","service_requests"], "status": "live", "recommendation": "keep" },
+    { "id": "provider.myServices", "role": "provider", "location": "/providers/provider-service(-list)", "label": "My Services (read)", "route": "providerService,providerServiceList", "behavior": "lists provider services", "dataSource": "pocketbase", "pbCollection": ["services"], "status": "live", "recommendation": "keep" },
+    { "id": "provider.addEditService", "role": "provider", "location": "ProviderServicesPanel CTA", "label": "Add Service / Edit Service", "route": "providerEditService (/providers/provider-edit-service)", "behavior": "Error404 (route not registered); form+hooks+API exist", "dataSource": "pocketbase", "pbCollection": ["services","service_categories","cities"], "status": "broken", "recommendation": "wire", "severity": 1, "note": "GHST-56 central fix; verified 404 on prod" },
+    { "id": "provider.jobFeed", "role": "provider", "location": "/providers/job-feed(+apply)", "label": "Job Feed / Apply", "route": "providerJobFeed,providerApplyJobs", "behavior": "open requests; dup-guarded quote", "dataSource": "pocketbase", "pbCollection": ["service_requests","quotes"], "status": "live", "recommendation": "keep" },
+    { "id": "provider.proposals", "role": "provider", "location": "/providers/proposal", "label": "Proposals", "route": "providerProposal", "behavior": "provider quotes", "dataSource": "pocketbase", "pbCollection": ["quotes"], "status": "live", "recommendation": "keep" },
+    { "id": "provider.activeJobs", "role": "provider", "location": "/providers/active-jobs(+job-details)", "label": "My Jobs / Job Detail", "route": "providerActiveJobs,providerJobsDetails", "behavior": "live panel; 4 variant detail pages demo", "dataSource": "pocketbase", "pbCollection": ["quotes","service_requests"], "status": "live", "recommendation": "keep" },
+    { "id": "provider.blog", "role": "provider", "location": "/providers/blog/*", "label": "Blog all/add/edit/submitted", "route": "providerBlog,providerAddBlog,providerEditBlog,providerSubmittedBlog", "behavior": "create->submit, moderation states", "dataSource": "pocketbase", "pbCollection": ["blog_posts","blog_categories"], "status": "live", "recommendation": "keep" },
+    { "id": "provider.mock", "role": "provider", "location": "sidebar", "label": "Staffs/Customers/Payout/Holidays/Coupons/Offers/Enquiries/Verification", "route": "staffList,providerCustomerList,providerPayout,providerHoliday,providerCoupons,providerOffer,providerEnquiry,verfication", "behavior": "renders core/data/json mock data", "dataSource": "mock", "status": "mock", "recommendation": "coming-soon" },
+    { "id": "provider.demo", "role": "provider", "location": "sidebar", "label": "Bookings/Reviews/Earnings/Subscription/Settings", "route": "providerBooking,providerReview,providerEarnings,providerSubscription,provider settings", "behavior": "static templates", "dataSource": "static", "status": "demo", "recommendation": "coming-soon" },
+    { "id": "provider.chat", "role": "provider", "location": "/providers/provider-chat", "label": "Chat", "route": "providerChat", "behavior": "static chat template", "dataSource": "static", "status": "demo", "recommendation": "needs-decision", "note": "GHST-57" },
+    { "id": "provider.logout", "role": "provider", "location": "sidebar+header", "label": "Logout", "route": "login", "behavior": "clears PB session", "dataSource": "pocketbase", "status": "live", "recommendation": "keep" }
+  ],
+  "edges": [
+    { "from": "guest.home", "to": "services", "type": "reads" },
+    { "from": "guest.home", "to": "provider_profiles", "type": "reads" },
+    { "from": "guest.home", "to": "service_categories", "type": "reads" },
+    { "from": "guest.home", "to": "cities", "type": "reads" },
+    { "from": "guest.home", "to": "reviews", "type": "reads" },
+    { "from": "guest.discovery", "to": "services", "type": "reads" },
+    { "from": "guest.blog", "to": "blog_posts", "type": "reads" },
+    { "from": "customer.dashboard", "to": "service_requests", "type": "reads" },
+    { "from": "customer.createJob", "to": "service_requests", "type": "writes" },
+    { "from": "customer.jobDetails", "to": "quotes", "type": "transition(hook)" },
+    { "from": "customer.reviews", "to": "reviews", "type": "reads" },
+    { "from": "customer.header.notifications", "to": "ERROR404", "type": "broken" },
+    { "from": "customer.security.innerLinks", "to": "ERROR404", "type": "broken" },
+    { "from": "provider.dashboard", "to": "provider_profiles", "type": "reads" },
+    { "from": "provider.myServices", "to": "services", "type": "reads" },
+    { "from": "provider.addEditService", "to": "ERROR404", "type": "broken" },
+    { "from": "provider.jobFeed", "to": "service_requests", "type": "reads" },
+    { "from": "provider.jobFeed", "to": "quotes", "type": "writes" },
+    { "from": "provider.blog", "to": "blog_posts", "type": "writes" }
+  ],
+  "brokenRoutes": {
+    "severity1_liveMvp": ["providerEditService", "customerNotifications"],
+    "severity2_demoSettings": ["customerLoginActivity", "deviceManagement"],
+    "severity3_nonMvp": ["booking1", "bookingPayment", "bookingDone", "invoice", "addSubscription", "providerAddon", "providerRegister", "providerSignupPayment", "commonNotification", "customerDetails", "loginemail", "home10", "blog"],
+    "tool": "scripts/audit-broken-routes.mjs"
+  },
+  "dataHonestyConcerns": [
+    { "id": "seeded-aggregates", "detail": "provider services_count=52 / rating_count=270 vs 18 services / 14 reviews; category listing_count=11", "recommendation": "compute from relations or hide" },
+    { "id": "empty-service-images", "detail": "services.images=[] on all sampled; cards use placeholder", "recommendation": "GHST-56 provider image upload" },
+    { "id": "static-discovery-facets", "detail": "hardcoded 6 categories, fake rating counts, Christmas promo", "recommendation": "GHST-55 wire or remove" }
+  ]
+}

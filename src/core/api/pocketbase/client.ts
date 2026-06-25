@@ -180,3 +180,62 @@ export async function pbUpdate<T>(
 
   return response.json();
 }
+
+/**
+ * Authenticated multipart create (GHST-56). Used when a record includes file
+ * uploads (e.g. `services.images`). Do NOT set Content-Type — the browser adds
+ * the multipart boundary automatically.
+ */
+export async function pbCreateForm<T>(
+  collection: string,
+  token: string,
+  form: FormData,
+): Promise<T> {
+  const url = `${POCKETBASE_API_URL}/collections/${collection}/records`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { Accept: "application/json", ...pbAuthHeaders(token) },
+    body: form,
+  });
+
+  if (!response.ok) {
+    let message = `PocketBase create ${collection} failed (${response.status})`;
+    try {
+      const err = await response.json();
+      message = err.message ?? message;
+    } catch {
+      // ignore
+    }
+    throw new PocketBaseError(message, response.status);
+  }
+
+  return response.json();
+}
+
+/** Authenticated multipart update (PATCH) for records with file uploads. */
+export async function pbUpdateForm<T>(
+  collection: string,
+  id: string,
+  token: string,
+  form: FormData,
+): Promise<T> {
+  const url = `${POCKETBASE_API_URL}/collections/${collection}/records/${id}`;
+  const response = await fetch(url, {
+    method: "PATCH",
+    headers: { Accept: "application/json", ...pbAuthHeaders(token) },
+    body: form,
+  });
+
+  if (!response.ok) {
+    let message = `PocketBase update ${collection}/${id} failed (${response.status})`;
+    try {
+      const err = await response.json();
+      message = err.message ?? message;
+    } catch {
+      // ignore
+    }
+    throw new PocketBaseError(message, response.status);
+  }
+
+  return response.json();
+}

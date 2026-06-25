@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import { all_routes } from '../../../../core/data/routes/all_routes'
-import { useProviders } from '../../../../core/hooks/useDiscoveryData'
+import { useProviders, useServiceCounts } from '../../../../core/hooks/useDiscoveryData'
 import {
   formatHourlyRate,
   formatRating,
@@ -13,6 +13,7 @@ import DiscoveryStatus from '../../common/discovery/DiscoveryStatus'
 const ProviderSection = () => {
   const routes = all_routes
   const { data: providers, loading, error, source } = useProviders()
+  const { data: counts } = useServiceCounts()
 
   return (
     <>
@@ -67,7 +68,7 @@ const ProviderSection = () => {
                     {formatRating(provider.rating_avg, provider.rating_count)}
                   </p>
                   <p className="mb-0">
-                    {provider.services_count ?? 0} Services, From{' '}
+                    {counts.byProvider[provider.id] ?? 0} Services, From{' '}
                     <span className="text-gray-9">{formatHourlyRate(provider.hourly_rate_min)}</span>
                   </p>
                 </div>

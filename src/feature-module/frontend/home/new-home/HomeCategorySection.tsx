@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import { all_routes } from "../../../../core/data/routes/all_routes";
-import { useCategories } from "../../../../core/hooks/useDiscoveryData";
+import { useCategories, useServiceCounts } from "../../../../core/hooks/useDiscoveryData";
 import {
   categoryIcon,
   searchWithCategory,
@@ -12,6 +12,7 @@ import DiscoveryStatus from "../../common/discovery/DiscoveryStatus";
 const HomeCategorySection = () => {
   const routes = all_routes;
   const { data: categories, loading, error, source } = useCategories(true);
+  const { data: counts } = useServiceCounts();
 
   return (
     <section className="section category-section">
@@ -57,7 +58,7 @@ const HomeCategorySection = () => {
                   </div>
                   <h6 className="fs-14 mb-1">{category.name}</h6>
                   <p className="fs-14 mb-0">
-                    {category.listing_count ?? 0} Listings
+                    {counts.byCategory[category.id] ?? 0} Listings
                   </p>
                   <Link
                     to={searchWithCategory(category.slug)}
