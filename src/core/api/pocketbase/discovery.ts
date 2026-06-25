@@ -43,7 +43,7 @@ export async function fetchServices(options?: {
   if (options?.featuredOnly) parts.push("(featured=true)");
   return pbList<PbService>("services", {
     perPage: String(options?.perPage ?? 50),
-    sort: options?.sort ?? "-created",
+    sort: options?.sort ?? "-@rowid",
     expand: SERVICE_EXPAND,
     filter: parts.join("&&"),
   });
