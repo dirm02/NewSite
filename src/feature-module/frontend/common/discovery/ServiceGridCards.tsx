@@ -4,11 +4,12 @@ import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import type { PbService } from "../../../../core/api/pocketbase/types";
 import {
   formatPrice,
-  formatRating,
   serviceDetailUrl,
   serviceImage,
   serviceLocationLabel,
+  serviceReviewDisplay,
 } from "../../../../core/api/pocketbase/format";
+import { useReviewStats } from "../../../../core/hooks/useDiscoveryData";
 import DiscoveryStatus from "./DiscoveryStatus";
 
 interface ServiceGridCardsProps {
@@ -25,6 +26,8 @@ const ServiceGridCards: React.FC<ServiceGridCardsProps> = ({
   error,
   source,
 }) => {
+  const { data: reviewStats } = useReviewStats();
+
   return (
     <DiscoveryStatus
       loading={loading}
@@ -40,8 +43,12 @@ const ServiceGridCards: React.FC<ServiceGridCardsProps> = ({
             service.expand?.provider?.business_name ?? "Provider";
           const city = service.expand?.city;
           const location = serviceLocationLabel(city?.name, city?.region);
-          const rating = service.rating_avg ?? service.expand?.provider?.rating_avg;
-          const ratingCount = service.expand?.provider?.rating_count;
+          const ratingLabel = serviceReviewDisplay(
+            reviewStats.byService,
+            reviewStats.byProvider,
+            service.id,
+            service.provider,
+          );
 
           return (
             <div key={service.id} className="col-xl-4 col-md-6">
@@ -70,7 +77,7 @@ const ServiceGridCards: React.FC<ServiceGridCardsProps> = ({
                       </p>
                       <span className="rating">
                         <i className="fa fa-star filled me-1" />
-                        {formatRating(rating, ratingCount)}
+                        {ratingLabel}
                       </span>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">

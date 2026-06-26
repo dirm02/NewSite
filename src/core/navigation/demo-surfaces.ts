@@ -16,6 +16,12 @@ import { all_routes as r } from "../data/routes/all_routes";
 export interface DemoSurface {
   /** Honest one-line explanation shown in the banner. */
   message: string;
+  /**
+   * When true (default for sample/future surfaces), the page body is replaced
+   * with an honest empty state and fake template rows are hidden (GHST-61).
+   * Settings previews keep the form visible; only the banner warns users.
+   */
+  hideFakeContent?: boolean;
 }
 
 const SAMPLE_DATA =
@@ -40,42 +46,40 @@ export const DEMO_SURFACES: Record<string, DemoSurface> = {
   [r.customerNotification]: { message: SETTINGS_PREVIEW },
   [r.customerConnectedApps]: { message: SETTINGS_PREVIEW },
 
-  // --- Provider (demo / mock JSON) ---
-  [r.providerBooking]: { message: SAMPLE_DATA },
-  [r.providerBookDetails]: { message: SAMPLE_DATA },
-  [r.staffList]: { message: SAMPLE_DATA },
-  [r.staffGrid]: { message: SAMPLE_DATA },
-  [r.staffDetails]: { message: SAMPLE_DATA },
-  [r.providerCustomerList]: { message: SAMPLE_DATA },
-  [r.providerCustomerGrid]: { message: SAMPLE_DATA },
-  [r.providerCustomerDetails]: { message: SAMPLE_DATA },
-  [r.providerPayout]: { message: FUTURE_FEATURE },
-  [r.providerTransaction]: { message: FUTURE_FEATURE },
-  [r.providerHoliday]: { message: SAMPLE_DATA },
-  [r.providerLeaveHistory]: { message: SAMPLE_DATA },
-  [r.providerCoupons]: { message: SAMPLE_DATA },
-  [r.providerOffer]: { message: SAMPLE_DATA },
-  [r.providerReview]: { message: SAMPLE_DATA },
-  [r.providerEnquiry]: { message: SAMPLE_DATA },
-  [r.providerEarnings]: { message: FUTURE_FEATURE },
-  [r.providerSubscription]: { message: FUTURE_FEATURE },
-  // Provider job-detail variants are demo; the base /providers/job-details is live.
-  [r.providerJobsDetailsDelivered]: { message: SAMPLE_DATA },
-  [r.providerJobsDetailsCompleted]: { message: SAMPLE_DATA },
-  [r.providerJobsDetailsInprogress]: { message: SAMPLE_DATA },
-  [r.providerJobsDetailsCancelled]: { message: SAMPLE_DATA },
-  // Provider settings (preview forms; Account/profile to be wired next)
-  [r.providerProfileSettings]: { message: SETTINGS_PREVIEW },
-  [r.providerAppointmentSettings]: { message: SETTINGS_PREVIEW },
-  [r.providerSocialProfile]: { message: SETTINGS_PREVIEW },
-  [r.ProviderSecuritySettings]: { message: SETTINGS_PREVIEW },
-  [r.providerPlan]: { message: FUTURE_FEATURE },
-  [r.paymentSetting]: { message: FUTURE_FEATURE },
-  [r.providerNotification]: { message: SETTINGS_PREVIEW },
-  [r.providerConnectedApps]: { message: SETTINGS_PREVIEW },
-  [r.providerDeviceManagement]: { message: SETTINGS_PREVIEW },
-  [r.providerLoginActivity]: { message: SETTINGS_PREVIEW },
-  [r.verfication]: { message: SAMPLE_DATA },
+  // --- Provider (demo / mock JSON) — hide fabricated rows (GHST-61) ---
+  [r.providerBooking]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerBookDetails]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.staffList]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.staffGrid]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.staffDetails]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerCustomerList]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerCustomerGrid]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerCustomerDetails]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerPayout]: { message: FUTURE_FEATURE, hideFakeContent: true },
+  [r.providerTransaction]: { message: FUTURE_FEATURE, hideFakeContent: true },
+  [r.providerHoliday]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerLeaveHistory]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerCoupons]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerOffer]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerEnquiry]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerEarnings]: { message: FUTURE_FEATURE, hideFakeContent: true },
+  [r.providerSubscription]: { message: FUTURE_FEATURE, hideFakeContent: true },
+  [r.providerJobsDetailsDelivered]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerJobsDetailsCompleted]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerJobsDetailsInprogress]: { message: SAMPLE_DATA, hideFakeContent: true },
+  [r.providerJobsDetailsCancelled]: { message: SAMPLE_DATA, hideFakeContent: true },
+  // Provider settings (preview forms; keep template visible)
+  [r.providerProfileSettings]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.providerAppointmentSettings]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.providerSocialProfile]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.ProviderSecuritySettings]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.providerPlan]: { message: FUTURE_FEATURE, hideFakeContent: true },
+  [r.paymentSetting]: { message: FUTURE_FEATURE, hideFakeContent: true },
+  [r.providerNotification]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.providerConnectedApps]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.providerDeviceManagement]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.providerLoginActivity]: { message: SETTINGS_PREVIEW, hideFakeContent: false },
+  [r.verfication]: { message: SAMPLE_DATA, hideFakeContent: true },
 };
 
 /** Returns the demo-surface policy for a pathname, or null for live surfaces. */

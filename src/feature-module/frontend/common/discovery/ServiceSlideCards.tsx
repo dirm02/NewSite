@@ -6,7 +6,9 @@ import {
   formatPrice,
   serviceDetailUrl,
   serviceImage,
+  serviceReviewDisplay,
 } from "../../../../core/api/pocketbase/format";
+import { useReviewStats } from "../../../../core/hooks/useDiscoveryData";
 import DiscoveryStatus from "./DiscoveryStatus";
 
 interface ServiceSlideCardsProps {
@@ -23,6 +25,8 @@ const ServiceSlideCards: React.FC<ServiceSlideCardsProps> = ({
   error,
   source,
 }) => {
+  const { data: reviewStats } = useReviewStats();
+
   return (
     <DiscoveryStatus
       loading={loading}
@@ -54,7 +58,12 @@ const ServiceSlideCards: React.FC<ServiceSlideCardsProps> = ({
                 {formatPrice(service.price_from, service.price_to)}
                 <span>
                   <i className="fa-solid fa-star" />
-                  {(service.rating_avg ?? 0).toFixed(1)}
+                  {serviceReviewDisplay(
+                    reviewStats.byService,
+                    reviewStats.byProvider,
+                    service.id,
+                    service.provider,
+                  )}
                 </span>
               </p>
             </div>

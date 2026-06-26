@@ -1,0 +1,32 @@
+{
+  "version": "3",
+  "task": "GHST-64",
+  "generated": "2026-06-26",
+  "role": "provider",
+  "nodes": [
+    { "id": "dashboard", "route": "/providers/dashboard", "status": "live", "collections": ["provider_profiles", "services", "quotes", "reviews"] },
+    { "id": "services", "route": "/providers/provider-service", "status": "live", "collections": ["services"] },
+    { "id": "service-edit", "route": "/providers/provider-edit-service", "status": "live", "collections": ["services"] },
+    { "id": "job-feed", "route": "/providers/job-feed", "status": "live", "collections": ["service_requests"] },
+    { "id": "proposals", "route": "/providers/proposal", "status": "live", "collections": ["quotes"] },
+    { "id": "active-jobs", "route": "/providers/active-jobs", "status": "live", "collections": ["quotes", "service_requests"] },
+    { "id": "job-details", "route": "/providers/job-details", "status": "live", "collections": ["service_requests", "quotes"] },
+    { "id": "blog", "route": "/providers/blog", "status": "live", "collections": ["blog_posts", "blog_categories"] },
+    { "id": "reviews", "route": "/providers/provider-review", "status": "live", "collections": ["reviews"] },
+    { "id": "bookings", "route": "/providers/provider-booking", "status": "demo-empty", "collections": [] },
+    { "id": "staff", "route": "/providers/staff/staff-list", "status": "demo-empty", "collections": [] },
+    { "id": "customers", "route": "/providers/customer-list", "status": "demo-empty", "collections": [] },
+    { "id": "payout", "route": "/providers/provider-payout", "status": "demo-empty", "collections": [] },
+    { "id": "holidays", "route": "/providers/provider-holiday", "status": "demo-empty", "collections": [] },
+    { "id": "coupons", "route": "/providers/provider-coupons", "status": "demo-empty", "collections": [] },
+    { "id": "offers", "route": "/providers/provider-offer", "status": "demo-empty", "collections": [] },
+    { "id": "enquiries", "route": "/providers/provider-enquiry", "status": "demo-empty", "collections": [] },
+    { "id": "earnings", "route": "/providers/provider-earnings", "status": "demo-empty", "collections": [] },
+    { "id": "chat", "route": "/providers/provider-chat", "status": "coming-soon", "collections": [] },
+    { "id": "settings", "route": "/providers/settings/*", "status": "settings-preview", "collections": [] }
+  ],
+  "broken": [
+    { "routeKey": "addSubscription", "path": "/providers/add-subscription" },
+    { "routeKey": "providerAddon", "path": "/providers/provider-addon" }
+  ]
+}

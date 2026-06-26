@@ -3,12 +3,14 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { useServices } from '../../../../core/hooks/useDiscoveryData';
+import { useReviewStats, useServices } from '../../../../core/hooks/useDiscoveryData';
 import {
   formatPrice,
   providerDisplayName,
   serviceDetailUrl,
   serviceImage,
+  serviceReviewDisplay,
+  serviceReviewSortScore,
 } from '../../../../core/api/pocketbase/format';
 import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 
@@ -17,8 +19,23 @@ import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 // empty state renders when there are no active services.
 const PreferredSection = () => {
   const { data: services, loading, error, source } = useServices();
+  const { data: reviewStats } = useReviewStats();
   const preferred = [...services]
-    .sort((a, b) => (b.rating_avg ?? 0) - (a.rating_avg ?? 0))
+    .sort(
+      (a, b) =>
+        serviceReviewSortScore(
+          reviewStats.byService,
+          reviewStats.byProvider,
+          b.id,
+          b.provider,
+        ) -
+        serviceReviewSortScore(
+          reviewStats.byService,
+          reviewStats.byProvider,
+          a.id,
+          a.provider,
+        ),
+    )
     .slice(0, 8);
 
   const imgslideroption = {
@@ -105,7 +122,12 @@ const PreferredSection = () => {
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="fs-14 mb-0">
                       <i className="ti ti-star-filled text-warning me-1" />
-                      {(service.rating_avg ?? 0).toFixed(1)}
+                      {serviceReviewDisplay(
+                        reviewStats.byService,
+                        reviewStats.byProvider,
+                        service.id,
+                        service.provider,
+                      )}
                     </p>
                     {service.expand?.category?.name ? (
                       <span className="badge badge-dark-transparent fw-medium p-2">

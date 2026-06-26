@@ -15,9 +15,9 @@
  * No deploy/restart is performed by committing this file.
  */
 
-var BLOG_PROVIDER_STATUSES = ["draft", "submitted"];
-
 onRecordCreateRequest((e) => {
+  var providerStatuses = ["draft", "submitted"];
+
   if (e.auth && e.auth.get("role") === "admin") {
     return e.next();
   }
@@ -25,7 +25,7 @@ onRecordCreateRequest((e) => {
   var status = e.record.get("status");
   if (!status) {
     e.record.set("status", "draft");
-  } else if (BLOG_PROVIDER_STATUSES.indexOf(status) === -1) {
+  } else if (providerStatuses.indexOf(status) === -1) {
     throw new BadRequestError(
       "New blog posts can only be saved as a draft or submitted for approval.",
     );
@@ -35,6 +35,7 @@ onRecordCreateRequest((e) => {
 }, "blog_posts");
 
 onRecordUpdateRequest((e) => {
+  var providerStatuses = ["draft", "submitted"];
   var nextStatus = e.record.get("status");
 
   if (e.auth && e.auth.get("role") === "admin") {
@@ -44,7 +45,7 @@ onRecordUpdateRequest((e) => {
     return e.next();
   }
 
-  if (BLOG_PROVIDER_STATUSES.indexOf(nextStatus) === -1) {
+  if (providerStatuses.indexOf(nextStatus) === -1) {
     throw new ForbiddenError(
       "Only an admin can approve, reject, publish, or unpublish a blog post.",
     );

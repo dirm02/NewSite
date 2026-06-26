@@ -1,17 +1,6 @@
 export const all_routes = {
-  // home module path
-  home2: "/index-2",
+  // home module path (canonical MVP homepage only — GHST-65 removed /index-2..12)
   home: "/index",
-  home3: "/index-3",
-  home4: "/index-4",
-  home5: "/index-5",
-  home6: "/index-6",
-  home7: "/index-7",
-  home8: "/index-8",
-  home9: "/index-9",
-  home10: "/index-10",
-  home11: "/index-11",
-  home12: "/index-12",
 
   // blog module path
   blog: "/blog/*",

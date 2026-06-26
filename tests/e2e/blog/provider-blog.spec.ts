@@ -37,6 +37,21 @@ test.describe("Provider blog @blog", () => {
     });
   });
 
+  // --- Read-only: provider add-blog form renders (GHST-60) ---
+  test("provider add-blog form fields are visible", async ({ page }) => {
+    test.skip(!hasSeedCredentials("provider"), seedSkipReason("provider"));
+    const { email, password } = getSeedProvider();
+    await loginViaUi(page, email, password);
+
+    await page.goto("/providers/blog/add-blog", { waitUntil: "networkidle" });
+    await expect(page.locator("#sidebar")).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByTestId("blog-title")).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByTestId("blog-content")).toBeVisible();
+    await expect(page.getByTestId("blog-cover-input")).toBeVisible();
+    await expect(page.getByTestId("save-draft-btn")).toBeVisible();
+    await expect(page.getByTestId("submit-blog-btn")).toBeVisible();
+  });
+
   // --- Mutating: provider creates + submits a post (skipped pre-deploy) ---
   test("provider can submit a post; guest cannot see it until published", async ({
     page,

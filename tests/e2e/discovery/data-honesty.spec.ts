@@ -77,20 +77,41 @@ test.describe("Honest live-data contract @datahonesty", () => {
     }
   });
 
-  test("empty collection renders an honest empty state (blog = 0 posts)", async ({
+  test("homepage provider cards do not show seeded review counts", async ({
     page,
     request,
   }) => {
-    const posts = await pbTotal(request, "blog_posts", "(status='published')");
-    await page.goto("/blog/blog-grid", { waitUntil: "domcontentloaded" });
-    if (posts === 0) {
-      await expect(page.getByText(/no blog posts yet/i)).toBeVisible({
-        timeout: 30_000,
-      });
-    } else {
-      await expect(
-        page.getByRole("link", { name: /read more/i }).first(),
-      ).toBeVisible({ timeout: 30_000 });
+    const provRes = await request.get(
+      `${API}/collections/provider_profiles/records?perPage=20&filter=(status='active')`,
+    );
+    expect(provRes.ok()).toBeTruthy();
+    const providers = ((await provRes.json()).items ?? []) as Array<{
+      id: string;
+      rating_count?: number;
+    }>;
+
+    const revRes = await request.get(
+      `${API}/collections/reviews/records?perPage=200&filter=(status='published')`,
+    );
+    expect(revRes.ok()).toBeTruthy();
+    const reviews = ((await revRes.json()).items ?? []) as Array<{
+      provider?: string;
+    }>;
+    const realByProvider: Record<string, number> = {};
+    for (const r of reviews) {
+      if (r.provider) realByProvider[r.provider] = (realByProvider[r.provider] ?? 0) + 1;
+    }
+
+    await page.goto("/index", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(2000);
+    const body = await page.locator("body").innerText();
+
+    for (const p of providers) {
+      const seeded = p.rating_count ?? 0;
+      const real = realByProvider[p.id] ?? 0;
+      if (seeded > real && seeded >= 50) {
+        expect(body).not.toContain(`(${seeded})`);
+      }
     }
   });
 });

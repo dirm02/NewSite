@@ -43,7 +43,7 @@ const Footer = () => {
           <div className="col-xl-4 col-sm-6">
             <div className="footer-widget footer-about">
               <div className="footer-logo">
-                <Link to={routes.home11}>
+                <Link to={routes.home}>
                   <ImageWithBasePath
                     src="assets/img/lif3line-logo-white.svg"
                     className="img-fluid"
@@ -170,7 +170,7 @@ const Footer = () => {
             <div className="copyright-content">
               <div className="copyright">
                 <p className="mb-0">
-                  © 2026 <Link to={routes.home11}>Lif3Line</Link>. All rights
+                  © 2026 <Link to={routes.home}>Lif3Line</Link>. All rights
                   reserved
                 </p>
               </div>

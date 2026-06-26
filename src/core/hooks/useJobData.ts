@@ -313,6 +313,24 @@ export function useCustomerReviews() {
   );
 }
 
+/** Reviews received by the signed-in provider (GHST-61). */
+export function useProviderReceivedReviews() {
+  const { token, user } = useAuth();
+  const enabled = Boolean(token && user?.id);
+
+  return useAsyncJob(
+    async () => {
+      const profile = await fetchProviderProfileForUser(token!, user!.id);
+      if (!profile) return [] as PbReview[];
+      const result = await fetchProviderReviews(token!, profile.id);
+      return result.items;
+    },
+    [] as PbReview[],
+    enabled,
+    [token, user?.id],
+  );
+}
+
 export function useProviderBlogPosts() {
   const { token, user } = useAuth();
   const enabled = Boolean(token && user?.id);

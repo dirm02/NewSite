@@ -84,6 +84,52 @@ export function useServiceCounts() {
   );
 }
 
+export interface ReviewStats {
+  byProvider: Record<string, { count: number; avg: number }>;
+  byService: Record<string, { count: number; avg: number }>;
+}
+
+/**
+ * GHST-63 (honest data): real rating/count aggregates from published reviews,
+ * grouped by provider and by service — replaces seeded rating_avg/rating_count.
+ */
+export function useReviewStats() {
+  return useAsyncDiscovery<ReviewStats>(
+    async () => {
+      const res = await fetchReviews({ perPage: 200 });
+      const rawProvider: Record<string, { sum: number; count: number }> = {};
+      const rawService: Record<string, { sum: number; count: number }> = {};
+      for (const r of res.items) {
+        if (r.provider) {
+          const cur = rawProvider[r.provider] ?? { sum: 0, count: 0 };
+          cur.sum += r.rating;
+          cur.count += 1;
+          rawProvider[r.provider] = cur;
+        }
+        if (r.service) {
+          const cur = rawService[r.service] ?? { sum: 0, count: 0 };
+          cur.sum += r.rating;
+          cur.count += 1;
+          rawService[r.service] = cur;
+        }
+      }
+      const finalize = (raw: Record<string, { sum: number; count: number }>) => {
+        const out: Record<string, { count: number; avg: number }> = {};
+        for (const [id, v] of Object.entries(raw)) {
+          out[id] = { count: v.count, avg: v.count ? v.sum / v.count : 0 };
+        }
+        return out;
+      };
+      return {
+        byProvider: finalize(rawProvider),
+        byService: finalize(rawService),
+      };
+    },
+    { byProvider: {}, byService: {} },
+    [],
+  );
+}
+
 export function useReviews() {
   return useAsyncDiscovery<PbReview[]>(
     async () => (await fetchReviews()).items,

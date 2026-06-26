@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import type { AppState } from "../../core/models/interface";
 import RequireAuth from "../../core/auth/RequireAuth";
 import DemoSurfaceBanner from "../frontend/common/state/DemoSurfaceBanner";
+import DemoSurfacePageGuard from "../frontend/common/state/DemoSurfacePageGuard";
 
 const ProviderLayout = () => {
   const location = useLocation();
@@ -34,7 +35,9 @@ const ProviderLayout = () => {
       <RequireAuth allowedRoles={["provider"]}>
         <>
           <DemoSurfaceBanner />
-          <Outlet />
+          <DemoSurfacePageGuard>
+            <Outlet />
+          </DemoSurfacePageGuard>
         </>
       </RequireAuth>
       <div

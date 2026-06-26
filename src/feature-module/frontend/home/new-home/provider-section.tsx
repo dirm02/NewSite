@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import { all_routes } from '../../../../core/data/routes/all_routes'
-import { useProviders, useServiceCounts } from '../../../../core/hooks/useDiscoveryData'
+import { useProviders, useReviewStats, useServiceCounts } from '../../../../core/hooks/useDiscoveryData'
 import {
   formatHourlyRate,
-  formatRating,
   providerDetailUrl,
   providerImage,
+  providerReviewDisplay,
 } from '../../../../core/api/pocketbase/format'
 import DiscoveryStatus from '../../common/discovery/DiscoveryStatus'
 
@@ -14,6 +14,7 @@ const ProviderSection = () => {
   const routes = all_routes
   const { data: providers, loading, error, source } = useProviders()
   const { data: counts } = useServiceCounts()
+  const { data: reviewStats } = useReviewStats()
 
   return (
     <>
@@ -65,7 +66,7 @@ const ProviderSection = () => {
                   </h6>
                   <p className="fs-14 mb-0">
                     <i className="ti ti-star-filled text-warning me-1" />
-                    {formatRating(provider.rating_avg, provider.rating_count)}
+                    {providerReviewDisplay(reviewStats.byProvider, provider.id)}
                   </p>
                   <p className="mb-0">
                     {counts.byProvider[provider.id] ?? 0} Services, From{' '}

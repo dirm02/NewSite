@@ -4,12 +4,18 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { useServices } from '../../../../core/hooks/useDiscoveryData';
-import { formatPrice, serviceDetailUrl, serviceImage } from '../../../../core/api/pocketbase/format';
+import { useReviewStats, useServices } from '../../../../core/hooks/useDiscoveryData';
+import {
+  formatPrice,
+  serviceDetailUrl,
+  serviceImage,
+  serviceReviewDisplay,
+} from '../../../../core/api/pocketbase/format';
 import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 const FeatureSection = () => {
     const routes = all_routes;
     const { data: featuredServices, loading, error, source } = useServices({ featuredOnly: true });
+    const { data: reviewStats } = useReviewStats();
     const imgslideroption = {
         dots: false,
         nav: false,
@@ -140,7 +146,12 @@ const FeatureSection = () => {
               <p className="fw-medium fs-14 mb-0">{formatPrice(service.price_from, service.price_to)}</p>
               <span className="d-inline-flex align-items-center fs-14">
                 <i className="ti ti-star-filled text-warning me-1" />
-                {(service.rating_avg ?? 0).toFixed(1)}
+                {serviceReviewDisplay(
+                  reviewStats.byService,
+                  reviewStats.byProvider,
+                  service.id,
+                  service.provider,
+                )}
               </span>
             </div>
           </div>

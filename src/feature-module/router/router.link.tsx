@@ -2,11 +2,6 @@ import { Navigate, Route } from "react-router-dom";
 import { all_routes } from "../../core/data/routes/all_routes";
 
 import NewHome from "../frontend/home/new-home";
-import HomeTwo from "../frontend/home/home-3/home-three";
-import HomeFour from "../frontend/home/home-four/home-four";
-import HomeThree from "../frontend/home/home-4/home-four";
-import HomeEight from "../frontend/home/home-eight";
-import HomeSeven from "../frontend/home/home-seven/home-seven";
 import LoginPhone1 from "../frontend/pages/authentication/login-phone1";
 import PhoneOtp from "../frontend/pages/authentication/phone-otp";
 import ChooseSignup from "../frontend/pages/authentication/choose-signup";
@@ -197,11 +192,6 @@ import CreateMenu from "../admin/management/create-menu";
 import AvailablePlugins from "../admin/plugin/available-plugins";
 import WebsiteSettings from "../admin/management/website-settings";
 import EditBlog from "../admin/blog/edit-blog";
-import HomeFive from "../frontend/home/home-six";
-import HomeSix from "../frontend/home/home-6";
-import HomeNine from "../frontend/home/home-9/home-nine";
-import HomeEleven from "../frontend/home/home-11/homeEleven ";
-import HomeTwelve from "../frontend/home/home-12/homeTwelve";
 import UserJobBooking from "../frontend/customers/user-job-booking/userJobBooking";
 import UserJobBookingDetails from "../frontend/customers/user-job-booking/userJobBookingDetails";
 import UserJobBookingCompleted from "../frontend/customers/user-job-booking/userJobBookingCompleted";
@@ -247,60 +237,11 @@ const publicRoutes = [
     route: Route,
   },
   {
-    path: routes.home2,
-    name: "home-one",
-    element: <HomeTwo />,
-    route: Route,
-  },
-  {
     path: routes.home,
     name: "Home",
     element: <NewHome />,
     route: Route,
   },
-  {
-    path: routes.home3,
-    name: "home-one",
-    element: <HomeThree />,
-    route: Route,
-  },
-  {
-    path: routes.home4,
-    name: "home-three",
-    element: <HomeFour />,
-    route: Route,
-  },
-  {
-    path: routes.home5,
-    name: "home-four",
-    element: <HomeFive />,
-    route: Route,
-  },
-  {
-    path: routes.home6,
-    name: "home-five",
-    element: <HomeSix />,
-    route: Route,
-  },
-  {
-    path: routes.home7,
-    name: "home-six",
-    element: <HomeSeven />,
-    route: Route,
-  },
-  {
-    path: routes.home8,
-    name: "home-seven",
-    element: <HomeEight />,
-    route: Route,
-  },
-  {
-    path: routes.home9,
-    name: "home-eight",
-    element: <HomeNine />,
-    route: Route,
-  },
-
   {
     path: routes.aboutUs,
     name: "About Us",
@@ -474,19 +415,6 @@ const publicRoutes = [
     path: routes.createService,
     name: "create-service",
     element: <CreateService />,
-    route: Route,
-  },
-
-  {
-    path: routes.home11,
-    name: "general-home-2",
-    element: <HomeEleven />,
-    route: Route,
-  },
-  {
-    path: routes.home12,
-    name: "Paintaing Service",
-    element: <HomeTwelve />,
     route: Route,
   },
 

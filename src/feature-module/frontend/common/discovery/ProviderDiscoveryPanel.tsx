@@ -1,6 +1,7 @@
 import React from "react";
 import {
   useProviders,
+  useReviewStats,
   useServiceCounts,
 } from "../../../../core/hooks/useDiscoveryData";
 import ProviderGridCards from "./ProviderGridCards";
@@ -9,6 +10,7 @@ import ProviderGridCards from "./ProviderGridCards";
 const ProviderDiscoveryPanel: React.FC = () => {
   const { data, loading, error, source } = useProviders();
   const { data: counts } = useServiceCounts();
+  const { data: reviewStats } = useReviewStats();
 
   return (
     <ProviderGridCards
@@ -17,6 +19,7 @@ const ProviderDiscoveryPanel: React.FC = () => {
       error={error}
       source={source}
       serviceCounts={counts.byProvider}
+      reviewStats={reviewStats.byProvider}
     />
   );
 };

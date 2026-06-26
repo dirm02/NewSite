@@ -4,9 +4,9 @@ import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 import type { PbProviderProfile } from "../../../../core/api/pocketbase/types";
 import {
   formatHourlyRate,
-  formatRating,
   providerDetailUrl,
   providerImage,
+  providerReviewDisplay,
   serviceLocationLabel,
 } from "../../../../core/api/pocketbase/format";
 import DiscoveryStatus from "./DiscoveryStatus";
@@ -18,6 +18,8 @@ interface ProviderGridCardsProps {
   source?: "pocketbase" | "mock";
   /** GHST-55: real active-service counts per provider id (honest, computed). */
   serviceCounts?: Record<string, number>;
+  /** GHST-63: real review aggregates per provider id. */
+  reviewStats?: Record<string, { count: number; avg: number }>;
 }
 
 /** Renders provider listing cards from PocketBase — GHST-5 */
@@ -27,6 +29,7 @@ const ProviderGridCards: React.FC<ProviderGridCardsProps> = ({
   error,
   source,
   serviceCounts,
+  reviewStats,
 }) => {
   return (
     <DiscoveryStatus
@@ -82,7 +85,7 @@ const ProviderGridCards: React.FC<ProviderGridCardsProps> = ({
                       </p>
                       <p className="fs-14 mb-0">
                         <i className="fa fa-star filled text-warning me-1" />
-                        {formatRating(provider.rating_avg, provider.rating_count)}
+                        {providerReviewDisplay(reviewStats ?? {}, provider.id)}
                       </p>
                     </div>
                     <p className="fs-13 text-muted mt-2 mb-0">

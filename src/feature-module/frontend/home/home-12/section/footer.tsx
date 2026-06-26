@@ -158,7 +158,7 @@ const Footer = () => {
       <div className="container">
         <div className="copyright-content">
           <p className="copyright">
-            Copyright © 2026 <Link to={all_routes.home12}>Lif3Line</Link>. All rights
+            Copyright © 2026 <Link to={all_routes.home}>Lif3Line</Link>. All rights
             reserved
           </p>
           <div className="policy-links">

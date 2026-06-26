@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { all_routes } from '../../../../core/data/routes/all_routes';
-import { useServices } from '../../../../core/hooks/useDiscoveryData';
-import { serviceDetailUrl, serviceImage } from '../../../../core/api/pocketbase/format';
+import { useReviewStats, useServices } from '../../../../core/hooks/useDiscoveryData';
+import {
+  serviceDetailUrl,
+  serviceImage,
+  serviceReviewSortScore,
+} from '../../../../core/api/pocketbase/format';
 import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 
 // GHST-41: "Browse High Rated Services" is now backed by the PocketBase
@@ -12,8 +16,23 @@ import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 const RateServiceSection = () => {
   const routes = all_routes;
   const { data: services, loading, error, source } = useServices();
+  const { data: reviewStats } = useReviewStats();
   const topRated = [...services]
-    .sort((a, b) => (b.rating_avg ?? 0) - (a.rating_avg ?? 0))
+    .sort(
+      (a, b) =>
+        serviceReviewSortScore(
+          reviewStats.byService,
+          reviewStats.byProvider,
+          b.id,
+          b.provider,
+        ) -
+        serviceReviewSortScore(
+          reviewStats.byService,
+          reviewStats.byProvider,
+          a.id,
+          a.provider,
+        ),
+    )
     .slice(0, 8);
 
   return (

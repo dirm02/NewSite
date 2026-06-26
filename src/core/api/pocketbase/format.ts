@@ -23,6 +23,51 @@ export function formatRating(avg?: number, count?: number): string {
   return `${avg.toFixed(1)} (${count})`;
 }
 
+export interface ReviewAggregate {
+  count: number;
+  avg: number;
+}
+
+export type ReviewStatsMap = Record<string, ReviewAggregate>;
+
+/** Rating label for a provider from live published-review aggregates. */
+export function providerReviewDisplay(
+  byProvider: ReviewStatsMap,
+  providerId: string,
+): string {
+  const stats = byProvider[providerId];
+  return formatRating(stats?.avg, stats?.count);
+}
+
+/** Rating label for a service; prefers service reviews, else provider aggregate. */
+export function serviceReviewDisplay(
+  byService: ReviewStatsMap,
+  byProvider: ReviewStatsMap,
+  serviceId: string,
+  providerId?: string,
+): string {
+  const svc = byService[serviceId];
+  if (svc?.count) return formatRating(svc.avg, svc.count);
+  if (providerId) {
+    const prov = byProvider[providerId];
+    return formatRating(prov?.avg, prov?.count);
+  }
+  return formatRating(undefined, undefined);
+}
+
+/** Sort key for ranking services by real review evidence. */
+export function serviceReviewSortScore(
+  byService: ReviewStatsMap,
+  byProvider: ReviewStatsMap,
+  serviceId: string,
+  providerId?: string,
+): number {
+  const svc = byService[serviceId];
+  if (svc?.count) return svc.avg;
+  if (providerId) return byProvider[providerId]?.avg ?? 0;
+  return 0;
+}
+
 export function serviceLocationLabel(
   cityName?: string,
   region?: string,
@@ -259,4 +304,15 @@ export function formatBlogDate(iso?: string): string {
         month: "short",
         day: "numeric",
       });
+}
+
+/** Public PocketBase file URL for a single-file record field (e.g. blog cover). */
+export function pbRecordFileUrl(
+  collection: string,
+  recordId: string,
+  filename: string,
+): string {
+  const base =
+    import.meta.env.VITE_POCKETBASE_URL ?? "https://pocket.lif3line.me/api";
+  return `${base}/files/${collection}/${recordId}/${filename}`;
 }

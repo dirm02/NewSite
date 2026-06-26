@@ -30,6 +30,8 @@ test.describe("Demo surface policy @demopolicy", () => {
     // Demo surface → honest banner
     await page.goto("/providers/provider-coupons", { waitUntil: "networkidle" });
     await expect(page.locator(banner)).toBeVisible({ timeout: 30_000 });
+    // GHST-61: fake coupon rows hidden; empty state shown (template stays in DOM as d-none)
+    await expect(page.locator(comingSoon)).toBeVisible({ timeout: 15_000 });
 
     // Chat → coming-soon state (GHST-57)
     await page.goto("/providers/provider-chat", { waitUntil: "networkidle" });

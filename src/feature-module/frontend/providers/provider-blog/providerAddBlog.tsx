@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { all_routes } from "../../../../core/data/routes/all_routes";
 import {
@@ -7,7 +7,7 @@ import {
   useProviderServices,
 } from "../../../../core/hooks/useJobData";
 import { useBlogCategories } from "../../../../core/hooks/useDiscoveryData";
-import { slugify } from "../../../../core/api/pocketbase/format";
+import { pbRecordFileUrl, slugify } from "../../../../core/api/pocketbase/format";
 import type { BlogPostInput } from "../../../../core/api/pocketbase/blog";
 import JobFlowStatus from "../../common/jobs/JobFlowStatus";
 
@@ -35,13 +35,14 @@ const ProviderAddBlog = () => {
   const [service, setService] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [removeCover, setRemoveCover] = useState(false);
 
   const [submitting, setSubmitting] = useState<null | "draft" | "submitted">(
     null,
   );
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  // The blog hook rejects provider edits once a post is approved/published.
   const locked =
     isEdit &&
     existing != null &&
@@ -60,11 +61,31 @@ const ProviderAddBlog = () => {
     setService(existing.service ?? "");
     setSeoTitle(existing.seo_title ?? "");
     setSeoDescription(existing.seo_description ?? "");
+    setCoverFile(null);
+    setRemoveCover(false);
   }, [existing]);
+
+  const coverPreviewUrl = useMemo(() => {
+    if (coverFile) return URL.createObjectURL(coverFile);
+    if (!removeCover && existing?.cover_image && postId) {
+      return pbRecordFileUrl("blog_posts", postId, existing.cover_image);
+    }
+    return null;
+  }, [coverFile, removeCover, existing?.cover_image, postId]);
+
+  useEffect(() => {
+    if (!coverFile || !coverPreviewUrl?.startsWith("blob:")) return;
+    return () => URL.revokeObjectURL(coverPreviewUrl);
+  }, [coverFile, coverPreviewUrl]);
 
   const onTitleChange = (value: string) => {
     setTitle(value);
     if (!slugTouched) setSlug(slugify(value));
+  };
+
+  const onCoverChange = (file: File | null) => {
+    setCoverFile(file);
+    if (file) setRemoveCover(false);
   };
 
   const save = async (status: "draft" | "submitted") => {
@@ -89,6 +110,12 @@ const ProviderAddBlog = () => {
       seo_description: seoDescription.trim() || undefined,
       status,
     };
+
+    if (coverFile) {
+      input.cover_image = coverFile;
+    } else if (removeCover && existing?.cover_image) {
+      input.cover_image = null;
+    }
 
     setSubmitting(status);
     setSubmitError(null);
@@ -149,7 +176,8 @@ const ProviderAddBlog = () => {
                     <div className="alert alert-danger">{submitError}</div>
                   )}
 
-                  <fieldset disabled={Boolean(locked)}>
+                  {/* display:block overrides global fieldset { display:none } in _home.scss */}
+                  <fieldset style={{ display: "block" }} disabled={Boolean(locked)}>
                     <div className="mb-3">
                       <label className="form-label">
                         Title <span className="text-danger">*</span>
@@ -184,6 +212,7 @@ const ProviderAddBlog = () => {
                         <label className="form-label">Category</label>
                         <select
                           className="form-select"
+                          data-testid="blog-category"
                           value={category}
                           onChange={(e) => setCategory(e.target.value)}
                         >
@@ -199,6 +228,7 @@ const ProviderAddBlog = () => {
                         <label className="form-label">Promotes service (optional)</label>
                         <select
                           className="form-select"
+                          data-testid="blog-service"
                           value={service}
                           onChange={(e) => setService(e.target.value)}
                         >
@@ -217,6 +247,7 @@ const ProviderAddBlog = () => {
                       <textarea
                         className="form-control"
                         rows={2}
+                        data-testid="blog-excerpt"
                         value={excerpt}
                         onChange={(e) => setExcerpt(e.target.value)}
                         placeholder="A short summary shown in blog listings."
@@ -233,6 +264,50 @@ const ProviderAddBlog = () => {
                         onChange={(e) => setContent(e.target.value)}
                         placeholder="Write your post..."
                       />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Cover image{" "}
+                        <span className="text-muted fs-13">
+                          (optional — JPG/PNG/WebP, up to 5 MB)
+                        </span>
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        data-testid="blog-cover-input"
+                        accept="image/jpeg,image/png,image/webp"
+                        onChange={(e) =>
+                          onCoverChange(
+                            e.target.files?.[0] ? e.target.files[0] : null,
+                          )
+                        }
+                      />
+                      {coverPreviewUrl && (
+                        <div className="mt-3">
+                          <img
+                            src={coverPreviewUrl}
+                            alt="Cover preview"
+                            className="rounded border"
+                            style={{ maxWidth: 280, maxHeight: 180, objectFit: "cover" }}
+                            data-testid="blog-cover-preview"
+                          />
+                          <div className="mt-2">
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-danger"
+                              data-testid="blog-cover-remove"
+                              onClick={() => {
+                                setCoverFile(null);
+                                setRemoveCover(true);
+                              }}
+                            >
+                              Remove cover
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="row">
@@ -261,7 +336,7 @@ const ProviderAddBlog = () => {
                         type="button"
                         className="btn btn-light"
                         data-testid="save-draft-btn"
-                        disabled={submitting !== null}
+                        disabled={submitting !== null || locked}
                         onClick={() => save("draft")}
                       >
                         {submitting === "draft" ? "Saving..." : "Save Draft"}
@@ -270,7 +345,7 @@ const ProviderAddBlog = () => {
                         type="button"
                         className="btn btn-primary"
                         data-testid="submit-blog-btn"
-                        disabled={submitting !== null}
+                        disabled={submitting !== null || locked}
                         onClick={() => save("submitted")}
                       >
                         {submitting === "submitted"

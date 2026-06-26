@@ -4,11 +4,12 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { useCategories, useServices } from '../../../../core/hooks/useDiscoveryData';
+import { useCategories, useReviewStats, useServices } from '../../../../core/hooks/useDiscoveryData';
 import {
   formatPrice,
   serviceDetailUrl,
   serviceImage,
+  serviceReviewDisplay,
 } from '../../../../core/api/pocketbase/format';
 import DiscoveryStatus from '../../common/discovery/DiscoveryStatus';
 
@@ -17,6 +18,7 @@ const PopularSection = () => {
   const routes = all_routes;
   const { data: categories, loading: catLoading, error: catError, source: catSource } = useCategories(true);
   const { data: services, loading: svcLoading, error: svcError, source: svcSource } = useServices();
+  const { data: reviewStats } = useReviewStats();
 
   const loading = catLoading || svcLoading;
   const error = catError ?? svcError;
@@ -115,7 +117,12 @@ const PopularSection = () => {
                             <div className="d-flex align-items-center justify-content-between">
                               <p className="fs-14 mb-0">
                                 <i className="ti ti-star-filled text-warning me-1" />
-                                {(service.rating_avg ?? 0).toFixed(1)}
+                                {serviceReviewDisplay(
+                                  reviewStats.byService,
+                                  reviewStats.byProvider,
+                                  service.id,
+                                  service.provider,
+                                )}
                               </p>
                               <small>{formatPrice(service.price_from, service.price_to)}</small>
                             </div>
