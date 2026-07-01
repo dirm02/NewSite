@@ -161,8 +161,8 @@ const NewHome = () => {
             data-wow-delay=".25s"
           >
             <ImageWithBasePath
-              src="assets/img/banner.png"
-              alt="img"
+              src="assets/img/banner.png?v=20260626"
+              alt="Find trusted local services in Canada"
               className="img-fluid animation-float"
             />
           </div>
